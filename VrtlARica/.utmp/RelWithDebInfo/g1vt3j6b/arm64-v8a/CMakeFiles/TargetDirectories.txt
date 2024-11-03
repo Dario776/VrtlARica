@@ -1,0 +1,5 @@
+D:/FER/5sem/projektr/VrtlARica/VrtlARica/.utmp/RelWithDebInfo/g1vt3j6b/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/FER/5sem/projektr/VrtlARica/VrtlARica/.utmp/RelWithDebInfo/g1vt3j6b/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/FER/5sem/projektr/VrtlARica/VrtlARica/.utmp/RelWithDebInfo/g1vt3j6b/arm64-v8a/GameActivity/CMakeFiles/game.dir
+D:/FER/5sem/projektr/VrtlARica/VrtlARica/.utmp/RelWithDebInfo/g1vt3j6b/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+D:/FER/5sem/projektr/VrtlARica/VrtlARica/.utmp/RelWithDebInfo/g1vt3j6b/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
