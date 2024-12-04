@@ -2462,6 +2462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1162343357}
   - component: {fileID: 1162343358}
+  - component: {fileID: 1162343359}
   m_Layer: 0
   m_Name: Upute
   m_TagString: Untagged
@@ -2510,6 +2511,18 @@ MonoBehaviour:
   Upute1: {fileID: 707651855}
   Upute2: {fileID: 1800659551}
   Upute3: {fileID: 1254118036}
+--- !u!114 &1162343359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162343356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab5a463970410444b42d1509b27965e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1200568755
 GameObject:
   m_ObjectHideFlags: 0
