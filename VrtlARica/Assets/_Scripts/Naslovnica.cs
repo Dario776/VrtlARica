@@ -9,9 +9,26 @@ public class Naslovnica : MonoBehaviour
     public GameObject Info;
     public GameObject Postavke;
 
+    public GameObject PopupZaIzlaze;
+
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void QuitGame()
+    {
+        PopupZaIzlaze.SetActive(true);
+    }
+
+    public void CancelExit()
+    {
+        PopupZaIzlaze.SetActive(false);
+    }
+
+    public void ConfirmExit()
+    {
+        Application.Quit();
     }
 
     public void ShowUpute()
@@ -31,4 +48,5 @@ public class Naslovnica : MonoBehaviour
         Postavke.SetActive(true);
         this.gameObject.SetActive(false);
     }
+
 }
