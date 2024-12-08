@@ -750,7 +750,7 @@ GameObject:
   - component: {fileID: 361165948}
   - component: {fileID: 361165949}
   m_Layer: 0
-  m_Name: Naslovnica
+  m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
