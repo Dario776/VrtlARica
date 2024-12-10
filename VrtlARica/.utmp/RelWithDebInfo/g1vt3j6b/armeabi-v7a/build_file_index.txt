@@ -1,2 +1,0 @@
-D:\FER\5sem\projektr\VrtlARica\VrtlARica\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
-D:\FER\5sem\projektr\VrtlARica\VrtlARica\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

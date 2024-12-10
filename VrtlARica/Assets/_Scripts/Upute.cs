@@ -2,33 +2,32 @@ using UnityEngine;
 
 public class Upute : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject Upute1;
+    [SerializeField]
+    private GameObject Upute2;
+    [SerializeField]
+    private GameObject Upute3;
+    [SerializeField]
+    private GameObject Tockica1;
+    [SerializeField]
+    private GameObject Tockica2;
+    [SerializeField]
+    private GameObject Tockica3;
+
     private int trenutneUpute;
-    public GameObject Naslovnica;
-    public GameObject Upute1;
-    public GameObject Upute2;
-    public GameObject Upute3;
 
-    public GameObject Tockica1;
-    public GameObject Tockica2;
-    public GameObject Tockica3;
-
-    void Awake()
+    private void Awake()
     {
         trenutneUpute = 1;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         trenutneUpute = 1;
         ShowUpute(trenutneUpute);
     }
 
-
-    public void ShowNaslovnica()
-    {
-        Naslovnica.SetActive(true);
-        this.gameObject.SetActive(false);
-    }
     public void ShowNextUpute()
     {
         if (trenutneUpute == 3)
@@ -37,6 +36,7 @@ public class Upute : MonoBehaviour
         trenutneUpute++;
         ShowUpute(trenutneUpute);
     }
+
     public void ShowLastUpute()
     {
         if (trenutneUpute == 1)
@@ -45,6 +45,7 @@ public class Upute : MonoBehaviour
         trenutneUpute--;
         ShowUpute(trenutneUpute);
     }
+
     private void ShowUpute(int trenutneUpute)
     {
         if (trenutneUpute == 1)
@@ -74,6 +75,5 @@ public class Upute : MonoBehaviour
             Tockica2.SetActive(true);
             Tockica3.SetActive(false);
         }
-
     }
 }

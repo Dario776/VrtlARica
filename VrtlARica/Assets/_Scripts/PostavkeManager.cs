@@ -1,36 +1,48 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PostavkeManager : MonoBehaviour
+public class PostavkeManager : SingletonPersistent<PostavkeManager>
 {
-    static PostavkeManager _instance;
-    public static PostavkeManager Instance { get { return _instance; } }
+    public string currentFont { get; set; }
+    public int currentFontSize { get; set; }
 
-    public string currentFont;
-    public int currentFontSize;
+    private TMP_FontAsset sans;
+    private TMP_FontAsset dyslexic;
 
-    public TMP_FontAsset sans;
-    public TMP_FontAsset dyslexic;
+    private List<GameObject> texts;
 
-    List<GameObject> texts;
-
-    public void Awake()
+    private void Awake()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            currentFont = "Sans";
-            currentFontSize = 0;
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
+        currentFont = "Sans";
+        currentFontSize = 0;
+        sans = Resources.Load<TMP_FontAsset>(Konstante.OpenSansRegularPath);
+        dyslexic = Resources.Load<TMP_FontAsset>(Konstante.OpenDyslexicRegularPath);
     }
 
-    public void CheckForText()
+    private void Start()
+    {
+        Refresh();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += SceneChanged;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= SceneChanged;
+    }
+
+    private void SceneChanged(Scene scene, LoadSceneMode mode)
+    {
+        if (mode == LoadSceneMode.Additive)
+            Refresh();
+    }
+
+    private void Refresh()
     {
         texts = new List<GameObject>();
         GameObject[] gameObjects = FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -39,11 +51,7 @@ public class PostavkeManager : MonoBehaviour
             if (go.tag == "Text")
                 texts.Add(go);
         }
-        CheckFont();
-    }
 
-    public void CheckFont()
-    {
         if (currentFont == "Sans")
             ChangeFontSans();
         else
@@ -59,6 +67,7 @@ public class PostavkeManager : MonoBehaviour
             go.GetComponent<TextMeshProUGUI>().font = sans;
         }
     }
+
     public void ChangeFontDyslexic()
     {
         currentFont = "Dyslexic";

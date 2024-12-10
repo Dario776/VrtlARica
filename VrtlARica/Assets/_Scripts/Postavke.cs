@@ -1,48 +1,57 @@
-using System;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Postavke : MonoBehaviour
 {
-    public GameObject Naslovnica;
-    public GameObject Button1;
-    public GameObject Button2;
-    private UnityEngine.UI.Image OpcijaFonta1;
-    private UnityEngine.UI.Image OpcijaFonta2;
+    [SerializeField]
+    private GameObject OpcijaFonta1;
+    [SerializeField]
+    private GameObject OpcijaFonta2;
+    private Image imageOpcijaFonta1;
+    private Image imageOpcijaFonta2;
+
+    private PostavkeManager postavkeManager;
 
     private void Start()
     {
-        OpcijaFonta1 = Button1.GetComponent<UnityEngine.UI.Image>();
-        OpcijaFonta2 = Button2.GetComponent<UnityEngine.UI.Image>();
-        CheckFont();
+        postavkeManager = PostavkeManager.Instance;
+        imageOpcijaFonta1 = OpcijaFonta1.GetComponent<Image>();
+        imageOpcijaFonta2 = OpcijaFonta2.GetComponent<Image>();
+        Refresh();
     }
-    public void CheckFont()
+
+    private void Refresh()
     {
-        if (PostavkeManager.Instance.currentFont == "Sans")
+        if (postavkeManager.currentFont == "Sans")
             ChangeFontSans();
         else
             ChangeFontDyslexic();
     }
-    public void ShowNaslovnica()
-    {
-        Naslovnica.SetActive(true);
-        this.gameObject.SetActive(false);
-    }
+
     public void ChangeFontSans()
     {
-        PostavkeManager.Instance.ChangeFontSans();
-        OpcijaFonta1.color = new Color32(249, 194, 126, 255);
-        OpcijaFonta2.color = new Color32(255, 255, 255, 255);
+        imageOpcijaFonta1.color = Konstante.CustomOrangeColor;
+        imageOpcijaFonta2.color = Konstante.WhiteColor;
     }
     public void ChangeFontDyslexic()
     {
-        PostavkeManager.Instance.ChangeFontDyslexic();
-        OpcijaFonta2.color = new Color32(249, 194, 126, 255);
-        OpcijaFonta1.color = new Color32(255, 255, 255, 255);
+        imageOpcijaFonta1.color = Konstante.WhiteColor;
+        imageOpcijaFonta2.color = Konstante.CustomOrangeColor;
     }
-    public void CloseThis()
+    public void ChangeFontSansButton()
     {
-        this.gameObject.SetActive(false);
+        postavkeManager.ChangeFontSans();
+        imageOpcijaFonta1.color = Konstante.CustomOrangeColor;
+        imageOpcijaFonta2.color = Konstante.WhiteColor;
+    }
+    public void ChangeFontDyslexicButton()
+    {
+        postavkeManager.ChangeFontDyslexic();
+        imageOpcijaFonta1.color = Konstante.WhiteColor;
+        imageOpcijaFonta2.color = Konstante.CustomOrangeColor;
+    }
+    public void CloseButton()
+    {
+        gameObject.SetActive(false);
     }
 }

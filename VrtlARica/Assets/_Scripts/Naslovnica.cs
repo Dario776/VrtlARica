@@ -1,38 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Scripting;
 
 public class Naslovnica : MonoBehaviour
 {
-    public GameObject Upute;
-    public GameObject Info;
-    public GameObject Postavke;
-    public GameObject PopupZaIzlaze;
+    [SerializeField]
+    private GameObject Upute;
+    [SerializeField]
+    private GameObject Info;
+    [SerializeField]
+    private GameObject Postavke;
+    [SerializeField]
+    private GameObject IzlazPopup;
 
-    public void Start()
-    {
-        PostavkeManager.Instance.CheckForText();
-    }
-    public void PlayGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
+    private GameManager gameManager;
 
-    public void ReturnHome()
+    private void Start()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        gameManager = GameManager.Instance;
     }
 
-    public void QuitGame()
+    public void ZapocniButton()
     {
-        PopupZaIzlaze.SetActive(true);
+        gameManager.LoadGameScene();
+    }
+
+    public void IzlazButton()
+    {
+        IzlazPopup.SetActive(true);
     }
 
     public void CancelExit()
     {
-        PopupZaIzlaze.SetActive(false);
+        IzlazPopup.SetActive(false);
     }
 
     public void ConfirmExit()
@@ -40,26 +38,39 @@ public class Naslovnica : MonoBehaviour
         Application.Quit();
     }
 
-    public void ShowUpute()
+    public void UputeButton()
     {
-        Upute.SetActive(true);
-        this.gameObject.SetActive(false);
+        if (Upute.activeSelf == false)
+        {
+            Upute.SetActive(true);
+        }
+        else
+        {
+            Upute.SetActive(false);
+        }
     }
 
-    public void ShowInfo()
+    public void InfoButton()
     {
-        Info.SetActive(true);
-        this.gameObject.SetActive(false);
+        if (Info.activeSelf == false)
+        {
+            Info.SetActive(true);
+        }
+        else
+        {
+            Info.SetActive(false);
+        }
     }
 
-    public void ShowPostavke()
+    public void PostavkeButton()
     {
-        Postavke.SetActive(true);
-        this.gameObject.SetActive(false);
+        if (Postavke.activeSelf == false)
+        {
+            Postavke.SetActive(true);
+        }
+        else
+        {
+            Postavke.SetActive(false);
+        }
     }
-    public void ShowPostavkePopup()
-    {
-        Postavke.SetActive(true);
-    }
-
 }
