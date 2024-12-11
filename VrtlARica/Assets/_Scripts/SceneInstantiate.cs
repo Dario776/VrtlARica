@@ -5,13 +5,10 @@ public class SceneInstantiate : MonoBehaviour
 {
     [SerializeField]
     private Object persistentScene;
-    private static bool done = false;
-    private async void Awake()
+
+    public async void Load()
     {
-        if (!done)
-        {
-            await SceneManager.LoadSceneAsync(persistentScene.name, LoadSceneMode.Additive);
-            done = true;
-        }
+
+        await SceneManager.LoadSceneAsync(persistentScene.name, LoadSceneMode.Additive);
     }
 }

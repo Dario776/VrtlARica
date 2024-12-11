@@ -11,5 +11,4 @@ public static class Konstante
 
     public static string OpenSansRegularPath = "Fonts/OpenSans/OpenSans-Regular SDF";
     public static string OpenDyslexicRegularPath = "Fonts/OpenDyslexic/OpenDyslexic-Regular SDF";
-
 }

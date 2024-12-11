@@ -13,7 +13,7 @@ public class Naslovnica : MonoBehaviour
 
     private GameManager gameManager;
 
-    private void Start()
+    private void Awake()
     {
         gameManager = GameManager.Instance;
     }

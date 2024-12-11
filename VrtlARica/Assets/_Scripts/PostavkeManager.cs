@@ -13,8 +13,9 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
 
     private List<GameObject> texts;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         currentFont = "Sans";
         currentFontSize = 0;
         sans = Resources.Load<TMP_FontAsset>(Konstante.OpenSansRegularPath);
@@ -38,8 +39,7 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
 
     private void SceneChanged(Scene scene, LoadSceneMode mode)
     {
-        if (mode == LoadSceneMode.Additive)
-            Refresh();
+        Refresh();
     }
 
     private void Refresh()

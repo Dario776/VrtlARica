@@ -1,6 +1,4 @@
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.XR.ARFoundation;
 
 public class TrackedImageInfo : MonoBehaviour
