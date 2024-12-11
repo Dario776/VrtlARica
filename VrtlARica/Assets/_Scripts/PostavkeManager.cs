@@ -11,7 +11,7 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
     private TMP_FontAsset sans;
     private TMP_FontAsset dyslexic;
 
-    private List<GameObject> texts;
+    private TextMeshProUGUI[] texts;
 
     public override void Awake()
     {
@@ -44,13 +44,7 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
 
     private void Refresh()
     {
-        texts = new List<GameObject>();
-        GameObject[] gameObjects = FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-        foreach (GameObject go in gameObjects)
-        {
-            if (go.tag == "Text")
-                texts.Add(go);
-        }
+        texts = FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         if (currentFont == "Sans")
             ChangeFontSans();
@@ -62,9 +56,9 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
     {
         currentFont = "Sans";
 
-        foreach (GameObject go in texts)
+        foreach (TextMeshProUGUI text in texts)
         {
-            go.GetComponent<TextMeshProUGUI>().font = sans;
+            text.font = sans;
         }
     }
 
@@ -72,9 +66,9 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
     {
         currentFont = "Dyslexic";
 
-        foreach (GameObject go in texts)
+        foreach (TextMeshProUGUI text in texts)
         {
-            go.GetComponent<TextMeshProUGUI>().font = dyslexic;
+            text.font = dyslexic;
         }
     }
 }

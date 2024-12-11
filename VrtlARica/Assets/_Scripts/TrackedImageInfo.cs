@@ -15,6 +15,8 @@ public class TrackedImageInfo : MonoBehaviour
         foreach (var newImage in eventArgs.added)
         {
             ListAllImages("ADD");
+            GameManager.Instance.SkeniranMarker();
+            enabled = false;
         }
 
         foreach (var updatedImage in eventArgs.updated)

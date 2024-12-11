@@ -14,8 +14,17 @@ public class MainUI : MonoBehaviour
     private GameObject DropdownMenu;
     [SerializeField]
     private GameObject Zamrzni;
+    [SerializeField]
+    private GameObject[] Text;
+
+    private int i;
 
     private GameManager gameManager;
+
+    private void Awake()
+    {
+        i = 0;
+    }
 
     private void Start()
     {
@@ -67,6 +76,20 @@ public class MainUI : MonoBehaviour
         {
             Zamrzni.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
             Time.timeScale = 1;
+        }
+    }
+
+    public void StrelicaZaTextButton()
+    {
+        if (gameManager.NextStep())
+        {
+            Text[i].SetActive(false);
+            Text[++i].SetActive(true);
+
+            if (i == Text.Length - 1)
+            {
+                i = 0;
+            }
         }
     }
 }

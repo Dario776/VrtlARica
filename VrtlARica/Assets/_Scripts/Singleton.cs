@@ -52,7 +52,6 @@ public class SingletonPersistent<T> : MonoBehaviour where T : Component
                 obj.name = typeof(T).Name;
                 obj.hideFlags = HideFlags.HideAndDontSave;
                 _instance = obj.AddComponent<T>();
-
             }
             return _instance;
         }

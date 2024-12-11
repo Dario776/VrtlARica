@@ -9,11 +9,11 @@ public class PlaceObject : MonoBehaviour
 {
 
     [SerializeField]
-    GameObject prefab;
+    private GameObject Zemlja;
 
-    ARRaycastManager aRRaycastManager;
-    ARPlaneManager aRPlaneManager;
-    List<ARRaycastHit> hits = new List<ARRaycastHit>();
+    private ARRaycastManager aRRaycastManager;
+    private ARPlaneManager aRPlaneManager;
+    private List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
     void Awake()
     {
@@ -45,7 +45,15 @@ public class PlaceObject : MonoBehaviour
             foreach (ARRaycastHit hit in hits)
             {
                 Pose pose = hit.pose;
-                GameObject obj = Instantiate(prefab, pose.position, pose.rotation);
+                GameObject obj = Instantiate(Zemlja, pose.position, pose.rotation);
+                aRPlaneManager.enabled = false;
+                ARPlaneMeshVisualizer[] aRPlaneMeshVisualizers = FindObjectsByType<ARPlaneMeshVisualizer>(FindObjectsSortMode.None);
+                foreach (ARPlaneMeshVisualizer aRPlaneMesh in aRPlaneMeshVisualizers)
+                {
+                    aRPlaneMesh.enabled = false;
+                }
+                GameManager.Instance.ZemljaPostavljena();
+                enabled = false;
             }
         }
 
