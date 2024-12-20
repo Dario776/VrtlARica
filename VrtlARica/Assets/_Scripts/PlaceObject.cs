@@ -15,27 +15,34 @@ public class PlaceObject : MonoBehaviour
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
-    void Awake()
+    private bool objectPlaced;
+
+    private void Awake()
+    {
+        objectPlaced = false;
+    }
+
+    private void Start()
     {
         aRPlaneManager = GetComponent<ARPlaneManager>();
         aRRaycastManager = GetComponent<ARRaycastManager>();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         EnhancedTouch.TouchSimulation.Enable();
         EnhancedTouch.EnhancedTouchSupport.Enable();
         EnhancedTouch.Touch.onFingerDown += FingerDown;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         EnhancedTouch.TouchSimulation.Disable();
         EnhancedTouch.EnhancedTouchSupport.Disable();
         EnhancedTouch.Touch.onFingerDown -= FingerDown;
     }
 
-    void FingerDown(EnhancedTouch.Finger finger)
+    private void FingerDown(EnhancedTouch.Finger finger)
     {
         if (finger.index != 0)
             return;
@@ -44,16 +51,25 @@ public class PlaceObject : MonoBehaviour
         {
             foreach (ARRaycastHit hit in hits)
             {
-                Pose pose = hit.pose;
-                GameObject obj = Instantiate(Zemlja, pose.position, pose.rotation);
-                aRPlaneManager.enabled = false;
-                ARPlaneMeshVisualizer[] aRPlaneMeshVisualizers = FindObjectsByType<ARPlaneMeshVisualizer>(FindObjectsSortMode.None);
-                foreach (ARPlaneMeshVisualizer aRPlaneMesh in aRPlaneMeshVisualizers)
+                // da nebi slucajno bilo dva objekta zemlje
+                if (!objectPlaced)
                 {
-                    aRPlaneMesh.enabled = false;
+                    objectPlaced = true;
+
+                    Pose pose = hit.pose;
+                    GameObject obj = Instantiate(Zemlja, pose.position, pose.rotation);
+
+                    //iskljucivanje prepoznavanja ravnina i njihovih mesh-eva
+                    aRPlaneManager.enabled = false;
+                    ARPlaneMeshVisualizer[] aRPlaneMeshVisualizers = FindObjectsByType<ARPlaneMeshVisualizer>(FindObjectsSortMode.None);
+                    foreach (ARPlaneMeshVisualizer aRPlaneMesh in aRPlaneMeshVisualizers)
+                    {
+                        aRPlaneMesh.enabled = false;
+                    }
+
+                    //javljanje GameManageru da smo gotovi
+                    GameManager.Instance.ZemljaPostavljena();
                 }
-                GameManager.Instance.ZemljaPostavljena();
-                enabled = false;
             }
         }
 

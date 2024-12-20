@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 enum Stanje
 {
-    Uvod,
     PostavljanjeZemlje,
     SkeniranjeMarkera,
     ZalijevanjeBiljke,
@@ -17,6 +17,11 @@ public class GameManager : SingletonPersistent<GameManager>
     private int zadovoljeniUvjeti;
     private Stanje stanje;
 
+    private MainUI mainUI;
+    private PlaceObject placeObject;
+    private TrackedImageInfo trackedImageInfo;
+
+
     public override void Awake()
     {
         base.Awake();
@@ -25,9 +30,9 @@ public class GameManager : SingletonPersistent<GameManager>
     public void LoadGameScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //2 uvodna teksta
+        //2 uvodna teksta, 2 puta dajemo prolaz
         zadovoljeniUvjeti = 2;
-        stanje = Stanje.Uvod;
+        stanje = Stanje.PostavljanjeZemlje;
     }
 
     public void LoadStartScene()
@@ -40,23 +45,23 @@ public class GameManager : SingletonPersistent<GameManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    //ako je igrac napravio zadano, zadovoljeniUvjeti ce biti pozitivni i ova funkcija ce vratiti prolaz (true)
     public bool NextStep()
     {
         if (zadovoljeniUvjeti > 0)
         {
             zadovoljeniUvjeti--;
-            if (zadovoljeniUvjeti == 0 && stanje == Stanje.Uvod)
+            //kad smo dosli do kraja prolaza, obradujemo stanje
+            if (zadovoljeniUvjeti == 0)
             {
-                stanje = Stanje.PostavljanjeZemlje;
                 ObradiStanje();
             }
-            else if (zadovoljeniUvjeti == 0)
-                ObradiStanje();
-
             return true;
         }
-
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
     private void ObradiStanje()
@@ -65,12 +70,12 @@ public class GameManager : SingletonPersistent<GameManager>
         {
             case Stanje.PostavljanjeZemlje:
                 Debug.Log(Stanje.PostavljanjeZemlje);
-                PlaceObject placeObject = FindFirstObjectByType<PlaceObject>();
+                placeObject = FindFirstObjectByType<PlaceObject>();
                 placeObject.enabled = true;
                 break;
             case Stanje.SkeniranjeMarkera:
                 Debug.Log(Stanje.SkeniranjeMarkera);
-                TrackedImageInfo trackedImageInfo = FindFirstObjectByType<TrackedImageInfo>();
+                trackedImageInfo = FindFirstObjectByType<TrackedImageInfo>();
                 trackedImageInfo.enabled = true;
                 break;
             case Stanje.ZalijevanjeBiljke:
@@ -90,13 +95,21 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void ZemljaPostavljena()
     {
+        //onemogucavanje placeObjecta
+        placeObject.enabled = false;
+
+        //priprema za sljedece stanje 
         stanje = Stanje.SkeniranjeMarkera;
         zadovoljeniUvjeti++;
+        mainUI = FindFirstObjectByType<MainUI>();
+        mainUI.ToggleRightArrow(true);
     }
 
-    internal void SkeniranMarker()
+    public void SkeniranMarker()
     {
+        trackedImageInfo.enabled = false;
         stanje = Stanje.ZalijevanjeBiljke;
         zadovoljeniUvjeti++;
+        mainUI.ToggleRightArrow(true);
     }
 }
