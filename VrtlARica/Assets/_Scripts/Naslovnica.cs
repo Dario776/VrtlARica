@@ -2,14 +2,10 @@ using UnityEngine;
 
 public class Naslovnica : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject Upute;
-    [SerializeField]
-    private GameObject Info;
-    [SerializeField]
-    private GameObject Postavke;
-    [SerializeField]
-    private GameObject IzlazPopup;
+    [SerializeField] private GameObject Upute;
+    [SerializeField] private GameObject Info;
+    [SerializeField] private GameObject Postavke;
+    [SerializeField] private GameObject IzlazPopup;
 
     private GameManager gameManager;
 

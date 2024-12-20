@@ -1,4 +1,5 @@
 using System;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
@@ -18,8 +19,9 @@ public class GameManager : SingletonPersistent<GameManager>
     private Stanje stanje;
 
     private MainUI mainUI;
+    private GameObject XROriginGO;
     private PlaceObject placeObject;
-    private TrackedImageInfo trackedImageInfo;
+    private ImageTracker imageTracker;
 
 
     public override void Awake()
@@ -70,13 +72,12 @@ public class GameManager : SingletonPersistent<GameManager>
         {
             case Stanje.PostavljanjeZemlje:
                 Debug.Log(Stanje.PostavljanjeZemlje);
-                placeObject = FindFirstObjectByType<PlaceObject>();
+                PronalazakKomponenataIgre();
                 placeObject.enabled = true;
                 break;
             case Stanje.SkeniranjeMarkera:
                 Debug.Log(Stanje.SkeniranjeMarkera);
-                trackedImageInfo = FindFirstObjectByType<TrackedImageInfo>();
-                trackedImageInfo.enabled = true;
+                imageTracker.enabled = true;
                 break;
             case Stanje.ZalijevanjeBiljke:
                 Debug.Log(Stanje.ZalijevanjeBiljke);
@@ -93,6 +94,13 @@ public class GameManager : SingletonPersistent<GameManager>
         }
     }
 
+    private void PronalazakKomponenataIgre()
+    {
+        XROriginGO = FindFirstObjectByType<XROrigin>().gameObject;
+        placeObject = XROriginGO.GetComponent<PlaceObject>();
+        imageTracker = XROriginGO.GetComponent<ImageTracker>();
+    }
+
     public void ZemljaPostavljena()
     {
         //onemogucavanje placeObjecta
@@ -107,7 +115,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void SkeniranMarker()
     {
-        trackedImageInfo.enabled = false;
+        imageTracker.enabled = false;
         stanje = Stanje.ZalijevanjeBiljke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);

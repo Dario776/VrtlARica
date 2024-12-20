@@ -2,18 +2,12 @@ using UnityEngine;
 
 public class Upute : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject Upute1;
-    [SerializeField]
-    private GameObject Upute2;
-    [SerializeField]
-    private GameObject Upute3;
-    [SerializeField]
-    private GameObject Tockica1;
-    [SerializeField]
-    private GameObject Tockica2;
-    [SerializeField]
-    private GameObject Tockica3;
+    [SerializeField] private GameObject Upute1;
+    [SerializeField] private GameObject Upute2;
+    [SerializeField] private GameObject Upute3;
+    [SerializeField] private GameObject Tockica1;
+    [SerializeField] private GameObject Tockica2;
+    [SerializeField] private GameObject Tockica3;
 
     private int trenutneUpute;
 

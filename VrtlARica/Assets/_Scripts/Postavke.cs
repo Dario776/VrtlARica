@@ -3,10 +3,8 @@ using UnityEngine.UI;
 
 public class Postavke : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject OpcijaFonta1;
-    [SerializeField]
-    private GameObject OpcijaFonta2;
+    [SerializeField] private GameObject OpcijaFonta1;
+    [SerializeField] private GameObject OpcijaFonta2;
     private Image imageOpcijaFonta1;
     private Image imageOpcijaFonta2;
 

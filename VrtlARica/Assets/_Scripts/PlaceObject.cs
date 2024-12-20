@@ -7,9 +7,7 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 [RequireComponent(typeof(ARRaycastManager), typeof(ARPlaneManager))]
 public class PlaceObject : MonoBehaviour
 {
-
-    [SerializeField]
-    private GameObject Zemlja;
+    [SerializeField] private GameObject Zemlja;
 
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
