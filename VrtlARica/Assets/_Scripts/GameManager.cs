@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +13,7 @@ enum Stanje
     BerbaPlodova
 }
 public class GameManager : SingletonPersistent<GameManager>
-{
+{    
     //semafor
     private int zadovoljeniUvjeti;
     private Stanje stanje;
@@ -51,6 +52,7 @@ public class GameManager : SingletonPersistent<GameManager>
         if (zadovoljeniUvjeti > 0)
         {
             zadovoljeniUvjeti--;
+            Debug.Log("zadovoljeniUvjet= " + zadovoljeniUvjeti);
             //kad smo dosli do kraja prolaza, obradujemo stanje
             if (zadovoljeniUvjeti == 0)
             {
@@ -64,6 +66,8 @@ public class GameManager : SingletonPersistent<GameManager>
         }
     }
 
+    //samo radi testiranja
+    public int count = 1;
     private void ObradiStanje()
     {
         switch (stanje)
@@ -75,17 +79,25 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case Stanje.SkeniranjeMarkera:
                 Debug.Log(Stanje.SkeniranjeMarkera);
-                trackedImageInfo = FindFirstObjectByType<TrackedImageInfo>();
-                trackedImageInfo.enabled = true;
+                //trackedImageInfo = FindFirstObjectByType<TrackedImageInfo>();
+                //trackedImageInfo.enabled = true;
+                //treba staviti na ispravno mjesto, ovdje je samo radi testiranja
+                SkeniranMarker();
                 break;
             case Stanje.ZalijevanjeBiljke:
                 Debug.Log(Stanje.ZalijevanjeBiljke);
+                //treba staviti na ispravno mjesto, ovdje je samo radi testiranja
+                ZalivenaBiljka();
                 break;
             case Stanje.RastBiljke:
                 Debug.Log(Stanje.RastBiljke);
+                //makni
+                Rast();
                 break;
             case Stanje.BerbaPlodova:
                 Debug.Log(Stanje.BerbaPlodova);
+                placeObject.ReplaceModel();
+                mainUI.ToggleRotationButtons(true);
                 break;
             default:
                 Debug.Log("Greska!");
@@ -107,8 +119,33 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void SkeniranMarker()
     {
-        trackedImageInfo.enabled = false;
+        //trackedImageInfo.enabled = false;
         stanje = Stanje.ZalijevanjeBiljke;
+        zadovoljeniUvjeti++;
+        mainUI.ToggleRightArrow(true);
+    }
+
+    public void ZalivenaBiljka()
+    {
+        //treba nadopuniti
+        stanje = Stanje.RastBiljke;
+        zadovoljeniUvjeti++;
+        mainUI.ToggleRightArrow(true);
+    }
+
+    //samo radi testiranja
+    public void Rast(){
+        if(count == 1){
+            count++;
+            zadovoljeniUvjeti++;
+        }else{
+            BiljkaNarasla();
+        }
+    }
+    public void BiljkaNarasla()
+    {
+        //treba nadopuniti
+        stanje = Stanje.BerbaPlodova;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
     }

@@ -11,9 +11,19 @@ public class PlaceObject : MonoBehaviour
     [SerializeField]
     private GameObject Zemlja;
 
+    //dodano
+    [SerializeField]
+    private GameObject GrownPlantWithFruit;
+
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+    //dodano da se zapamti pozicija gdje je stavljen model
+    private Pose pose;
+
+    //dodano da se zapamti trenutni model
+    private GameObject obj;
 
     private bool objectPlaced;
 
@@ -56,8 +66,10 @@ public class PlaceObject : MonoBehaviour
                 {
                     objectPlaced = true;
 
-                    Pose pose = hit.pose;
-                    GameObject obj = Instantiate(Zemlja, pose.position, pose.rotation);
+                    //Pose pose = hit.pose;
+                    pose = hit.pose;
+                    //GameObject obj = Instantiate(Zemlja, pose.position, pose.rotation);
+                    obj = Instantiate(Zemlja, pose.position, pose.rotation);
 
                     //iskljucivanje prepoznavanja ravnina i njihovih mesh-eva
                     aRPlaneManager.enabled = false;
@@ -72,6 +84,21 @@ public class PlaceObject : MonoBehaviour
                 }
             }
         }
+    }
+
+    //dodano
+    public void ReplaceModel(){
+        if(obj != null)
+        {
+            Debug.Log("Uništenje " + obj);
+            Destroy(obj);
+
+            obj = Instantiate(GrownPlantWithFruit, pose.position, pose.rotation);
+            Debug.Log("Stvoren novi objekt " + obj);
+        } else {
+            Debug.LogWarning("No object to replace");
+        }
+
 
     }
 }
