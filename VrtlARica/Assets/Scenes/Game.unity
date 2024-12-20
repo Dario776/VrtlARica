@@ -1660,6 +1660,8 @@ GameObject:
   - component: {fileID: 372881569}
   - component: {fileID: 372881575}
   - component: {fileID: 372881576}
+  - component: {fileID: 372881577}
+  - component: {fileID: 372881578}
   m_Layer: 0
   m_Name: XR Origin (Mobile AR)
   m_TagString: Untagged
@@ -1793,6 +1795,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sjemenka: {fileID: 919132149155446097, guid: b630b0ee800521241b16bca21dcb1f43, type: 3}
+--- !u!114 &372881577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372881568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67989358fdbb79445a3ec6782d42f6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &372881578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372881568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab5a463970410444b42d1509b27965e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistance: 0.2
+  maxTime: 1
 --- !u!1 &381732167
 GameObject:
   m_ObjectHideFlags: 0
