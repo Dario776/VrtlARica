@@ -1796,8 +1796,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Zemlja: {fileID: 919132149155446097, guid: 099da0c998da5e64d9eafdbdd794d852, type: 3}
-  GrownPlantWithFruit: {fileID: 919132149155446097, guid: ce425fac6ff21ab47a04185ce5ee79b1,
+  GrownPlant: {fileID: 919132149155446097, guid: ce425fac6ff21ab47a04185ce5ee79b1,
     type: 3}
+  Basket: {fileID: 919132149155446097, guid: b8291573fc112994d946c67e147ca6d2, type: 3}
 --- !u!1 &381732167
 GameObject:
   m_ObjectHideFlags: 0

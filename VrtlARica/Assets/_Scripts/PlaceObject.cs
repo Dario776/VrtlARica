@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARKit;
 using UnityEngine.XR.ARSubsystems;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 
@@ -13,7 +14,11 @@ public class PlaceObject : MonoBehaviour
 
     //dodano
     [SerializeField]
-    private GameObject GrownPlantWithFruit;
+    private GameObject GrownPlant;
+
+    //dodano
+    [SerializeField]
+    private GameObject Basket;
 
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
@@ -93,15 +98,35 @@ public class PlaceObject : MonoBehaviour
             Debug.Log("Uništenje " + obj);
             Destroy(obj);
 
-            obj = Instantiate(GrownPlantWithFruit, pose.position, pose.rotation);
+            obj = Instantiate(GrownPlant, pose.position, pose.rotation);
+
             Debug.Log("Stvoren novi objekt " + obj);
         } else {
             Debug.LogWarning("No object to replace");
         }
     }
 
+
+    private float spawnDistance = 0.5f;
+
+    //funkcija za omogućavanje prikaza objekta pored drugog objekta
+    public void SpawnObject(GameObject objectToSpawn, GameObject refObject)
+    {
+        //izračun pozicije za stvaranje objekta
+        Vector3 spawnPosition = refObject.transform.position + refObject.transform.right.normalized * spawnDistance;
+
+        spawnPosition.y = refObject.transform.position.y;
+
+        Instantiate(objectToSpawn, spawnPosition, refObject.transform.rotation);
+
+    }
+
     //getter za objekt
     public GameObject GetObject(){
         return obj;
+    }
+
+    public GameObject GetBasket(){
+        return Basket;
     }
 }

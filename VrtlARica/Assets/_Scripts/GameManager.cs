@@ -100,10 +100,10 @@ public class GameManager : SingletonPersistent<GameManager>
                 Debug.Log(Stanje.BerbaPlodova);
                 placeObject.ReplaceModel();
                 GameObject rotationTarget = placeObject.GetObject();
-                Debug.Log("rotationTarget=" + rotationTarget);
                 mainUI.ToggleRotationButtons(true);
+                GameObject basket = placeObject.GetBasket();
+                placeObject.SpawnObject(basket, rotationTarget);
                 rotateObject = FindFirstObjectByType<RotateObject>();
-                Debug.Log("rotateObject= " + rotateObject);
                 rotateObject.enabled = true;
                 rotateObject.SetRotationTarget(rotationTarget);
                 break;
