@@ -13,13 +13,15 @@ enum Stanje
     BerbaPlodova
 }
 public class GameManager : SingletonPersistent<GameManager>
-{    
+{
     //semafor
     private int zadovoljeniUvjeti;
     private Stanje stanje;
 
     private MainUI mainUI;
     private PlaceObject placeObject;
+    //dodano za rotaciju
+    private RotateObject rotateObject;
     private TrackedImageInfo trackedImageInfo;
 
 
@@ -97,7 +99,13 @@ public class GameManager : SingletonPersistent<GameManager>
             case Stanje.BerbaPlodova:
                 Debug.Log(Stanje.BerbaPlodova);
                 placeObject.ReplaceModel();
+                GameObject rotationTarget = placeObject.GetObject();
+                Debug.Log("rotationTarget=" + rotationTarget);
                 mainUI.ToggleRotationButtons(true);
+                rotateObject = FindFirstObjectByType<RotateObject>();
+                Debug.Log("rotateObject= " + rotateObject);
+                rotateObject.enabled = true;
+                rotateObject.SetRotationTarget(rotationTarget);
                 break;
             default:
                 Debug.Log("Greska!");
@@ -134,11 +142,15 @@ public class GameManager : SingletonPersistent<GameManager>
     }
 
     //samo radi testiranja
-    public void Rast(){
-        if(count == 1){
+    public void Rast()
+    {
+        if (count == 1)
+        {
             count++;
             zadovoljeniUvjeti++;
-        }else{
+        }
+        else
+        {
             BiljkaNarasla();
         }
     }

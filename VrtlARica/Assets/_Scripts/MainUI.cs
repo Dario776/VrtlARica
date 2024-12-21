@@ -14,6 +14,8 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject StrelicaUdesnoVizualno;
     //dodano za rotaciju
     [SerializeField] private GameObject StreliceZaRotaciju;
+/*     [SerializeField] private GameObject StrelicaZaRotacijuDesno;
+    [SerializeField] private GameObject StrelicaZaRotacijuLijevo; */
     [SerializeField] private GameObject[] Text;
     [SerializeField] private GameObject[] Tockice;
 
@@ -22,9 +24,6 @@ public class MainUI : MonoBehaviour
     private int pritisnutaStrelicaUlijevo;
     private Button strelicaUlijevoButton;
     private Button strelicaUdesnoButton;
-    //dodano
-    private Button strelicaRotirajUlijevoButton;
-    private Button strelicaRotirajUdesnoButton;
     private Image strelicaUlijevoVizualnoImage;
     private Image strelicaUdesnoVizualnoImage;
 
@@ -44,6 +43,7 @@ public class MainUI : MonoBehaviour
 
         strelicaUlijevoVizualnoImage = StrelicaUlijevoVizualno.GetComponent<Image>();
         strelicaUdesnoVizualnoImage = StrelicaUdesnoVizualno.GetComponent<Image>();
+
         //onemogucujemo lijevu strelicu na pocetku
         ToggleLeftArrow(false);
     }
@@ -199,7 +199,8 @@ public class MainUI : MonoBehaviour
     }
 
     //dodano za omogućavanje gumbića za rotaciju
-    public void ToggleRotationButtons(bool Enable){
+    public void ToggleRotationButtons(bool Enable)
+    {
         if (Enable)
         {
             StreliceZaRotaciju.SetActive(true);

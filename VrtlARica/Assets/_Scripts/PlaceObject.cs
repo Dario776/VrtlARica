@@ -98,7 +98,10 @@ public class PlaceObject : MonoBehaviour
         } else {
             Debug.LogWarning("No object to replace");
         }
+    }
 
-
+    //getter za objekt
+    public GameObject GetObject(){
+        return obj;
     }
 }
