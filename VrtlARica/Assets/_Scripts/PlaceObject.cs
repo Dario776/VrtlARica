@@ -97,8 +97,8 @@ public class PlaceObject : MonoBehaviour
         }
     }
 
-    //ovo znaci da ce objekt biti 0.5 m udaljen od drugog objekta
-    private float spawnDistance = 0.5f;
+    //ovo znaci da ce objekt biti 0.3 m udaljen od drugog objekta
+    private float spawnDistance = 0.3f;
     //funkcija za omogućavanje prikaza objekta pored drugog objekta
     public void SpawnObject(GameObject objectToSpawn, GameObject refObject)
     {

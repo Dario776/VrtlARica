@@ -4,7 +4,7 @@ public class RotateObject : MonoBehaviour
 {
     //dodano
     [SerializeField]
-    private GameObject GrownPlant;
+    private GameObject GrownPlantWithFruit;
 
     //dodano
     [SerializeField]
@@ -53,11 +53,13 @@ public class RotateObject : MonoBehaviour
 
 
     //geter za kosaru
-    public GameObject GetBasket(){
+    public GameObject GetBasket()
+    {
         return Basket;
     }
     //getter za izraslu biljku
-    public GameObject GetGrownPlant(){
-        return GrownPlant;
+    public GameObject GetGrownPlantWithFruit()
+    {
+        return GrownPlantWithFruit;
     }
 }

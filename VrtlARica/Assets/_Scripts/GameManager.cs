@@ -103,8 +103,8 @@ public class GameManager : SingletonPersistent<GameManager>
                 //pripremi rotaciju
                 rotateObject = FindFirstObjectByType<RotateObject>();
                 rotateObject.enabled = true;
-                //zamijeni trenutni objekt s biljkom s plodovima (trenutno je teglica zamijenjena s obicnom biljkom bez plodova, a treba obicna biljka bit zamijenjena s biljkom s plodovima)
-                placeObject.ReplaceModel(placeObject.GetObject(), rotateObject.GetGrownPlant());
+                //zamijeni trenutni objekt s biljkom s plodovima
+                placeObject.ReplaceModel(placeObject.GetObject(), rotateObject.GetGrownPlantWithFruit());
                 //dohvati objekt koji će se rotirati
                 GameObject rotationTarget = placeObject.GetObject();
                 //dohvati objekt kosare
