@@ -93,18 +93,25 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case Stanje.RastBiljke:
                 Debug.Log(Stanje.RastBiljke);
-                //makni
+                //makni, tu je radi testiranja
                 Rast();
                 break;
             case Stanje.BerbaPlodova:
                 Debug.Log(Stanje.BerbaPlodova);
-                placeObject.ReplaceModel();
-                GameObject rotationTarget = placeObject.GetObject();
+                //omogući gumbe za rotaciju (nakon izvršene interakcije treba ih isključiti)
                 mainUI.ToggleRotationButtons(true);
-                GameObject basket = placeObject.GetBasket();
-                placeObject.SpawnObject(basket, rotationTarget);
+                //pripremi rotaciju
                 rotateObject = FindFirstObjectByType<RotateObject>();
                 rotateObject.enabled = true;
+                //zamijeni trenutni objekt s biljkom s plodovima (trenutno je teglica zamijenjena s obicnom biljkom bez plodova, a treba obicna biljka bit zamijenjena s biljkom s plodovima)
+                placeObject.ReplaceModel(placeObject.GetObject(), rotateObject.GetGrownPlant());
+                //dohvati objekt koji će se rotirati
+                GameObject rotationTarget = placeObject.GetObject();
+                //dohvati objekt kosare
+                GameObject basket = rotateObject.GetBasket();
+                //stvori kosaru pokraj biljke
+                placeObject.SpawnObject(basket, rotationTarget);
+                //omogući rotiranje biljke
                 rotateObject.SetRotationTarget(rotationTarget);
                 break;
             default:

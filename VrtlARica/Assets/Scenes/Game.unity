@@ -1437,7 +1437,6 @@ GameObject:
   m_Component:
   - component: {fileID: 361165948}
   - component: {fileID: 361165949}
-  - component: {fileID: 361165950}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -1509,20 +1508,6 @@ MonoBehaviour:
   - {fileID: 1634755456}
   - {fileID: 1833000211}
   - {fileID: 854883221}
---- !u!114 &361165950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361165947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5a2269070cec3246bd8112dace6bf20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationDegree: 15
-  rotationSpeed: 5
 --- !u!1 &363368083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,9 +1781,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Zemlja: {fileID: 919132149155446097, guid: 099da0c998da5e64d9eafdbdd794d852, type: 3}
-  GrownPlant: {fileID: 919132149155446097, guid: ce425fac6ff21ab47a04185ce5ee79b1,
-    type: 3}
-  Basket: {fileID: 919132149155446097, guid: b8291573fc112994d946c67e147ca6d2, type: 3}
 --- !u!1 &381732167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3523,7 +3505,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 361165950}
+      - m_Target: {fileID: 1890485554}
         m_TargetAssemblyTypeName: RotateObject, Assembly-CSharp
         m_MethodName: RotateRight
         m_Mode: 1
@@ -6582,7 +6564,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 361165950}
+      - m_Target: {fileID: 1890485554}
         m_TargetAssemblyTypeName: RotateObject, Assembly-CSharp
         m_MethodName: RotateLeft
         m_Mode: 1
@@ -8972,6 +8954,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1890485553}
+  - component: {fileID: 1890485554}
   m_Layer: 5
   m_Name: RotateButtonContainer
   m_TagString: Untagged
@@ -9000,6 +8983,23 @@ RectTransform:
   m_AnchoredPosition: {x: -224, y: -400}
   m_SizeDelta: {x: 200, y: 400}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1890485554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890485552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a2269070cec3246bd8112dace6bf20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrownPlant: {fileID: 919132149155446097, guid: ce425fac6ff21ab47a04185ce5ee79b1,
+    type: 3}
+  Basket: {fileID: 919132149155446097, guid: b8291573fc112994d946c67e147ca6d2, type: 3}
+  rotationDegree: 15
+  rotationSpeed: 5
 --- !u!1 &1891655112
 GameObject:
   m_ObjectHideFlags: 0

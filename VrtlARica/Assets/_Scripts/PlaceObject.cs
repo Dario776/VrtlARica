@@ -11,14 +11,6 @@ public class PlaceObject : MonoBehaviour
     [SerializeField]
     private GameObject Zemlja;
 
-    //dodano
-    [SerializeField]
-    private GameObject GrownPlant;
-
-    //dodano
-    [SerializeField]
-    private GameObject Basket;
-
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
@@ -90,27 +82,28 @@ public class PlaceObject : MonoBehaviour
         }
     }
 
-    //dodano
-    public void ReplaceModel(){
-        if(obj != null)
+    //dodano za zamijenu trenutnog modela
+    public void ReplaceModel(GameObject toReplace, GameObject replaceWith){
+        if(toReplace != null)
         {
-            Debug.Log("Uništenje " + obj);
-            Destroy(obj);
+            Debug.Log("Uništenje " + toReplace);
+            Destroy(toReplace);
 
-            obj = Instantiate(GrownPlant, pose.position, pose.rotation);
+            obj = Instantiate(replaceWith, pose.position, pose.rotation);
 
-            Debug.Log("Stvoren novi objekt " + obj);
+            Debug.Log("Stvoren novi objekt " + toReplace);
         } else {
-            Debug.LogWarning("No object to replace");
+            Debug.LogWarning("Objekt ne postoji");
         }
     }
 
-
+    //ovo znaci da ce objekt biti 0.5 m udaljen od drugog objekta
     private float spawnDistance = 0.5f;
-
     //funkcija za omogućavanje prikaza objekta pored drugog objekta
     public void SpawnObject(GameObject objectToSpawn, GameObject refObject)
     {
+        Debug.Log("objectToSpawn=" + objectToSpawn);
+        Debug.Log("refObject=" + refObject);
         //izračun pozicije za stvaranje objekta
         Vector3 spawnPosition = refObject.transform.position + refObject.transform.right.normalized * spawnDistance;
 
@@ -120,12 +113,9 @@ public class PlaceObject : MonoBehaviour
 
     }
 
-    //getter za objekt
+    //getter za trenutni objekt
     public GameObject GetObject(){
         return obj;
     }
 
-    public GameObject GetBasket(){
-        return Basket;
-    }
 }
