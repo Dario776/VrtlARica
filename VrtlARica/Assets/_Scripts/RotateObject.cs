@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class RotateObject : MonoBehaviour
 {
-    //dodano
     [SerializeField]
     private GameObject GrownPlantWithFruit;
 
-    //dodano
     [SerializeField]
     private GameObject Basket;
 

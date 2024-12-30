@@ -22,6 +22,8 @@ public class GameManager : SingletonPersistent<GameManager>
     private PlaceObject placeObject;
     //dodano za rotaciju
     private RotateObject rotateObject;
+    //dodano za detekciju dodira na objektu
+    private TapDetection tapDetection;
     private TrackedImageInfo trackedImageInfo;
 
 
@@ -113,6 +115,8 @@ public class GameManager : SingletonPersistent<GameManager>
                 placeObject.SpawnObject(basket, rotationTarget);
                 //omogući rotiranje biljke
                 rotateObject.SetRotationTarget(rotationTarget);
+                /* tapDetection = FindFirstObjectByType<TapDetection>();
+                tapDetection.enabled = true; */
                 break;
             default:
                 Debug.Log("Greska!");

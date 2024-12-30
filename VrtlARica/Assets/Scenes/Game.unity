@@ -8997,7 +8997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrownPlantWithFruit: {fileID: 2104343922964719262, guid: 26904b8187b3eb048939c18ea0e24b53,
     type: 3}
-  Basket: {fileID: 919132149155446097, guid: b8291573fc112994d946c67e147ca6d2, type: 3}
+  Basket: {fileID: 2479003934938976774, guid: 2e7623d50e9a00b40a0d02cb8962b486, type: 3}
   rotationDegree: 15
   rotationSpeed: 5
 --- !u!1 &1891655112

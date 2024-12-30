@@ -1,0 +1,47 @@
+using System.Runtime.CompilerServices;
+using UnityEngine;
+using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
+
+public class TapDetection : MonoBehaviour
+{
+    //potrebno da se detektiraju objekti koji se mogu selektirati, a ne npr. ARPlane
+    [SerializeField]
+    private LayerMask detectableLayer;
+    [SerializeField]
+    private bool isOutlined;
+    private Outline outline;
+
+    private void OnEnable()
+    {
+        Debug.Log("Tap detection enabled");
+        EnhancedTouch.TouchSimulation.Enable();
+        EnhancedTouch.EnhancedTouchSupport.Enable();
+        EnhancedTouch.Touch.onFingerDown += TapAction;
+    }
+
+    private void OnDisable()
+    {
+        EnhancedTouch.TouchSimulation.Disable();
+        EnhancedTouch.EnhancedTouchSupport.Disable();
+        EnhancedTouch.Touch.onFingerDown -= TapAction;
+    }
+
+    private void TapAction(EnhancedTouch.Finger finger){
+        if(finger.index != 0){return;}
+
+        Ray ray = Camera.main.ScreenPointToRay(finger.currentTouch.screenPosition);
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, detectableLayer))
+        {
+            GameObject tappedObject = hitInfo.collider.gameObject;
+            ToggleOutline(tappedObject);
+            Debug.Log("Tapped on object: " + tappedObject.name);
+        }        
+    }
+
+    private void ToggleOutline(GameObject tappedObject){
+        outline = tappedObject.GetComponent<Outline>();
+        isOutlined = !isOutlined;
+        outline.enabled = isOutlined;
+    }
+}
