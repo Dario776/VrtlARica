@@ -22,8 +22,8 @@ public class GameManager : SingletonPersistent<GameManager>
     private PlaceObject placeObject;
     //dodano za rotaciju
     private RotateObject rotateObject;
-    //dodano za detekciju dodira na objektu
-    private TapDetection tapDetection;
+    //dodano za berbu
+    private HarvestController harvestController;
     private TrackedImageInfo trackedImageInfo;
 
 
@@ -104,19 +104,17 @@ public class GameManager : SingletonPersistent<GameManager>
                 mainUI.ToggleRotationButtons(true);
                 //pripremi rotaciju
                 rotateObject = FindFirstObjectByType<RotateObject>();
-                rotateObject.enabled = true;
+                harvestController = FindFirstObjectByType<HarvestController>();
                 //zamijeni trenutni objekt s biljkom s plodovima
-                placeObject.ReplaceModel(placeObject.GetObject(), rotateObject.GetGrownPlantWithFruit());
+                placeObject.ReplaceModel(placeObject.GetObject(), harvestController.GetGrownPlantWithFruit());
                 //dohvati objekt koji će se rotirati
                 GameObject rotationTarget = placeObject.GetObject();
                 //dohvati objekt kosare
-                GameObject basket = rotateObject.GetBasket();
+                GameObject basket = harvestController.GetBasket();
                 //stvori kosaru pokraj biljke
                 placeObject.SpawnObject(basket, rotationTarget);
                 //omogući rotiranje biljke
                 rotateObject.SetRotationTarget(rotationTarget);
-                /* tapDetection = FindFirstObjectByType<TapDetection>();
-                tapDetection.enabled = true; */
                 break;
             default:
                 Debug.Log("Greska!");

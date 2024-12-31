@@ -83,8 +83,9 @@ public class PlaceObject : MonoBehaviour
     }
 
     //dodano za zamijenu trenutnog modela
-    public void ReplaceModel(GameObject toReplace, GameObject replaceWith){
-        if(toReplace != null)
+    public void ReplaceModel(GameObject toReplace, GameObject replaceWith)
+    {
+        if (toReplace != null)
         {
             Debug.Log("Uništenje " + toReplace);
             Destroy(toReplace);
@@ -92,7 +93,9 @@ public class PlaceObject : MonoBehaviour
             obj = Instantiate(replaceWith, pose.position, pose.rotation);
 
             Debug.Log("Stvoren novi objekt " + toReplace);
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("Objekt ne postoji");
         }
     }
@@ -114,7 +117,8 @@ public class PlaceObject : MonoBehaviour
     }
 
     //getter za trenutni objekt
-    public GameObject GetObject(){
+    public GameObject GetObject()
+    {
         return obj;
     }
 

@@ -8955,6 +8955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1890485553}
   - component: {fileID: 1890485554}
+  - component: {fileID: 1890485555}
   m_Layer: 5
   m_Name: RotateButtonContainer
   m_TagString: Untagged
@@ -8995,11 +8996,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a2269070cec3246bd8112dace6bf20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  rotationDegree: 15
+  rotationSpeed: 5
+--- !u!114 &1890485555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890485552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bd7d7d687327464eb17f0ffaf74b4a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   GrownPlantWithFruit: {fileID: 2104343922964719262, guid: 26904b8187b3eb048939c18ea0e24b53,
     type: 3}
   Basket: {fileID: 2479003934938976774, guid: 2e7623d50e9a00b40a0d02cb8962b486, type: 3}
-  rotationDegree: 15
-  rotationSpeed: 5
 --- !u!1 &1891655112
 GameObject:
   m_ObjectHideFlags: 0
