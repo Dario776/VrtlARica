@@ -108,7 +108,7 @@ public class PlaceObject : MonoBehaviour
         Debug.Log("objectToSpawn=" + objectToSpawn);
         Debug.Log("refObject=" + refObject);
         //izračun pozicije za stvaranje objekta
-        Vector3 spawnPosition = refObject.transform.position + refObject.transform.right.normalized * spawnDistance;
+        Vector3 spawnPosition = refObject.transform.position - refObject.transform.right.normalized * spawnDistance;
 
         spawnPosition.y = refObject.transform.position.y;
 

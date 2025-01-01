@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using UnityEngine;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 
@@ -7,13 +10,12 @@ public class TapDetection : MonoBehaviour
     [SerializeField]
     private LayerMask detectableLayer;
     [SerializeField]
-    private bool isOutlined;
+    public bool isOutlined;
     private Outline outline;
-    private static TapDetection selectedInstance;
+    private static TapDetection currentlyTappedOn;
 
     private void OnEnable()
     {
-        Debug.Log("Tap detection enabled");
         EnhancedTouch.TouchSimulation.Enable();
         EnhancedTouch.EnhancedTouchSupport.Enable();
         EnhancedTouch.Touch.onFingerDown += TapAction;
@@ -35,50 +37,20 @@ public class TapDetection : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, detectableLayer))
         {
             GameObject tappedObject = hitInfo.collider.gameObject;
-            TapDetection tapDetection = tappedObject.GetComponent<TapDetection>();
 
-            if(tapDetection != null){
-                tapDetection.ToggleOutline();
+            if (tappedObject == gameObject)
+            {
                 Debug.Log("Tapped on object: " + tappedObject.name);
+                currentlyTappedOn = this;
             }
-            //ToggleOutline(tappedObject);
         }
+
     }
 
-    private void ToggleOutline(GameObject tappedObject)
+    public void ToggleOutline()
     {
-        outline = tappedObject.GetComponent<Outline>();
         isOutlined = !isOutlined;
-        outline.enabled = isOutlined;
-    }
 
-    //onemogucava selektiranje vise objekata odjednom
-    private void ToggleOutline()
-    {
-        //Odznaci trenutno oznacen objekt ako postoji i ako nije trenutni objek
-        if (selectedInstance != null && selectedInstance != this)
-        {
-            selectedInstance.SetOutline(false);
-        }
-
-        //Upravljanje outlineom za trenutni objekt
-        isOutlined = !isOutlined;
-        SetOutline(isOutlined);
-
-        //Azuriranje selektiranog elementa
-        if (isOutlined)
-        {
-            selectedInstance = this;
-        }
-        else if (selectedInstance == this)
-        {
-            selectedInstance = null;
-        }
-    }
-
-    //postavljanje outlinea
-    private void SetOutline(bool enable)
-    {
         if (outline == null)
         {
             outline = GetComponent<Outline>();
@@ -86,11 +58,23 @@ public class TapDetection : MonoBehaviour
 
         if (outline != null)
         {
-            outline.enabled = enable;
+            outline.enabled = isOutlined;
         }
     }
 
-    public static TapDetection GetSelectedInstance(){
-        return selectedInstance;
-    }    
+    //opcenito ako se zeli oznaciti neki objekt na koji je korisnik pritisnuo
+    private void ToggleOutline(GameObject tappedObject)
+    {
+        outline = tappedObject.GetComponent<Outline>();
+        isOutlined = !isOutlined;
+        outline.enabled = isOutlined;      
+    }
+
+    public static TapDetection GetCurrentlyTappedObject()
+    {
+        TapDetection tappedObject = currentlyTappedOn;
+        currentlyTappedOn = null;
+        return tappedObject;
+    }
+
 }
