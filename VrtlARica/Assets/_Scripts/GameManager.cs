@@ -22,6 +22,8 @@ public class GameManager : SingletonPersistent<GameManager>
     private PlaceObject placeObject;
     //dodano za rotaciju
     private RotateObject rotateObject;
+
+    private SizeUpObject sizeUpObject;
     private TrackedImageInfo trackedImageInfo;
 
 
@@ -94,7 +96,13 @@ public class GameManager : SingletonPersistent<GameManager>
             case Stanje.RastBiljke:
                 Debug.Log(Stanje.RastBiljke);
                 //makni, tu je radi testiranja
-                Rast();
+                mainUI.ToggleSizeUpButton(true);
+                sizeUpObject = FindFirstObjectByType<SizeUpObject>();
+                sizeUpObject.enabled = true;
+                
+                sizeUpObject.Start();
+                sizeUpObject.OnButtonClick();
+                //Rast();
                 break;
             case Stanje.BerbaPlodova:
                 Debug.Log(Stanje.BerbaPlodova);

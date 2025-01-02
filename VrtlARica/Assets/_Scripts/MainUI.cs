@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,11 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject StreliceZaRotaciju;
 /*     [SerializeField] private GameObject StrelicaZaRotacijuDesno;
     [SerializeField] private GameObject StrelicaZaRotacijuLijevo; */
+
+    [SerializeField] private GameObject StrelicaZaUvecanje;
+    [SerializeField] private GameObject StrelicaZaSmanjenje;
+
+    // [SerializeField] private GameObject StrelicaZaSmanjenje;
     [SerializeField] private GameObject[] Text;
     [SerializeField] private GameObject[] Tockice;
 
@@ -208,6 +214,34 @@ public class MainUI : MonoBehaviour
         else
         {
             StreliceZaRotaciju.SetActive(false);
+        }
+    }
+
+    public void ToggleSizeUpButton(bool Enable)
+    {
+        if (Enable)
+        {
+            StrelicaZaUvecanje.SetActive(true);
+            StrelicaZaSmanjenje.SetActive(false);
+        }
+        else
+        {
+            StrelicaZaUvecanje.SetActive(false);
+            StrelicaZaSmanjenje.SetActive(true);
+        }
+    }
+
+    public void ToggleSizeDownButton(bool Enable)
+    {
+        if (Enable)
+        {
+            StrelicaZaSmanjenje.SetActive(true);
+            StrelicaZaUvecanje.SetActive(false);
+        }
+        else
+        {
+            StrelicaZaSmanjenje.SetActive(false);
+            StrelicaZaUvecanje.SetActive(true);
         }
     }
 }

@@ -1488,6 +1488,8 @@ MonoBehaviour:
   StrelicaUlijevoVizualno: {fileID: 1366139340}
   StrelicaUdesnoVizualno: {fileID: 389040147}
   StreliceZaRotaciju: {fileID: 1890485552}
+  StrelicaZaUvecanje: {fileID: 0}
+  StrelicaZaSmanjenje: {fileID: 0}
   Text:
   - {fileID: 1157347639}
   - {fileID: 1763776169}
@@ -5661,7 +5663,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 94.95
+  m_fontSize: 86.05
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6055,6 +6057,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1241350537}
+  - component: {fileID: 1241350538}
   m_Layer: 5
   m_Name: ResizeButtonContainer
   m_TagString: Untagged
@@ -6083,6 +6086,24 @@ RectTransform:
   m_AnchoredPosition: {x: 30, y: -994}
   m_SizeDelta: {x: 960, y: 148.40002}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1241350538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241350536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0d4551f31706f4ea89198b29b16578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  models:
+  - {fileID: 919132149155446097, guid: 4a721c0d0c1c6844ca1054d53faaa79b, type: 3}
+  - {fileID: 919132149155446097, guid: dec736085517dff4588099559ebe43d1, type: 3}
+  - {fileID: 919132149155446097, guid: d097b16600bb87c48b16751ab693a8cc, type: 3}
+  - {fileID: 919132149155446097, guid: ce425fac6ff21ab47a04185ce5ee79b1, type: 3}
+  currentModel: {fileID: 0}
 --- !u!1 &1261207760
 GameObject:
   m_ObjectHideFlags: 0
@@ -7528,9 +7549,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 361165949}
-        m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: StrelicaUdesnoButton
+      - m_Target: {fileID: 1241350538}
+        m_TargetAssemblyTypeName: SizeUpObject, Assembly-CSharp
+        m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
