@@ -1488,8 +1488,8 @@ MonoBehaviour:
   StrelicaUlijevoVizualno: {fileID: 1366139340}
   StrelicaUdesnoVizualno: {fileID: 389040147}
   StreliceZaRotaciju: {fileID: 1890485552}
-  StrelicaZaUvecanje: {fileID: 0}
-  StrelicaZaSmanjenje: {fileID: 0}
+  StrelicaZaUvecanje: {fileID: 1638441660}
+  StrelicaZaSmanjenje: {fileID: 2122144215}
   Text:
   - {fileID: 1157347639}
   - {fileID: 1763776169}
@@ -5663,7 +5663,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 86.05
+  m_fontSize: 94.95
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6064,7 +6064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1241350537
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6103,7 +6103,6 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: dec736085517dff4588099559ebe43d1, type: 3}
   - {fileID: 919132149155446097, guid: d097b16600bb87c48b16751ab693a8cc, type: 3}
   - {fileID: 919132149155446097, guid: ce425fac6ff21ab47a04185ce5ee79b1, type: 3}
-  currentModel: {fileID: 0}
 --- !u!1 &1261207760
 GameObject:
   m_ObjectHideFlags: 0
@@ -9891,7 +9890,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 361165949}
         m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: StrelicaUdesnoButton
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

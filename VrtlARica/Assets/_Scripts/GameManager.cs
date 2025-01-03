@@ -96,12 +96,16 @@ public class GameManager : SingletonPersistent<GameManager>
             case Stanje.RastBiljke:
                 Debug.Log(Stanje.RastBiljke);
                 //makni, tu je radi testiranja
-                mainUI.ToggleSizeUpButton(true);
-                sizeUpObject = FindFirstObjectByType<SizeUpObject>();
-                sizeUpObject.enabled = true;
-                
-                sizeUpObject.Start();
-                sizeUpObject.OnButtonClick();
+
+                // Debug.Log("AAAAAAAAAAAAAAAAAAA");
+
+                // sizeUpObject = FindFirstObjectByType<SizeUpObject>();
+                // sizeUpObject.enabled = true;
+
+                // Debug.Log(sizeUpObject);
+
+                // mainUI.ToggleSizeUpButton(true);
+
                 //Rast();
                 break;
             case Stanje.BerbaPlodova:
