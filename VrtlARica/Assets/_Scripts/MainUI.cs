@@ -14,6 +14,7 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject StrelicaUdesnoVizualno;
     [SerializeField] private GameObject[] Text;
     [SerializeField] private GameObject[] Tockice;
+    [SerializeField] private GameObject moveButtonContainer; 
 
     private int i;
     private bool canToggle;
@@ -22,6 +23,13 @@ public class MainUI : MonoBehaviour
     private Button strelicaUdesnoButton;
     private Image strelicaUlijevoVizualnoImage;
     private Image strelicaUdesnoVizualnoImage;
+    //private Button MoveUp;
+    // private Button MoveDown;
+    //private Button MoveLeft;    
+    //private Button MoveRight;
+    private GameObject selectedSeed;
+
+    private float moveStep = 0.1f;
 
     private GameManager gameManager;
 
@@ -40,6 +48,18 @@ public class MainUI : MonoBehaviour
         strelicaUdesnoVizualnoImage = StrelicaUdesnoVizualno.GetComponent<Image>();
         //onemogucujemo lijevu strelicu na pocetku
         ToggleLeftArrow(false);
+
+        moveButtonContainer = GameObject.Find("MoveButtonContainer"); 
+
+        if (moveButtonContainer == null)
+        {
+            Debug.LogError("MoveButtonContainer not found!");
+        }
+
+        if (moveButtonContainer != null)
+        {
+            moveButtonContainer.SetActive(false);
+        }
     }
 
     public void HomeButton()
@@ -191,4 +211,17 @@ public class MainUI : MonoBehaviour
             strelicaUdesnoVizualnoImage.color = Konstante.CustomDisabledBrownColor;
         }
     }
+
+    public void ShowMoveButtons(bool shouldShow)
+    {
+        if (shouldShow)
+        {
+            moveButtonContainer.SetActive(true);
+        }
+        else
+        {
+            moveButtonContainer.SetActive(false);
+        }
+    }
+
 }

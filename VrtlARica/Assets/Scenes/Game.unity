@@ -1507,6 +1507,7 @@ MonoBehaviour:
   - {fileID: 1634755456}
   - {fileID: 1833000211}
   - {fileID: 854883221}
+  moveButtonContainer: {fileID: 0}
 --- !u!1 &363368083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,7 +1777,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372881568}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e366b1e21d09c244a26598074ea60fe, type: 3}
   m_Name: 
@@ -1789,7 +1790,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372881568}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d0464542a740fc4b9a3fbb4a7cbd3ec, type: 3}
   m_Name: 
@@ -1821,6 +1822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistance: 0.2
   maxTime: 1
+  directionThreshold: 0.9
 --- !u!1 &381732167
 GameObject:
   m_ObjectHideFlags: 0
@@ -5200,6 +5202,7 @@ GameObject:
   - component: {fileID: 1083193984}
   - component: {fileID: 1083193983}
   - component: {fileID: 1083193982}
+  - component: {fileID: 1083193985}
   m_Layer: 5
   m_Name: MoveLeft
   m_TagString: Untagged
@@ -5270,9 +5273,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 361165949}
-        m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: StrelicaUdesnoButton
+      - m_Target: {fileID: 372881576}
+        m_TargetAssemblyTypeName: ImageTracker, Assembly-CSharp
+        m_MethodName: MoveSeedLeft
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5320,6 +5323,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083193980}
   m_CullTransparentMesh: 1
+--- !u!114 &1083193985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083193980}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd721f58880eb6b42835fbf4da4c8007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1088966025
 GameObject:
   m_ObjectHideFlags: 0
@@ -5788,7 +5803,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 94.95
+  m_fontSize: 48.05
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6219,13 +6234,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1261207761}
+  - component: {fileID: 1261207762}
+  - component: {fileID: 1261207763}
+  - component: {fileID: 1261207764}
+  - component: {fileID: 1261207765}
   m_Layer: 5
   m_Name: MoveButtonContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1261207761
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6249,6 +6268,55 @@ RectTransform:
   m_AnchoredPosition: {x: -1039, y: -1008}
   m_SizeDelta: {x: 960, y: 148.40002}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1261207762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261207760}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd721f58880eb6b42835fbf4da4c8007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1261207763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261207760}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566b56f21d7c7ee46bd03d8dcf186219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1261207764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261207760}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee9c1cad1813534db8c86667e9c619c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+--- !u!114 &1261207765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261207760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d15a0141596a54fbe44c1109ba652f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1261671551
 GameObject:
   m_ObjectHideFlags: 0
@@ -7585,6 +7653,7 @@ GameObject:
   - component: {fileID: 1640467646}
   - component: {fileID: 1640467645}
   - component: {fileID: 1640467644}
+  - component: {fileID: 1640467647}
   m_Layer: 5
   m_Name: MoveUp
   m_TagString: Untagged
@@ -7655,16 +7724,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 361165949}
-        m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: StrelicaUdesnoButton
+      - m_Target: {fileID: 372881576}
+        m_TargetAssemblyTypeName: ImageTracker, Assembly-CSharp
+        m_MethodName: MoveSeedUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MoveUp
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1640467645
@@ -7705,6 +7774,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640467642}
   m_CullTransparentMesh: 1
+--- !u!114 &1640467647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640467642}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd721f58880eb6b42835fbf4da4c8007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1669370053
 GameObject:
   m_ObjectHideFlags: 0
@@ -7829,6 +7910,7 @@ GameObject:
   - component: {fileID: 1686755607}
   - component: {fileID: 1686755606}
   - component: {fileID: 1686755605}
+  - component: {fileID: 1686755608}
   m_Layer: 5
   m_Name: MoveRight
   m_TagString: Untagged
@@ -7899,9 +7981,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 361165949}
-        m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: StrelicaUdesnoButton
+      - m_Target: {fileID: 372881576}
+        m_TargetAssemblyTypeName: ImageTracker, Assembly-CSharp
+        m_MethodName: MoveSeedRight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7949,6 +8031,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686755603}
   m_CullTransparentMesh: 1
+--- !u!114 &1686755608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686755603}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd721f58880eb6b42835fbf4da4c8007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1698955815
 GameObject:
   m_ObjectHideFlags: 0
@@ -7961,6 +8055,7 @@ GameObject:
   - component: {fileID: 1698955819}
   - component: {fileID: 1698955818}
   - component: {fileID: 1698955817}
+  - component: {fileID: 1698955820}
   m_Layer: 5
   m_Name: MoveDown
   m_TagString: Untagged
@@ -8031,9 +8126,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 361165949}
-        m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: StrelicaUdesnoButton
+      - m_Target: {fileID: 372881576}
+        m_TargetAssemblyTypeName: ImageTracker, Assembly-CSharp
+        m_MethodName: MoveSeedDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8081,6 +8176,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1698955815}
   m_CullTransparentMesh: 1
+--- !u!114 &1698955820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698955815}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd721f58880eb6b42835fbf4da4c8007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1700507311
 GameObject:
   m_ObjectHideFlags: 0

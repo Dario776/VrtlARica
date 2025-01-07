@@ -1,6 +1,7 @@
 using System;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
@@ -8,12 +9,14 @@ enum Stanje
 {
     PostavljanjeZemlje,
     SkeniranjeMarkera,
+    PomicanjeSjemenke,
     ZalijevanjeBiljke,
     RastBiljke,
     BerbaPlodova
 }
 public class GameManager : SingletonPersistent<GameManager>
 {
+    
     //semafor
     private int zadovoljeniUvjeti;
     private Stanje stanje;
@@ -22,7 +25,6 @@ public class GameManager : SingletonPersistent<GameManager>
     private GameObject XROriginGO;
     private PlaceObject placeObject;
     private ImageTracker imageTracker;
-
 
     public override void Awake()
     {
@@ -53,6 +55,7 @@ public class GameManager : SingletonPersistent<GameManager>
         if (zadovoljeniUvjeti > 0)
         {
             zadovoljeniUvjeti--;
+            Debug.Log("zadovoljeniUvjet= " + zadovoljeniUvjeti);
             //kad smo dosli do kraja prolaza, obradujemo stanje
             if (zadovoljeniUvjeti == 0)
             {
@@ -79,8 +82,13 @@ public class GameManager : SingletonPersistent<GameManager>
                 Debug.Log(Stanje.SkeniranjeMarkera);
                 imageTracker.enabled = true;
                 break;
+            case Stanje.PomicanjeSjemenke:
+                Debug.Log(Stanje.PomicanjeSjemenke);
+                mainUI.ShowMoveButtons(true);
+                break;
             case Stanje.ZalijevanjeBiljke:
                 Debug.Log(Stanje.ZalijevanjeBiljke);
+                mainUI.ShowMoveButtons(true);
                 break;
             case Stanje.RastBiljke:
                 Debug.Log(Stanje.RastBiljke);
@@ -103,6 +111,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void ZemljaPostavljena()
     {
+        Debug.Log("zemlja postavljena called");
         //onemogucavanje placeObjecta
         placeObject.enabled = false;
 
@@ -115,9 +124,28 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void SkeniranMarker()
     {
+        Debug.Log("skeniran marker called");
         imageTracker.enabled = false;
+        stanje = Stanje.PomicanjeSjemenke;  
+        zadovoljeniUvjeti++;
+        mainUI.ToggleRightArrow(true);
+    }
+
+    public void SjemenkaPomaknuta()
+    {
+        Debug.Log("pomaknuta sjemneka called");
         stanje = Stanje.ZalijevanjeBiljke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
     }
+
+    public void ZalivenaBiljka()
+    {
+        Debug.Log("zalivena biljka called");
+        stanje = Stanje.RastBiljke;
+        zadovoljeniUvjeti++;
+        mainUI.ToggleRightArrow(true);
+
+    }
+
 }
