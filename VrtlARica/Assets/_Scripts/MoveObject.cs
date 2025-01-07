@@ -16,6 +16,7 @@ public class MoveObject : MonoBehaviour
         if (targetObject != null)
         {
             targetObject.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
+            Debug.Log(transform.position);
         }
     }
 
@@ -25,6 +26,7 @@ public class MoveObject : MonoBehaviour
         if (targetObject != null)
         {
             targetObject.transform.position += new Vector3(0.1f, 0, 0);  // Adjust as needed
+            Debug.Log(transform.position);
         }
     }
 
@@ -34,6 +36,7 @@ public class MoveObject : MonoBehaviour
         if (targetObject != null)
         {
             targetObject.transform.position += new Vector3(0, 0.1f, 0);  // Adjust as needed
+            Debug.Log(transform.position);
         }
     }
 
@@ -43,6 +46,7 @@ public class MoveObject : MonoBehaviour
         if (targetObject != null)
         {
             targetObject.transform.position -= new Vector3(0, 0.1f, 0);  // Adjust as needed
+            Debug.Log(transform.position);
         }
     }
 }

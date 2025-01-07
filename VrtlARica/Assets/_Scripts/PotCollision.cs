@@ -6,13 +6,15 @@ public class PotCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("sjemenka"))
+        Debug.Log("nezz");
+        if (collision.gameObject.CompareTag("Sjemenka"))
         {
+            Debug.Log("uspio");
             // When the seed collides with the pot, transform the pot model
             if (transformedPotModel != null)
             {
                 transformedPotModel.SetActive(true);
-                gameObject.SetActive(false); 
+                gameObject.SetActive(false);
             }
         }
     }

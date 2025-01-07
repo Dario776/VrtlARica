@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
 
 public class ImageTracker : MonoBehaviour
 {
@@ -11,10 +8,16 @@ public class ImageTracker : MonoBehaviour
     private List<GameObject> ARObjects = new List<GameObject>();
     private ARTrackedImageManager aRTrackedImageManager;
     private GameObject instantiatedSeed; // Store reference to the instantiated seed
+    private GameObject pot;
 
     private void Awake()
     {
         aRTrackedImageManager = GetComponent<ARTrackedImageManager>();
+    }
+
+    public void SetPot(GameObject pot)
+    {
+        this.pot = pot;
     }
 
     private void OnEnable()
@@ -34,7 +37,8 @@ public class ImageTracker : MonoBehaviour
         {
             if (trackedImage.referenceImage.name == "crvenaJabuka" || trackedImage.referenceImage.name == "zelenaJabuka")
             {
-                var newPrefab = Instantiate(Sjemenka, trackedImage.transform);
+                // var newPrefab = Instantiate(Sjemenka, trackedImage.transform);
+                var newPrefab = Instantiate(Sjemenka, new Vector3(pot.transform.position.x + 1f, pot.transform.position.y + 1f, pot.transform.position.z), Quaternion.identity);
                 instantiatedSeed = newPrefab;  // Store the reference of the instantiated seed
                 Debug.Log("stvoren prefab");
                 Debug.Log("Prefab Position: " + newPrefab.transform.position);
@@ -73,6 +77,7 @@ public class ImageTracker : MonoBehaviour
     // Method to move the instantiated seed right
     public void MoveSeedRight()
     {
+        Debug.Log("right");
         if (instantiatedSeed != null)
         {
             var moveObjectScript = instantiatedSeed.GetComponent<MoveObject>();
@@ -86,6 +91,7 @@ public class ImageTracker : MonoBehaviour
     // Method to move the instantiated seed up
     public void MoveSeedUp()
     {
+        Debug.Log("up");
         if (instantiatedSeed != null)
         {
             var moveObjectScript = instantiatedSeed.GetComponent<MoveObject>();
@@ -99,6 +105,7 @@ public class ImageTracker : MonoBehaviour
     // Method to move the instantiated seed down
     public void MoveSeedDown()
     {
+        Debug.Log("down");
         if (instantiatedSeed != null)
         {
             var moveObjectScript = instantiatedSeed.GetComponent<MoveObject>();
