@@ -667,7 +667,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Klikni na sjemenke i pomo\u0107u gumba ih prenesi do teglice."
+  m_text: Koristi gumbe kako bi pomaknuo sjemenku i doveo je do teglice.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -1141,8 +1141,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Vrijeme je za berbu! Rotiraj biljku klikom na gumbe za rotiranje kako bi
-    svi plodovi bili ubrani!
+  m_text: "Rotiraj biljku pomo\u0107u gumbi za rotaciju. Klikni na jabuku, a zatim
+    na ko\u0161aru kako bi je ubrao."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -1568,6 +1568,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1348134008}
   - {fileID: 411316801}
   - {fileID: 1892397036}
   - {fileID: 753885674}
@@ -1603,6 +1604,7 @@ MonoBehaviour:
   moveButtons: {fileID: 1261207760}
   plusButton: {fileID: 1638441660}
   minusButton: {fileID: 2122144215}
+  skipButton: {fileID: 1348134007}
   endScreenPopup: {fileID: 822365375}
   Text:
   - {fileID: 1157347639}
@@ -2044,6 +2046,14 @@ MonoBehaviour:
   - {fileID: 6963654916623680536, guid: 265935d2fe774014da75dc8545878835, type: 3}
   basketPrefab: {fileID: 2479003934938976774, guid: 2e7623d50e9a00b40a0d02cb8962b486,
     type: 3}
+  seedPrefab: {fileID: 5784593501678896757, guid: e3f9970089e19c64d9a56eacc8e91b65,
+    type: 3}
+  wateringCanPrefab: {fileID: 5110093828988194060, guid: ccec03ac51d1d4c4582d5f3a3fb430d6,
+    type: 3}
+  currentObjectToMove: {fileID: 0}
+  instantiatedSeed: {fileID: 0}
+  instantiatedWateringCan: {fileID: 0}
+  trenutnaTeglica: {fileID: 0}
 --- !u!114 &372881576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2056,10 +2066,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0464542a740fc4b9a3fbb4a7cbd3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedPrefab: {fileID: 5784593501678896757, guid: e3f9970089e19c64d9a56eacc8e91b65,
-    type: 3}
-  wateringCanPrefab: {fileID: 5110093828988194060, guid: ccec03ac51d1d4c4582d5f3a3fb430d6,
-    type: 3}
 --- !u!114 &372881577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3751,8 +3757,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ubrali smo sve plodove! Nje\u017Eno izvuci biljku iz zemlje kako bismo
-    mogli posaditi novu."
+  m_text: "Svi plodovi su ubrani! Ukloni uvenulu biljku iz zemlje koriste\u0107i
+    gumb za smanjenje.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -3944,6 +3950,82 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &756670481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756670482}
+  - component: {fileID: 756670484}
+  - component: {fileID: 756670483}
+  m_Layer: 5
+  m_Name: Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &756670482
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756670481}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2025636190}
+  m_Father: {fileID: 1348134008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 10, y: 10}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &756670483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756670481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 44fa8bc9a6a53874bb950cbf22a846c8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &756670484
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756670481}
+  m_CullTransparentMesh: 1
 --- !u!1 &782374018
 GameObject:
   m_ObjectHideFlags: 0
@@ -4865,7 +4947,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Potaknimo sadnicu da naraste tako da ju pove\u0107amo! Klikni na gumb
-    za pove\u0107anje."
+    za pove\u0107anje.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -6151,7 +6233,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Dobrodo\u0161li u svijet pro\u0161irene stvarnosti!"
+  m_text: "Istra\u017Ei svijet pro\u0161irene stvarnosti!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -6179,7 +6261,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 94.95
+  m_fontSize: 90.45
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6445,8 +6527,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skeniraj AR marker kako bi se stvorila sjemenka biljke te ju povuci prema
-    zemlji kako bi ju posadio.
+  m_text: Skeniraj AR marker kako bi se stvorila sjemenka pored biljke.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -6696,8 +6777,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Usmjeri kameru prema horizontalnoj povr\u0161ini. Klikni kada osvijetli
-    kako bi stvorio teglicu za sadnju."
+  m_text: "Usmjeri kameru prema horizontalnoj povr\u0161ini. Klikni na povr\u0161inu
+    kada osvijetli kako bi stvorio teglicu za sadnju."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -6813,6 +6894,139 @@ RectTransform:
   m_AnchoredPosition: {x: -7.5, y: 0}
   m_SizeDelta: {x: -35, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1348134007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1348134008}
+  - component: {fileID: 1348134011}
+  - component: {fileID: 1348134010}
+  - component: {fileID: 1348134009}
+  m_Layer: 5
+  m_Name: Preskoci
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1348134008
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348134007}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 756670482}
+  m_Father: {fileID: 361165948}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -25, y: -200}
+  m_SizeDelta: {x: 150, y: 150}
+  m_Pivot: {x: 1, y: 1}
+--- !u!114 &1348134009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348134007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1348134010}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 361165949}
+        m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
+        m_MethodName: SkipInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1348134010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348134007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.5647059, g: 0.31764707, b: 0.15294118, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 44fa8bc9a6a53874bb950cbf22a846c8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1348134011
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348134007}
+  m_CullTransparentMesh: 1
 --- !u!1 &1354185010
 GameObject:
   m_ObjectHideFlags: 0
@@ -10409,6 +10623,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000727449}
+  m_CullTransparentMesh: 1
+--- !u!1 &2025636189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2025636190}
+  - component: {fileID: 2025636192}
+  - component: {fileID: 2025636191}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2025636190
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025636189}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 756670482}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 6.1, y: 0}
+  m_SizeDelta: {x: -50, y: -50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2025636191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025636189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.5647059, g: 0.31764707, b: 0.15294118, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: aafc438e418b8c34da5e235b95074d65, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2025636192
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025636189}
   m_CullTransparentMesh: 1
 --- !u!1 &2096671741
 GameObject:

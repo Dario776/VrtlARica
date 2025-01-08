@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +16,7 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject moveButtons;
     [SerializeField] private GameObject plusButton;
     [SerializeField] private GameObject minusButton;
+    [SerializeField] private GameObject skipButton;
     [SerializeField] private GameObject endScreenPopup;
     [SerializeField] private GameObject[] Text;
     [SerializeField] private GameObject[] Tockice;
@@ -229,22 +229,22 @@ public class MainUI : MonoBehaviour
 
     public void MoveLeftButton()
     {
-        gameManager.imageTracker.MoveCurrentObjectLeft();
+        gameManager.placeObject.MoveCurrentObjectLeft();
     }
 
     public void MoveRightButton()
     {
-        gameManager.imageTracker.MoveCurrentObjectRight();
+        gameManager.placeObject.MoveCurrentObjectRight();
     }
 
     public void MoveUpButton()
     {
-        gameManager.imageTracker.MoveCurrentObjectUp();
+        gameManager.placeObject.MoveCurrentObjectUp();
     }
 
     public void MoveDownButton()
     {
-        gameManager.imageTracker.MoveCurrentObjectDown();
+        gameManager.placeObject.MoveCurrentObjectDown();
     }
 
     public void NextPotButton()
@@ -289,5 +289,22 @@ public class MainUI : MonoBehaviour
     public void ShowEndScreen()
     {
         endScreenPopup.SetActive(true);
+    }
+
+    public void SkipInteraction()
+    {
+        GameManager.Instance.SkipInteraction();
+    }
+
+    public void ToggleSkipButton(bool Enable)
+    {
+        if (Enable)
+        {
+            skipButton.SetActive(true);
+        }
+        else
+        {
+            skipButton.SetActive(false);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,14 +12,20 @@ public class PlaceObject : MonoBehaviour
 {
     [SerializeField] private GameObject[] teglicePrefab;
     [SerializeField] private GameObject basketPrefab;
-    private GameObject instantiatedBasket;
-    private GameObject trenutnaTeglica;
+
+    [SerializeField] public GameObject seedPrefab;
+    [SerializeField] public GameObject wateringCanPrefab;
+
+    public MoveObject currentObjectToMove;
+    public GameObject instantiatedSeed;
+    public GameObject instantiatedWateringCan;
+    public GameObject instantiatedBasket;
+    public GameObject trenutnaTeglica;
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
     //dodano da se zapamti pozicija gdje je stavljen prefab
-    private Pose poseTrenutnaTeglica;
     private bool objectPlaced;
     private int currentPotIndex;
 
@@ -61,10 +68,9 @@ public class PlaceObject : MonoBehaviour
                 if (!objectPlaced)
                 {
                     objectPlaced = true;
+                    EnhancedTouch.Touch.onFingerDown -= FingerDown;
 
-                    poseTrenutnaTeglica = hit.pose;
-
-                    trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], poseTrenutnaTeglica.position, poseTrenutnaTeglica.rotation);
+                    trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], hit.pose.position, hit.pose.rotation);
 
                     Debug.Log("stvoren prefab teglice");
                     Debug.Log("Prefab Position: " + trenutnaTeglica.transform.position);
@@ -92,7 +98,7 @@ public class PlaceObject : MonoBehaviour
             Debug.Log("Uništenje " + toReplace);
             Destroy(toReplace);
 
-            trenutnaTeglica = Instantiate(replaceWith, poseTrenutnaTeglica.position, poseTrenutnaTeglica.rotation);
+            trenutnaTeglica = Instantiate(replaceWith, trenutnaTeglica.transform.position, trenutnaTeglica.transform.rotation);
 
             Debug.Log("Stvoren novi objekt " + toReplace);
         }
@@ -115,35 +121,73 @@ public class PlaceObject : MonoBehaviour
         }
         Destroy(trenutnaTeglica);
         currentPotIndex++;
-        trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], poseTrenutnaTeglica.position, poseTrenutnaTeglica.rotation);
-    }
-
-    //ovo znaci da ce objekt biti 0.3 m udaljen od drugog objekta
-    private float spawnDistance = 0.3f;
-    //funkcija za omogućavanje prikaza objekta pored drugog objekta
-    public void SpawnObject(GameObject objectToSpawn, GameObject refObject)
-    {
-        Debug.Log("objectToSpawn=" + objectToSpawn);
-        Debug.Log("refObject=" + refObject);
-        //izračun pozicije za stvaranje objekta
-        Vector3 spawnPosition = refObject.transform.position + refObject.transform.right.normalized * spawnDistance;
-
-        spawnPosition.y = refObject.transform.position.y;
-
-        Instantiate(objectToSpawn, spawnPosition, refObject.transform.rotation);
-
-    }
-
-    //getter za trenutnu teglicu
-    public GameObject GetTrenutnaTeglica()
-    {
-        return trenutnaTeglica;
+        trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], trenutnaTeglica.transform.position, trenutnaTeglica.transform.rotation);
     }
 
     public void CreateBasket()
     {
-        instantiatedBasket = Instantiate(basketPrefab, new Vector3(GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.x - 0.3f,
-        GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.y, GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.z), Quaternion.identity);
+        instantiatedBasket = Instantiate(basketPrefab, new Vector3(trenutnaTeglica.transform.position.x - 0.3f,
+        trenutnaTeglica.transform.position.y, trenutnaTeglica.transform.position.z), Quaternion.identity);
     }
 
+    public void CreateStartTeglica(Vector3 potPosition)
+    {
+        objectPlaced = true;
+
+        trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], potPosition, Quaternion.identity);
+
+        Debug.Log("stvoren prefab teglice");
+        Debug.Log("Prefab Position: " + trenutnaTeglica.transform.position);
+
+        //iskljucivanje prepoznavanja ravnina i njihovih mesh-eva
+        aRPlaneManager.enabled = false;
+        ARPlaneMeshVisualizer[] aRPlaneMeshVisualizers = FindObjectsByType<ARPlaneMeshVisualizer>(FindObjectsSortMode.None);
+        foreach (ARPlaneMeshVisualizer aRPlaneMesh in aRPlaneMeshVisualizers)
+        {
+            aRPlaneMesh.enabled = false;
+        }
+    }
+
+    public void CreateWateringCan()
+    {
+        instantiatedWateringCan = Instantiate(wateringCanPrefab, new Vector3(trenutnaTeglica.transform.position.x + 0.5f,
+        trenutnaTeglica.transform.position.y, trenutnaTeglica.transform.position.z), Quaternion.identity);
+        currentObjectToMove = instantiatedWateringCan.GetComponent<MoveObject>();
+    }
+
+    public void CreateSeed()
+    {
+        instantiatedSeed = Instantiate(seedPrefab, new Vector3(trenutnaTeglica.transform.position.x + 0.5f,
+        trenutnaTeglica.transform.position.y + 0.5f, trenutnaTeglica.transform.position.z), Quaternion.identity);
+        currentObjectToMove = instantiatedSeed.GetComponent<MoveObject>();
+    }
+
+    public void MoveCurrentObjectLeft()
+    {
+        currentObjectToMove.MoveLeft();
+    }
+
+    public void MoveCurrentObjectRight()
+    {
+        currentObjectToMove.MoveRight();
+    }
+
+    public void MoveCurrentObjectUp()
+    {
+        currentObjectToMove.MoveUp();
+    }
+
+    public void MoveCurrentObjectDown()
+    {
+        currentObjectToMove.MoveDown();
+    }
+
+    public IEnumerator SkipGrowInteraction(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            yield return new WaitForSeconds(1);
+            ReplaceCurrentPotWithNextPotInLine();
+        }
+    }
 }

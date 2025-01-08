@@ -116,4 +116,19 @@ public class HarvestController : MonoBehaviour
 
         Debug.Log("Disabled visibility for object: " + obj.name);
     }
+
+    public IEnumerator SkipHarvestInteraction()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(0.5f);
+            Debug.Log(GameManager.Instance.placeObject.trenutnaTeglica);
+            Debug.Log(GameManager.Instance.placeObject.instantiatedBasket.transform.GetChild(i).gameObject);
+            Debug.Log(GameManager.Instance.placeObject.trenutnaTeglica.transform.GetChild(i).gameObject);
+            Debug.Log(GameManager.Instance.placeObject.instantiatedBasket.transform.GetChild(i).gameObject.name);
+            Debug.Log(GameManager.Instance.placeObject.trenutnaTeglica.transform.GetChild(i).gameObject.name);
+            GameManager.Instance.placeObject.instantiatedBasket.transform.GetChild(i).gameObject.SetActive(true);
+            GameManager.Instance.placeObject.trenutnaTeglica.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
 }

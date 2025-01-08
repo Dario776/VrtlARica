@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,7 @@ public class GameManager : SingletonPersistent<GameManager>
     public RotateObject rotateObject;
     private HarvestController harvestController;
     public ImageTracker imageTracker;
+    private Camera camera;
 
     public override void Awake()
     {
@@ -67,6 +69,8 @@ public class GameManager : SingletonPersistent<GameManager>
 
     private void ObradiStanje()
     {
+        StartCoroutine(ShowSkipButton());
+
         switch (stanje)
         {
             case Stanje.PostavljanjeZemlje:
@@ -95,7 +99,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 placeObject.CreateBasket();
                 rotateObject.enabled = true;
                 harvestController.enabled = true;
-                rotateObject.SetRotationTarget(placeObject.GetTrenutnaTeglica());
+                rotateObject.SetRotationTarget(placeObject.trenutnaTeglica);
                 break;
             case Stanje.PropadanjeBiljke:
                 Debug.Log(Stanje.PropadanjeBiljke);
@@ -114,14 +118,13 @@ public class GameManager : SingletonPersistent<GameManager>
         imageTracker = FindFirstObjectByType<ImageTracker>();
         rotateObject = FindFirstObjectByType<RotateObject>();
         harvestController = FindFirstObjectByType<HarvestController>();
+        camera = FindFirstObjectByType<Camera>();
     }
 
     public void ZemljaPostavljena()
     {
-        //onemogucavanje placeObjecta
-        placeObject.enabled = false;
+        mainUI.ToggleSkipButton(false);
 
-        //priprema za sljedece stanje 
         stanje = Stanje.SkeniranjeMarkera;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
@@ -129,6 +132,9 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void SkeniranMarker()
     {
+        mainUI.ToggleSkipButton(false);
+        imageTracker.enabled = false;
+
         stanje = Stanje.PomicanjeSjemenke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
@@ -136,7 +142,8 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void SjemenkaPomaknuta()
     {
-        imageTracker.CreateWateringCan();
+        mainUI.ToggleSkipButton(false);
+        placeObject.CreateWateringCan();
         placeObject.ReplaceCurrentPotWithNextPotInLine();
 
         stanje = Stanje.ZalijevanjeBiljke;
@@ -146,9 +153,9 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void ZalivenaBiljka()
     {
+        mainUI.ToggleSkipButton(false);
         placeObject.ReplaceCurrentPotWithNextPotInLine();
 
-        imageTracker.enabled = false;
         mainUI.ToggleMoveSeedButtons(false);
 
         stanje = Stanje.RastBiljke;
@@ -158,6 +165,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void BiljkaNarasla()
     {
+        mainUI.ToggleSkipButton(false);
         mainUI.TogglePlusButton(false);
 
         stanje = Stanje.BerbaPlodova;
@@ -167,6 +175,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void UbraniPlodovi()
     {
+        mainUI.ToggleSkipButton(false);
         mainUI.ToggleRotationButtons(false);
 
         stanje = Stanje.PropadanjeBiljke;
@@ -178,5 +187,52 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         Debug.Log("GOTOVO!!!!!");
         mainUI.ShowEndScreen();
+    }
+
+    public void SkipInteraction()
+    {
+        mainUI.ToggleSkipButton(false);
+
+        switch (stanje)
+        {
+            case Stanje.PostavljanjeZemlje:
+                placeObject.CreateStartTeglica(camera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 3, 2f)));
+                ZemljaPostavljena();
+                break;
+            case Stanje.SkeniranjeMarkera:
+                placeObject.CreateSeed();
+                SkeniranMarker();
+                break;
+            case Stanje.PomicanjeSjemenke:
+                Destroy(placeObject.instantiatedSeed);
+                SjemenkaPomaknuta();
+                break;
+            case Stanje.ZalijevanjeBiljke:
+                Destroy(placeObject.instantiatedWateringCan);
+                ZalivenaBiljka();
+                break;
+            case Stanje.RastBiljke:
+                mainUI.TogglePlusButton(false);
+                StartCoroutine(placeObject.SkipGrowInteraction(4));
+                break;
+            case Stanje.BerbaPlodova:
+                mainUI.ToggleRotationButtons(false);
+                StartCoroutine(harvestController.SkipHarvestInteraction());
+                UbraniPlodovi();
+                break;
+            case Stanje.PropadanjeBiljke:
+                mainUI.ToggleMinusButton(false);
+                StartCoroutine(placeObject.SkipGrowInteraction(5));
+                break;
+            default:
+                Debug.Log("Greska!");
+                break;
+        }
+    }
+
+    private IEnumerator ShowSkipButton()
+    {
+        yield return new WaitForSeconds(0.5f);
+        mainUI.ToggleSkipButton(true);
     }
 }
