@@ -1,7 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 enum Stanje
@@ -14,18 +11,13 @@ enum Stanje
 }
 public class GameManager : SingletonPersistent<GameManager>
 {
-    //semafor
     private int zadovoljeniUvjeti;
     private Stanje stanje;
-
     private MainUI mainUI;
     private PlaceObject placeObject;
-    //dodano za rotaciju
     private RotateObject rotateObject;
-
     private SizeUpObject sizeUpObject;
-    private TrackedImageInfo trackedImageInfo;
-
+    private ImageTracker imageTracker;
 
     public override void Awake()
     {
@@ -78,42 +70,27 @@ public class GameManager : SingletonPersistent<GameManager>
         {
             case Stanje.PostavljanjeZemlje:
                 Debug.Log(Stanje.PostavljanjeZemlje);
-                placeObject = FindFirstObjectByType<PlaceObject>();
+                PronadiKomponente();
                 placeObject.enabled = true;
                 break;
             case Stanje.SkeniranjeMarkera:
                 Debug.Log(Stanje.SkeniranjeMarkera);
-                //trackedImageInfo = FindFirstObjectByType<TrackedImageInfo>();
-                //trackedImageInfo.enabled = true;
-                //treba staviti na ispravno mjesto, ovdje je samo radi testiranja
-                SkeniranMarker();
+                imageTracker.enabled = true;
                 break;
             case Stanje.ZalijevanjeBiljke:
                 Debug.Log(Stanje.ZalijevanjeBiljke);
-                //treba staviti na ispravno mjesto, ovdje je samo radi testiranja
                 ZalivenaBiljka();
                 break;
             case Stanje.RastBiljke:
                 Debug.Log(Stanje.RastBiljke);
-                //makni, tu je radi testiranja
-
-                // Debug.Log("AAAAAAAAAAAAAAAAAAA");
-
-                // sizeUpObject = FindFirstObjectByType<SizeUpObject>();
-                // sizeUpObject.enabled = true;
-
-                // Debug.Log(sizeUpObject);
-
-                // mainUI.ToggleSizeUpButton(true);
-
-                //Rast();
+                sizeUpObject.enabled = true;
                 break;
             case Stanje.BerbaPlodova:
                 Debug.Log(Stanje.BerbaPlodova);
                 //omogući gumbe za rotaciju (nakon izvršene interakcije treba ih isključiti)
                 mainUI.ToggleRotationButtons(true);
                 //pripremi rotaciju
-                rotateObject = FindFirstObjectByType<RotateObject>();
+
                 rotateObject.enabled = true;
                 //zamijeni trenutni objekt s biljkom s plodovima
                 placeObject.ReplaceModel(placeObject.GetObject(), rotateObject.GetGrownPlantWithFruit());
@@ -130,6 +107,15 @@ public class GameManager : SingletonPersistent<GameManager>
                 Debug.Log("Greska!");
                 break;
         }
+    }
+
+    private void PronadiKomponente()
+    {
+        placeObject = FindFirstObjectByType<PlaceObject>();
+        imageTracker = FindFirstObjectByType<ImageTracker>();
+        sizeUpObject = FindFirstObjectByType<SizeUpObject>();
+        rotateObject = FindFirstObjectByType<RotateObject>();
+
     }
 
     public void ZemljaPostavljena()
@@ -158,20 +144,6 @@ public class GameManager : SingletonPersistent<GameManager>
         stanje = Stanje.RastBiljke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
-    }
-
-    //samo radi testiranja
-    public void Rast()
-    {
-        if (count == 1)
-        {
-            count++;
-            zadovoljeniUvjeti++;
-        }
-        else
-        {
-            BiljkaNarasla();
-        }
     }
     public void BiljkaNarasla()
     {

@@ -1801,8 +1801,6 @@ MonoBehaviour:
   - {fileID: 1634755456}
   - {fileID: 1833000211}
   - {fileID: 854883221}
-  moveButtonContainer: {fileID: 1261207760}
-  moveButtonContainer2: {fileID: 1144143396}
 --- !u!1 &363368083
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,7 +2077,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Zemlja: {fileID: 4499498373088983110, guid: 910a487b0b12b024bbbcd465b3e2f4c1, type: 3}
-  imageTracker: {fileID: 372881576}
 --- !u!114 &372881576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2093,12 +2090,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sjemenka: {fileID: 919132149155446097, guid: b630b0ee800521241b16bca21dcb1f43, type: 3}
-  transformedPotModel: {fileID: 1469703212755206574, guid: bba8bb97b78c55e4b9e5b44b59729e85,
-    type: 3}
-  transformedPotModel2: {fileID: 9072262823244473254, guid: 9e2ad95cebc95604fb1861fdb0eef549,
-    type: 3}
-  waterCanModel: {fileID: 2770238100706696716, guid: ccec03ac51d1d4c4582d5f3a3fb430d6,
-    type: 3}
 --- !u!114 &372881577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6459,7 +6450,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.8
+  m_fontSize: 94.95
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
