@@ -8,7 +8,8 @@ enum Stanje
     PomicanjeSjemenke,
     ZalijevanjeBiljke,
     RastBiljke,
-    BerbaPlodova
+    BerbaPlodova,
+    PropadanjeBiljke
 }
 public class GameManager : SingletonPersistent<GameManager>
 {
@@ -16,7 +17,8 @@ public class GameManager : SingletonPersistent<GameManager>
     private Stanje stanje;
     private MainUI mainUI;
     public PlaceObject placeObject;
-    private RotateObject rotateObject;
+    public RotateObject rotateObject;
+    private HarvestController harvestController;
     private SizeUpObject sizeUpObject;
     public ImageTracker imageTracker;
 
@@ -89,21 +91,14 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case Stanje.BerbaPlodova:
                 Debug.Log(Stanje.BerbaPlodova);
-                //omogući gumbe za rotaciju (nakon izvršene interakcije treba ih isključiti)
-                // mainUI.ToggleRotationButtons(true);
-                // //pripremi rotaciju
+                mainUI.ToggleRotationButtons(true);
+                placeObject.CreateBasket();
+                rotateObject.enabled = true;
+                rotateObject.SetRotationTarget(placeObject.GetTrenutnaTeglica());
+                break;
+            case Stanje.PropadanjeBiljke:
+                Debug.Log(Stanje.PropadanjeBiljke);
 
-                // rotateObject.enabled = true;
-                // //zamijeni trenutni objekt s biljkom s plodovima
-                // placeObject.ReplaceModel(placeObject.GetTrenutnaTeglica(), rotateObject.GetGrownPlantWithFruit());
-                // //dohvati objekt koji će se rotirati
-                // GameObject rotationTarget = placeObject.GetTrenutnaTeglica();
-                // //dohvati objekt kosare
-                // GameObject basket = rotateObject.GetBasket();
-                // //stvori kosaru pokraj biljke
-                // placeObject.SpawnObject(basket, rotationTarget);
-                // //omogući rotiranje biljke
-                // rotateObject.SetRotationTarget(rotationTarget);
                 break;
             default:
                 Debug.Log("Greska!");
@@ -155,7 +150,6 @@ public class GameManager : SingletonPersistent<GameManager>
         imageTracker.enabled = false;
         mainUI.ToggleMoveSeedButtons(false);
 
-        //treba nadopuniti
         stanje = Stanje.RastBiljke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
@@ -165,8 +159,16 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         mainUI.TogglePlusButton(false);
 
-        //treba nadopuniti
         stanje = Stanje.BerbaPlodova;
+        zadovoljeniUvjeti++;
+        mainUI.ToggleRightArrow(true);
+    }
+
+    public void UbraniPlodovi()
+    {
+        mainUI.ToggleRotationButtons(false);
+
+        stanje = Stanje.PropadanjeBiljke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
     }

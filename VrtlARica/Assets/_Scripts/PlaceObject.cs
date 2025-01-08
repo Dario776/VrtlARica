@@ -10,6 +10,8 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 public class PlaceObject : MonoBehaviour
 {
     [SerializeField] private GameObject[] teglicePrefab;
+    [SerializeField] private GameObject basketPrefab;
+    private GameObject instantiatedBasket;
     private GameObject trenutnaTeglica;
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
@@ -102,7 +104,7 @@ public class PlaceObject : MonoBehaviour
 
     public void ReplaceCurrentPotWithNextPotInLine()
     {
-        if (currentPotIndex >= 4)
+        if (currentPotIndex >= 5)
         {
             GameManager.Instance.BiljkaNarasla();
         }
@@ -141,6 +143,12 @@ public class PlaceObject : MonoBehaviour
     public GameObject GetTrenutnaTeglica()
     {
         return trenutnaTeglica;
+    }
+
+    public void CreateBasket()
+    {
+        instantiatedBasket = Instantiate(basketPrefab, new Vector3(GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.x + 0.5f,
+        GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.y, GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.z), Quaternion.identity);
     }
 
 }

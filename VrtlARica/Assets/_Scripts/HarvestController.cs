@@ -3,12 +3,6 @@ using UnityEngine;
 
 public class HarvestController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject GrownPlantWithFruit;
-
-    [SerializeField]
-    private GameObject Basket;
-
     private TapDetection currentlyTapped;
     //prati koja je jabuka selektirana
     private TapDetection selectedApple;
@@ -17,7 +11,7 @@ public class HarvestController : MonoBehaviour
     //brojac koliko je jabuka ubrano s biljke i stavljeno u kosaru
     private int appleCounter = 0;
 
-    void Update()
+    private void Update()
     {
         //dohvati objekt na koji je trenutno korisnik kliknuo
         currentlyTapped = TapDetection.GetCurrentlyTappedObject();
@@ -119,16 +113,4 @@ public class HarvestController : MonoBehaviour
 
         Debug.Log("Disabled visibility for object: " + obj.name);
     }
-
-    //getter za kosaru
-    public GameObject GetBasket()
-    {
-        return Basket;
-    }
-    //getter za izraslu biljku
-    public GameObject GetGrownPlantWithFruit()
-    {
-        return GrownPlantWithFruit;
-    }
-
 }
