@@ -2,14 +2,6 @@ using UnityEngine;
 
 public class RotateObject : MonoBehaviour
 {
-    //dodano
-    [SerializeField]
-    private GameObject GrownPlantWithFruit;
-
-    //dodano
-    [SerializeField]
-    private GameObject Basket;
-
     //referenca na objekt koji se rotira
     private GameObject targetObject;
     //za koliko stupnjeva se rotira
@@ -49,17 +41,5 @@ public class RotateObject : MonoBehaviour
     public void RotateRight()
     {
         targetRotation *= Quaternion.Euler(0, rotationDegree, 0);
-    }
-
-
-    //geter za kosaru
-    public GameObject GetBasket()
-    {
-        return Basket;
-    }
-    //getter za izraslu biljku
-    public GameObject GetGrownPlantWithFruit()
-    {
-        return GrownPlantWithFruit;
     }
 }
