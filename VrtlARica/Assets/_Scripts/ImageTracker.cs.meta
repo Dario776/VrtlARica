@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 0d0464542a740fc4b9a3fbb4a7cbd3ec
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Sjemenka: {fileID: 8583496835436145022, guid: cb34b43a3c3b32346865b36e911777ee,
+      type: 3}
+  - transformedPotModel: {fileID: 1469703212755206574, guid: bba8bb97b78c55e4b9e5b44b59729e85,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

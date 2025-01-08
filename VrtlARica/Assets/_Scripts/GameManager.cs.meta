@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 566b56f21d7c7ee46bd03d8dcf186219
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - wateringCanPrefab: {fileID: 2770238100706696716, guid: ccec03ac51d1d4c4582d5f3a3fb430d6,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
