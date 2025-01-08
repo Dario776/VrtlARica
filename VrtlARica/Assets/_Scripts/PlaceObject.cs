@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
@@ -8,19 +9,21 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 [RequireComponent(typeof(ARRaycastManager), typeof(ARPlaneManager))]
 public class PlaceObject : MonoBehaviour
 {
-    [SerializeField] private GameObject teglicaPrefab;
+    [SerializeField] private GameObject[] teglicePrefab;
     private GameObject trenutnaTeglica;
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
     //dodano da se zapamti pozicija gdje je stavljen prefab
-    private Pose poseTeglicaPrefab;
+    private Pose poseTrenutnaTeglica;
     private bool objectPlaced;
+    private int currentPotIndex;
 
     private void Awake()
     {
         objectPlaced = false;
+        currentPotIndex = 0;
     }
 
     private void Start()
@@ -57,9 +60,12 @@ public class PlaceObject : MonoBehaviour
                 {
                     objectPlaced = true;
 
-                    poseTeglicaPrefab = hit.pose;
+                    poseTrenutnaTeglica = hit.pose;
 
-                    trenutnaTeglica = Instantiate(teglicaPrefab, poseTeglicaPrefab.position, poseTeglicaPrefab.rotation);
+                    trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], poseTrenutnaTeglica.position, poseTrenutnaTeglica.rotation);
+
+                    Debug.Log("stvoren prefab teglice");
+                    Debug.Log("Prefab Position: " + trenutnaTeglica.transform.position);
 
                     //iskljucivanje prepoznavanja ravnina i njihovih mesh-eva
                     aRPlaneManager.enabled = false;
@@ -84,7 +90,7 @@ public class PlaceObject : MonoBehaviour
             Debug.Log("Uništenje " + toReplace);
             Destroy(toReplace);
 
-            trenutnaTeglica = Instantiate(replaceWith, poseTeglicaPrefab.position, poseTeglicaPrefab.rotation);
+            trenutnaTeglica = Instantiate(replaceWith, poseTrenutnaTeglica.position, poseTrenutnaTeglica.rotation);
 
             Debug.Log("Stvoren novi objekt " + toReplace);
         }
@@ -92,6 +98,13 @@ public class PlaceObject : MonoBehaviour
         {
             Debug.LogWarning("Objekt ne postoji");
         }
+    }
+
+    public void ReplaceCurrentPotWithNextPotInLine()
+    {
+        Destroy(trenutnaTeglica);
+        currentPotIndex++;
+        trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], poseTrenutnaTeglica.position, poseTrenutnaTeglica.rotation);
     }
 
     //ovo znaci da ce objekt biti 0.3 m udaljen od drugog objekta

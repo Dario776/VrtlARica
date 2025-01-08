@@ -20,11 +20,12 @@ public class MainUI : MonoBehaviour
 
     [SerializeField] private GameObject StrelicaZaUvecanje;
     [SerializeField] private GameObject StrelicaZaSmanjenje;
+    [SerializeField] private GameObject moveButtons;
+
 
     // [SerializeField] private GameObject StrelicaZaSmanjenje;
     [SerializeField] private GameObject[] Text;
     [SerializeField] private GameObject[] Tockice;
-    [SerializeField] private GameObject moveButtons;
 
     private int i;
     private bool canToggle;
@@ -33,6 +34,7 @@ public class MainUI : MonoBehaviour
     private Button strelicaUdesnoButton;
     private Image strelicaUlijevoVizualnoImage;
     private Image strelicaUdesnoVizualnoImage;
+    private MoveObject moveObject;
 
     private GameManager gameManager;
 
@@ -50,6 +52,8 @@ public class MainUI : MonoBehaviour
 
         strelicaUlijevoVizualnoImage = StrelicaUlijevoVizualno.GetComponent<Image>();
         strelicaUdesnoVizualnoImage = StrelicaUdesnoVizualno.GetComponent<Image>();
+
+        moveObject = moveButtons.GetComponent<MoveObject>();
 
         //onemogucujemo lijevu strelicu na pocetku
         ToggleLeftArrow(false);
@@ -258,37 +262,23 @@ public class MainUI : MonoBehaviour
         }
     }
 
-    public void MoveSeedLeft()
+    public void MoveLeftButton()
     {
-
+        gameManager.imageTracker.MoveCurrentObjectLeft();
     }
 
-    public void MoveSeedRight(GameObject objectToMove)
+    public void MoveRightButton()
     {
-        if (objectToMove != null)
-        {
-            objectToMove.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
-            Debug.Log(transform.position);
-        }
+        gameManager.imageTracker.MoveCurrentObjectRight();
     }
 
-    public void MoveSeedUp(GameObject objectToMove)
+    public void MoveUpButton()
     {
-        if (objectToMove != null)
-        {
-            objectToMove.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
-            Debug.Log(transform.position);
-        }
+        gameManager.imageTracker.MoveCurrentObjectUp();
     }
 
-    public void MoveSeedDown(GameObject objectToMove)
+    public void MoveDownButton()
     {
-        if (objectToMove != null)
-        {
-            objectToMove.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
-            Debug.Log(transform.position);
-            TransformPotAndDestroySeed();
-            GameManager.Instance.SkeniranMarker();
-        }
+        gameManager.imageTracker.MoveCurrentObjectDown();
     }
 }

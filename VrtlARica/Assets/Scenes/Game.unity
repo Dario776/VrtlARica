@@ -1459,6 +1459,9 @@ RectTransform:
   - {fileID: 411316801}
   - {fileID: 1892397036}
   - {fileID: 753885674}
+  - {fileID: 1261207761}
+  - {fileID: 1241350537}
+  - {fileID: 1890485553}
   m_Father: {fileID: 846312939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1488,6 +1491,9 @@ MonoBehaviour:
   StrelicaUlijevoVizualno: {fileID: 1366139340}
   StrelicaUdesnoVizualno: {fileID: 389040147}
   StreliceZaRotaciju: {fileID: 1890485552}
+  StrelicaZaUvecanje: {fileID: 0}
+  StrelicaZaSmanjenje: {fileID: 0}
+  moveButtons: {fileID: 1261207760}
   Text:
   - {fileID: 1157347639}
   - {fileID: 1763776169}
@@ -1660,6 +1666,7 @@ GameObject:
   - component: {fileID: 372881570}
   - component: {fileID: 372881569}
   - component: {fileID: 372881575}
+  - component: {fileID: 372881576}
   m_Layer: 0
   m_Name: XR Origin (Mobile AR)
   m_TagString: Untagged
@@ -1685,8 +1692,7 @@ MonoBehaviour:
   m_SerializedLibrary: {fileID: 11400000, guid: 2fb32293c93366d45a78c5c1e0b6dc25,
     type: 2}
   m_MaxNumberOfMovingImages: 4
-  m_TrackedImagePrefab: {fileID: 7933907529579906235, guid: a00f372192677ed4da0f5cec3dfded20,
-    type: 3}
+  m_TrackedImagePrefab: {fileID: 0}
 --- !u!114 &372881570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,7 +1786,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e366b1e21d09c244a26598074ea60fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Zemlja: {fileID: 919132149155446097, guid: 099da0c998da5e64d9eafdbdd794d852, type: 3}
+  teglicePrefab:
+  - {fileID: 7060935310830532492, guid: 6021aaad1b7c70e4cab3e99516d2edf5, type: 3}
+  - {fileID: 3146048308602018698, guid: e29e6e5d4658b1649a7dd93de8644e87, type: 3}
+  - {fileID: 850143840681324732, guid: 59488a10a898d0d4e81220cdd61f6258, type: 3}
+  - {fileID: 5873987865042697682, guid: 2501095e231fdd14eb29c729bacecf89, type: 3}
+  - {fileID: 1675787903810802156, guid: 2c35ad5d3abe87b458f839950710d375, type: 3}
+  - {fileID: 1214051966291801021, guid: 51da46b3809a0e54aaf7e5c9924c43db, type: 3}
+--- !u!114 &372881576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372881568}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0464542a740fc4b9a3fbb4a7cbd3ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedPrefab: {fileID: 5784593501678896757, guid: e3f9970089e19c64d9a56eacc8e91b65,
+    type: 3}
+  wateringCanPrefab: {fileID: 5110093828988194060, guid: ccec03ac51d1d4c4582d5f3a3fb430d6,
+    type: 3}
 --- !u!1 &381732167
 GameObject:
   m_ObjectHideFlags: 0
@@ -2334,51 +2362,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449851952}
   m_CullTransparentMesh: 1
---- !u!1 &454634462
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 454634464}
-  - component: {fileID: 454634463}
-  m_Layer: 0
-  m_Name: TrackedImageInformation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &454634463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454634462}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025adb305571e5341ab66716a1faedca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TrackedImageManager: {fileID: 372881569}
---- !u!4 &454634464
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454634462}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 223.87166, y: 461.57117, z: 2.1983}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &455229486
 GameObject:
   m_ObjectHideFlags: 0
@@ -3361,9 +3344,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1755243314}
-  - {fileID: 1261207761}
-  - {fileID: 1890485553}
-  - {fileID: 1241350537}
   m_Father: {fileID: 361165948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5145,7 +5125,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 361165949}
         m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: StrelicaUdesnoButton
+        m_MethodName: MoveLeftButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6076,7 +6056,7 @@ RectTransform:
   m_Children:
   - {fileID: 1638441661}
   - {fileID: 2122144216}
-  m_Father: {fileID: 753885674}
+  m_Father: {fileID: 361165948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -6115,7 +6095,7 @@ RectTransform:
   - {fileID: 1698955816}
   - {fileID: 1083193981}
   - {fileID: 1686755604}
-  m_Father: {fileID: 753885674}
+  m_Father: {fileID: 361165948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -7662,7 +7642,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 361165949}
         m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: StrelicaUdesnoButton
+        m_MethodName: MoveUpButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7906,7 +7886,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 361165949}
         m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: StrelicaUdesnoButton
+        m_MethodName: MoveRightButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8038,7 +8018,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 361165949}
         m_TargetAssemblyTypeName: MainUI, Assembly-CSharp
-        m_MethodName: StrelicaUdesnoButton
+        m_MethodName: MoveDownButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8977,7 +8957,7 @@ RectTransform:
   m_Children:
   - {fileID: 805715643}
   - {fileID: 1402223682}
-  m_Father: {fileID: 753885674}
+  m_Father: {fileID: 361165948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -8996,7 +8976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a2269070cec3246bd8112dace6bf20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 0}
   rotationDegree: 15
   rotationSpeed: 5
 --- !u!114 &1890485555
@@ -10257,6 +10236,5 @@ SceneRoots:
   - {fileID: 702413259}
   - {fileID: 1075000276}
   - {fileID: 372881574}
-  - {fileID: 454634464}
   - {fileID: 846312939}
   - {fileID: 1533028286}

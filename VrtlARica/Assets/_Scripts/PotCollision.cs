@@ -2,26 +2,21 @@ using UnityEngine;
 
 public class PotCollision : MonoBehaviour
 {
-    public GameObject transformedPotModel;
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log($"Trigger detected with: {other.gameObject.name} (Tag: {other.tag})");
+        Debug.Log("OnTriggerEnter");
 
-        if (other.CompareTag("Sjemenka"))
+        if (collision.gameObject.name == "seed")
         {
-            Debug.Log("Seed has entered the pot trigger!");
-
-            if (transformedPotModel != null)
-            {
-                Debug.Log("Activating transformed pot model.");
-                transformedPotModel.SetActive(true);
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                Debug.LogWarning("Transformed pot model is not assigned.");
-            }
+            Debug.Log("seed ocitan");
+            Destroy(collision.gameObject);
+            GameManager.Instance.SjemenkaPomaknuta();
+        }
+        else if (collision.gameObject.name == "wateringCan")
+        {
+            Debug.Log("wateringCan ocitan");
+            Destroy(collision.gameObject);
+            GameManager.Instance.ZalivenaBiljka();
         }
     }
 }

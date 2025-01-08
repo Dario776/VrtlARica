@@ -15,10 +15,10 @@ public class GameManager : SingletonPersistent<GameManager>
     private int zadovoljeniUvjeti;
     private Stanje stanje;
     private MainUI mainUI;
-    private PlaceObject placeObject;
+    public PlaceObject placeObject;
     private RotateObject rotateObject;
     private SizeUpObject sizeUpObject;
-    private ImageTracker imageTracker;
+    public ImageTracker imageTracker;
 
     public override void Awake()
     {
@@ -84,7 +84,6 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case Stanje.ZalijevanjeBiljke:
                 Debug.Log(Stanje.ZalijevanjeBiljke);
-                ZalivenaBiljka();
                 break;
             case Stanje.RastBiljke:
                 Debug.Log(Stanje.RastBiljke);
@@ -93,20 +92,20 @@ public class GameManager : SingletonPersistent<GameManager>
             case Stanje.BerbaPlodova:
                 Debug.Log(Stanje.BerbaPlodova);
                 //omogući gumbe za rotaciju (nakon izvršene interakcije treba ih isključiti)
-                mainUI.ToggleRotationButtons(true);
-                //pripremi rotaciju
+                // mainUI.ToggleRotationButtons(true);
+                // //pripremi rotaciju
 
-                rotateObject.enabled = true;
-                //zamijeni trenutni objekt s biljkom s plodovima
-                placeObject.ReplaceModel(placeObject.GetTrenutnaTeglica(), rotateObject.GetGrownPlantWithFruit());
-                //dohvati objekt koji će se rotirati
-                GameObject rotationTarget = placeObject.GetTrenutnaTeglica();
-                //dohvati objekt kosare
-                GameObject basket = rotateObject.GetBasket();
-                //stvori kosaru pokraj biljke
-                placeObject.SpawnObject(basket, rotationTarget);
-                //omogući rotiranje biljke
-                rotateObject.SetRotationTarget(rotationTarget);
+                // rotateObject.enabled = true;
+                // //zamijeni trenutni objekt s biljkom s plodovima
+                // placeObject.ReplaceModel(placeObject.GetTrenutnaTeglica(), rotateObject.GetGrownPlantWithFruit());
+                // //dohvati objekt koji će se rotirati
+                // GameObject rotationTarget = placeObject.GetTrenutnaTeglica();
+                // //dohvati objekt kosare
+                // GameObject basket = rotateObject.GetBasket();
+                // //stvori kosaru pokraj biljke
+                // placeObject.SpawnObject(basket, rotationTarget);
+                // //omogući rotiranje biljke
+                // rotateObject.SetRotationTarget(rotationTarget);
                 break;
             default:
                 Debug.Log("Greska!");
@@ -136,8 +135,6 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void SkeniranMarker()
     {
-        imageTracker.enabled = false;
-
         stanje = Stanje.PomicanjeSjemenke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
@@ -145,6 +142,9 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void SjemenkaPomaknuta()
     {
+        imageTracker.CreateWateringCan();
+        placeObject.ReplaceCurrentPotWithNextPotInLine();
+
         stanje = Stanje.ZalijevanjeBiljke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
@@ -152,6 +152,9 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void ZalivenaBiljka()
     {
+        placeObject.ReplaceCurrentPotWithNextPotInLine();
+
+        imageTracker.enabled = false;
         mainUI.ToggleMoveSeedButtons(false);
 
         //treba nadopuniti
