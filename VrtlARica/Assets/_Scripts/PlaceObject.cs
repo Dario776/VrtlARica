@@ -104,23 +104,18 @@ public class PlaceObject : MonoBehaviour
 
     public void ReplaceCurrentPotWithNextPotInLine()
     {
-        if (currentPotIndex >= 5)
+        if (currentPotIndex == 5)
         {
             GameManager.Instance.BiljkaNarasla();
+        }
+        else if (currentPotIndex == 10)
+        {
+            GameManager.Instance.BiljkaPropala();
+            return;
         }
         Destroy(trenutnaTeglica);
         currentPotIndex++;
         trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], poseTrenutnaTeglica.position, poseTrenutnaTeglica.rotation);
-    }
-
-    public void ReplaceCurrentPotWithLastPotInLine()
-    {
-        if (currentPotIndex >= 3)
-        {
-            Destroy(trenutnaTeglica);
-            currentPotIndex--;
-            trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], poseTrenutnaTeglica.position, poseTrenutnaTeglica.rotation);
-        }
     }
 
     //ovo znaci da ce objekt biti 0.3 m udaljen od drugog objekta

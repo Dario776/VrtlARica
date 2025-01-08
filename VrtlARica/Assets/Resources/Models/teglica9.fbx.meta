@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b989d569aee21e04e83bdf79cf0e192a
+guid: e41dd642cea905f48955315e05b7b154
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,18 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Dirt material
-    second: {fileID: 2100000, guid: b4666cc0551a6134baf8c5c94221ad0e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: Plant material
     second: {fileID: 2100000, guid: 22033787be439a34ab3b0946020e47da, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Pot material
-    second: {fileID: 2100000, guid: 4d1f573140536b141ab32fb7248976b5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

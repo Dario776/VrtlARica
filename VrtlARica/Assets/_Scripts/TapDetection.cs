@@ -7,10 +7,8 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 public class TapDetection : MonoBehaviour
 {
     //potrebno da se detektiraju objekti koji se mogu selektirati, a ne npr. ARPlane
-    [SerializeField]
-    private LayerMask detectableLayer;
-    [SerializeField]
-    public bool isOutlined;
+    [SerializeField] private LayerMask detectableLayer;
+    [SerializeField] public bool isOutlined;
     private Outline outline;
     private static TapDetection currentlyTappedOn;
 
@@ -67,7 +65,7 @@ public class TapDetection : MonoBehaviour
     {
         outline = tappedObject.GetComponent<Outline>();
         isOutlined = !isOutlined;
-        outline.enabled = isOutlined;      
+        outline.enabled = isOutlined;
     }
 
     public static TapDetection GetCurrentlyTappedObject()

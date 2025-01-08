@@ -92,6 +92,9 @@ public class HarvestController : MonoBehaviour
         //ukloni jabuku s biljke u hijerarhiji
         selectedApple.transform.SetParent(null);
         selectedApple = null;
+
+        if (appleCounter == 10)
+            GameManager.Instance.UbraniPlodovi();
     }
 
     private void DisableVisibility(GameObject obj)

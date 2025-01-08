@@ -17,6 +17,7 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject moveButtons;
     [SerializeField] private GameObject plusButton;
     [SerializeField] private GameObject minusButton;
+    [SerializeField] private GameObject endScreenPopup;
     [SerializeField] private GameObject[] Text;
     [SerializeField] private GameObject[] Tockice;
 
@@ -246,14 +247,9 @@ public class MainUI : MonoBehaviour
         gameManager.imageTracker.MoveCurrentObjectDown();
     }
 
-    public void SizeUpButton()
+    public void NextPotButton()
     {
         gameManager.placeObject.ReplaceCurrentPotWithNextPotInLine();
-    }
-
-    public void SizeDownButton()
-    {
-        gameManager.placeObject.ReplaceCurrentPotWithLastPotInLine();
     }
 
     public void TogglePlusButton(bool Enable)
@@ -288,5 +284,10 @@ public class MainUI : MonoBehaviour
     public void RotateRightButton()
     {
         gameManager.rotateObject.RotateRight();
+    }
+
+    public void ShowEndScreen()
+    {
+        endScreenPopup.SetActive(true);
     }
 }

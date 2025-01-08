@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +20,6 @@ public class GameManager : SingletonPersistent<GameManager>
     public PlaceObject placeObject;
     public RotateObject rotateObject;
     private HarvestController harvestController;
-    private SizeUpObject sizeUpObject;
     public ImageTracker imageTracker;
 
     public override void Awake()
@@ -94,11 +94,12 @@ public class GameManager : SingletonPersistent<GameManager>
                 mainUI.ToggleRotationButtons(true);
                 placeObject.CreateBasket();
                 rotateObject.enabled = true;
+                harvestController.enabled = true;
                 rotateObject.SetRotationTarget(placeObject.GetTrenutnaTeglica());
                 break;
             case Stanje.PropadanjeBiljke:
                 Debug.Log(Stanje.PropadanjeBiljke);
-
+                mainUI.ToggleMinusButton(true);
                 break;
             default:
                 Debug.Log("Greska!");
@@ -111,8 +112,8 @@ public class GameManager : SingletonPersistent<GameManager>
         mainUI = FindFirstObjectByType<MainUI>();
         placeObject = FindFirstObjectByType<PlaceObject>();
         imageTracker = FindFirstObjectByType<ImageTracker>();
-        sizeUpObject = FindFirstObjectByType<SizeUpObject>();
         rotateObject = FindFirstObjectByType<RotateObject>();
+        harvestController = FindFirstObjectByType<HarvestController>();
     }
 
     public void ZemljaPostavljena()
@@ -171,5 +172,11 @@ public class GameManager : SingletonPersistent<GameManager>
         stanje = Stanje.PropadanjeBiljke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
+    }
+
+    public void BiljkaPropala()
+    {
+        Debug.Log("GOTOVO!!!!!");
+        mainUI.ShowEndScreen();
     }
 }
