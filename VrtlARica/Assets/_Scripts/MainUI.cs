@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,15 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject StrelicaUdesnoObjekt;
     [SerializeField] private GameObject StrelicaUlijevoVizualno;
     [SerializeField] private GameObject StrelicaUdesnoVizualno;
+    //dodano za rotaciju
+    [SerializeField] private GameObject StreliceZaRotaciju;
+/*     [SerializeField] private GameObject StrelicaZaRotacijuDesno;
+    [SerializeField] private GameObject StrelicaZaRotacijuLijevo; */
+
+    [SerializeField] private GameObject StrelicaZaUvecanje;
+    [SerializeField] private GameObject StrelicaZaSmanjenje;
+
+    // [SerializeField] private GameObject StrelicaZaSmanjenje;
     [SerializeField] private GameObject[] Text;
     [SerializeField] private GameObject[] Tockice;
 
@@ -36,8 +46,10 @@ public class MainUI : MonoBehaviour
         gameManager = GameManager.Instance;
         strelicaUlijevoButton = StrelicaUlijevoObjekt.GetComponent<Button>();
         strelicaUdesnoButton = StrelicaUdesnoObjekt.GetComponent<Button>();
+
         strelicaUlijevoVizualnoImage = StrelicaUlijevoVizualno.GetComponent<Image>();
         strelicaUdesnoVizualnoImage = StrelicaUdesnoVizualno.GetComponent<Image>();
+
         //onemogucujemo lijevu strelicu na pocetku
         ToggleLeftArrow(false);
     }
@@ -189,6 +201,47 @@ public class MainUI : MonoBehaviour
         {
             strelicaUdesnoButton.interactable = false;
             strelicaUdesnoVizualnoImage.color = Konstante.CustomDisabledBrownColor;
+        }
+    }
+
+    //dodano za omogućavanje gumbića za rotaciju
+    public void ToggleRotationButtons(bool Enable)
+    {
+        if (Enable)
+        {
+            StreliceZaRotaciju.SetActive(true);
+        }
+        else
+        {
+            StreliceZaRotaciju.SetActive(false);
+        }
+    }
+
+    public void ToggleSizeUpButton(bool Enable)
+    {
+        if (Enable)
+        {
+            StrelicaZaUvecanje.SetActive(true);
+            StrelicaZaSmanjenje.SetActive(false);
+        }
+        else
+        {
+            StrelicaZaUvecanje.SetActive(false);
+            StrelicaZaSmanjenje.SetActive(true);
+        }
+    }
+
+    public void ToggleSizeDownButton(bool Enable)
+    {
+        if (Enable)
+        {
+            StrelicaZaSmanjenje.SetActive(true);
+            StrelicaZaUvecanje.SetActive(false);
+        }
+        else
+        {
+            StrelicaZaSmanjenje.SetActive(false);
+            StrelicaZaUvecanje.SetActive(true);
         }
     }
 }

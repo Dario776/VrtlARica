@@ -1,6 +1,6 @@
 using System;
-using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
@@ -19,9 +19,12 @@ public class GameManager : SingletonPersistent<GameManager>
     private Stanje stanje;
 
     private MainUI mainUI;
-    private GameObject XROriginGO;
     private PlaceObject placeObject;
-    private ImageTracker imageTracker;
+    //dodano za rotaciju
+    private RotateObject rotateObject;
+
+    private SizeUpObject sizeUpObject;
+    private TrackedImageInfo trackedImageInfo;
 
 
     public override void Awake()
@@ -53,6 +56,7 @@ public class GameManager : SingletonPersistent<GameManager>
         if (zadovoljeniUvjeti > 0)
         {
             zadovoljeniUvjeti--;
+            Debug.Log("zadovoljeniUvjet= " + zadovoljeniUvjeti);
             //kad smo dosli do kraja prolaza, obradujemo stanje
             if (zadovoljeniUvjeti == 0)
             {
@@ -66,39 +70,66 @@ public class GameManager : SingletonPersistent<GameManager>
         }
     }
 
+    //samo radi testiranja
+    public int count = 1;
     private void ObradiStanje()
     {
         switch (stanje)
         {
             case Stanje.PostavljanjeZemlje:
                 Debug.Log(Stanje.PostavljanjeZemlje);
-                PronalazakKomponenataIgre();
+                placeObject = FindFirstObjectByType<PlaceObject>();
                 placeObject.enabled = true;
                 break;
             case Stanje.SkeniranjeMarkera:
                 Debug.Log(Stanje.SkeniranjeMarkera);
-                imageTracker.enabled = true;
+                //trackedImageInfo = FindFirstObjectByType<TrackedImageInfo>();
+                //trackedImageInfo.enabled = true;
+                //treba staviti na ispravno mjesto, ovdje je samo radi testiranja
+                SkeniranMarker();
                 break;
             case Stanje.ZalijevanjeBiljke:
                 Debug.Log(Stanje.ZalijevanjeBiljke);
+                //treba staviti na ispravno mjesto, ovdje je samo radi testiranja
+                ZalivenaBiljka();
                 break;
             case Stanje.RastBiljke:
                 Debug.Log(Stanje.RastBiljke);
+                //makni, tu je radi testiranja
+
+                // Debug.Log("AAAAAAAAAAAAAAAAAAA");
+
+                // sizeUpObject = FindFirstObjectByType<SizeUpObject>();
+                // sizeUpObject.enabled = true;
+
+                // Debug.Log(sizeUpObject);
+
+                // mainUI.ToggleSizeUpButton(true);
+
+                //Rast();
                 break;
             case Stanje.BerbaPlodova:
                 Debug.Log(Stanje.BerbaPlodova);
+                //omogući gumbe za rotaciju (nakon izvršene interakcije treba ih isključiti)
+                mainUI.ToggleRotationButtons(true);
+                //pripremi rotaciju
+                rotateObject = FindFirstObjectByType<RotateObject>();
+                rotateObject.enabled = true;
+                //zamijeni trenutni objekt s biljkom s plodovima
+                placeObject.ReplaceModel(placeObject.GetObject(), rotateObject.GetGrownPlantWithFruit());
+                //dohvati objekt koji će se rotirati
+                GameObject rotationTarget = placeObject.GetObject();
+                //dohvati objekt kosare
+                GameObject basket = rotateObject.GetBasket();
+                //stvori kosaru pokraj biljke
+                placeObject.SpawnObject(basket, rotationTarget);
+                //omogući rotiranje biljke
+                rotateObject.SetRotationTarget(rotationTarget);
                 break;
             default:
                 Debug.Log("Greska!");
                 break;
         }
-    }
-
-    private void PronalazakKomponenataIgre()
-    {
-        XROriginGO = FindFirstObjectByType<XROrigin>().gameObject;
-        placeObject = XROriginGO.GetComponent<PlaceObject>();
-        imageTracker = XROriginGO.GetComponent<ImageTracker>();
     }
 
     public void ZemljaPostavljena()
@@ -115,8 +146,37 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void SkeniranMarker()
     {
-        imageTracker.enabled = false;
+        //trackedImageInfo.enabled = false;
         stanje = Stanje.ZalijevanjeBiljke;
+        zadovoljeniUvjeti++;
+        mainUI.ToggleRightArrow(true);
+    }
+
+    public void ZalivenaBiljka()
+    {
+        //treba nadopuniti
+        stanje = Stanje.RastBiljke;
+        zadovoljeniUvjeti++;
+        mainUI.ToggleRightArrow(true);
+    }
+
+    //samo radi testiranja
+    public void Rast()
+    {
+        if (count == 1)
+        {
+            count++;
+            zadovoljeniUvjeti++;
+        }
+        else
+        {
+            BiljkaNarasla();
+        }
+    }
+    public void BiljkaNarasla()
+    {
+        //treba nadopuniti
+        stanje = Stanje.BerbaPlodova;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
     }

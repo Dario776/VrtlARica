@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
@@ -12,6 +13,12 @@ public class PlaceObject : MonoBehaviour
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+    //dodano da se zapamti pozicija gdje je stavljen model
+    private Pose pose;
+
+    //dodano da se zapamti trenutni model
+    private GameObject obj;
 
     private bool objectPlaced;
 
@@ -54,8 +61,10 @@ public class PlaceObject : MonoBehaviour
                 {
                     objectPlaced = true;
 
-                    Pose pose = hit.pose;
-                    GameObject obj = Instantiate(Zemlja, pose.position, pose.rotation);
+                    //Pose pose = hit.pose;
+                    pose = hit.pose;
+                    //GameObject obj = Instantiate(Zemlja, pose.position, pose.rotation);
+                    obj = Instantiate(Zemlja, pose.position, pose.rotation);
 
                     //iskljucivanje prepoznavanja ravnina i njihovih mesh-eva
                     aRPlaneManager.enabled = false;
@@ -70,6 +79,42 @@ public class PlaceObject : MonoBehaviour
                 }
             }
         }
+    }
+
+    //dodano za zamijenu trenutnog modela
+    public void ReplaceModel(GameObject toReplace, GameObject replaceWith){
+        if(toReplace != null)
+        {
+            Debug.Log("Uništenje " + toReplace);
+            Destroy(toReplace);
+
+            obj = Instantiate(replaceWith, pose.position, pose.rotation);
+
+            Debug.Log("Stvoren novi objekt " + toReplace);
+        } else {
+            Debug.LogWarning("Objekt ne postoji");
+        }
+    }
+
+    //ovo znaci da ce objekt biti 0.3 m udaljen od drugog objekta
+    private float spawnDistance = 0.3f;
+    //funkcija za omogućavanje prikaza objekta pored drugog objekta
+    public void SpawnObject(GameObject objectToSpawn, GameObject refObject)
+    {
+        Debug.Log("objectToSpawn=" + objectToSpawn);
+        Debug.Log("refObject=" + refObject);
+        //izračun pozicije za stvaranje objekta
+        Vector3 spawnPosition = refObject.transform.position + refObject.transform.right.normalized * spawnDistance;
+
+        spawnPosition.y = refObject.transform.position.y;
+
+        Instantiate(objectToSpawn, spawnPosition, refObject.transform.rotation);
 
     }
+
+    //getter za trenutni objekt
+    public GameObject GetObject(){
+        return obj;
+    }
+
 }
