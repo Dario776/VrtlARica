@@ -82,7 +82,7 @@ public class ImageTracker : MonoBehaviour
     public void CreateWateringCan()
     {
         instantiatedWateringCan = Instantiate(wateringCanPrefab, new Vector3(GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.x + 0.5f,
-        GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.y + 0.5f, GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.z), Quaternion.identity);
+        GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.y, GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.z), Quaternion.identity);
         currentObjectToMove = instantiatedWateringCan.GetComponent<MoveObject>();
     }
 }
