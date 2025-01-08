@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
@@ -39,7 +37,7 @@ public class ImageTracker : MonoBehaviour
                 ListAllImages();
                 // var newPrefab = Instantiate(Sjemenka, trackedImage.transform);
                 instantiatedSeed = Instantiate(seedPrefab, new Vector3(GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.x + 0.5f,
-                GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.y, GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.z), Quaternion.identity);
+                GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.y + 0.5f, GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.z), Quaternion.identity);
 
                 currentObjectToMove = instantiatedSeed.GetComponent<MoveObject>();
 
@@ -84,7 +82,7 @@ public class ImageTracker : MonoBehaviour
     public void CreateWateringCan()
     {
         instantiatedWateringCan = Instantiate(wateringCanPrefab, new Vector3(GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.x + 0.5f,
-        GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.y, GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.z), Quaternion.identity);
+        GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.y + 0.5f, GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.z), Quaternion.identity);
         currentObjectToMove = instantiatedWateringCan.GetComponent<MoveObject>();
     }
 }

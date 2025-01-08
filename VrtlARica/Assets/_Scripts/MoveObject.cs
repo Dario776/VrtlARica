@@ -18,13 +18,11 @@ public class MoveObject : MonoBehaviour
     {
         transform.position += new Vector3(0, 0.1f, 0);
         Debug.Log(transform.position);
-        GameManager.Instance.ZalivenaBiljka();
     }
 
     public void MoveDown()
     {
         transform.position -= new Vector3(0, 0.1f, 0);
         Debug.Log(transform.position);
-        GameManager.Instance.SjemenkaPomaknuta();
     }
 }
