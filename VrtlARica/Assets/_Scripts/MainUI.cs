@@ -14,7 +14,8 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject StrelicaUdesnoVizualno;
     [SerializeField] private GameObject[] Text;
     [SerializeField] private GameObject[] Tockice;
-    [SerializeField] private GameObject moveButtonContainer; 
+    [SerializeField] private GameObject moveButtonContainer;
+    [SerializeField] private GameObject moveButtonContainer2;
 
     private int i;
     private bool canToggle;
@@ -29,7 +30,7 @@ public class MainUI : MonoBehaviour
     //private Button MoveRight;
     private GameObject selectedSeed;
 
-    private float moveStep = 0.1f;
+    //private float moveStep = 0.1f;
 
     private GameManager gameManager;
 
@@ -221,6 +222,18 @@ public class MainUI : MonoBehaviour
         else
         {
             moveButtonContainer.SetActive(false);
+        }
+    }
+
+    public void ShowMoveButtons2(bool shouldShow)
+    {
+        if (shouldShow)
+        {
+            moveButtonContainer2.SetActive(true);
+        }
+        else
+        {
+            moveButtonContainer2.SetActive(false);
         }
     }
 

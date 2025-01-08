@@ -26,6 +26,32 @@ public class GameManager : SingletonPersistent<GameManager>
     private PlaceObject placeObject;
     private ImageTracker imageTracker;
 
+    [SerializeField] GameObject wateringCanPrefab;
+    private GameObject transformedPot;
+    public void SetTransformedPot(GameObject pot) { 
+        transformedPot = pot; 
+        Debug.Log("Transformed pot has been set."); 
+        Debug.Log($"Transformed Pot Position: {transformedPot.transform.position}"); 
+        Debug.Log($"Transformed Pot Rotation: {transformedPot.transform.rotation}"); 
+        Debug.Log($"Transformed Pot Scale: {transformedPot.transform.localScale}"); 
+    }
+
+    private void SpawnWateringCan()
+    {
+        if (transformedPot != null && wateringCanPrefab != null)
+        {
+            Vector3 spawnPosition = transformedPot.transform.position + new Vector3(0, 0.5f, 0);
+            Instantiate(wateringCanPrefab, spawnPosition, Quaternion.identity);
+            Debug.LogWarning("Watering can spawned");
+        }
+        else
+        {
+            if (transformedPot == null) Debug.LogWarning("Transformed pot is not assigned."); 
+            if (wateringCanPrefab == null) Debug.LogWarning("Watering can prefab is not assigned."); 
+            Debug.LogWarning("nesto fali");
+        }
+    }
+
     public override void Awake()
     {
         base.Awake();
@@ -88,7 +114,9 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case Stanje.ZalijevanjeBiljke:
                 Debug.Log(Stanje.ZalijevanjeBiljke);
-                mainUI.ShowMoveButtons(true);
+                mainUI.ShowMoveButtons(false);
+                mainUI.ShowMoveButtons2(true);
+                //SpawnWateringCan();
                 break;
             case Stanje.RastBiljke:
                 Debug.Log(Stanje.RastBiljke);

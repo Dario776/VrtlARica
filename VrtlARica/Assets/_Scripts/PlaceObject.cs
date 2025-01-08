@@ -8,6 +8,7 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 public class PlaceObject : MonoBehaviour
 {
     [SerializeField] private GameObject Zemlja;
+
     [SerializeField] private ImageTracker imageTracker;
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
@@ -56,6 +57,7 @@ public class PlaceObject : MonoBehaviour
 
                     Pose pose = hit.pose;
                     GameObject obj = Instantiate(Zemlja, pose.position, pose.rotation);
+                    Debug.Log($"Placed Zemlja at {pose.position}, rotation: {pose.rotation}");
                     imageTracker.SetPot(obj);
 
                     //iskljucivanje prepoznavanja ravnina i njihovih mesh-eva
