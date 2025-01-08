@@ -63,8 +63,6 @@ public class GameManager : SingletonPersistent<GameManager>
         }
     }
 
-    //samo radi testiranja
-    public int count = 1;
     private void ObradiStanje()
     {
         switch (stanje)
@@ -87,7 +85,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case Stanje.RastBiljke:
                 Debug.Log(Stanje.RastBiljke);
-                sizeUpObject.enabled = true;
+                mainUI.TogglePlusButton(true);
                 break;
             case Stanje.BerbaPlodova:
                 Debug.Log(Stanje.BerbaPlodova);
@@ -165,6 +163,8 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void BiljkaNarasla()
     {
+        mainUI.TogglePlusButton(false);
+
         //treba nadopuniti
         stanje = Stanje.BerbaPlodova;
         zadovoljeniUvjeti++;

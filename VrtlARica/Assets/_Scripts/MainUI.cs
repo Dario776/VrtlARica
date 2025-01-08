@@ -21,7 +21,8 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject StrelicaZaUvecanje;
     [SerializeField] private GameObject StrelicaZaSmanjenje;
     [SerializeField] private GameObject moveButtons;
-
+    [SerializeField] private GameObject plusButton;
+    [SerializeField] private GameObject minusButton;
 
     // [SerializeField] private GameObject StrelicaZaSmanjenje;
     [SerializeField] private GameObject[] Text;
@@ -280,5 +281,39 @@ public class MainUI : MonoBehaviour
     public void MoveDownButton()
     {
         gameManager.imageTracker.MoveCurrentObjectDown();
+    }
+
+    public void SizeUpButton()
+    {
+        gameManager.placeObject.ReplaceCurrentPotWithNextPotInLine();
+    }
+
+    public void SizeDownButton()
+    {
+        gameManager.placeObject.ReplaceCurrentPotWithLastPotInLine();
+    }
+
+    public void TogglePlusButton(bool Enable)
+    {
+        if (Enable)
+        {
+            plusButton.SetActive(true);
+        }
+        else
+        {
+            plusButton.SetActive(false);
+        }
+    }
+
+    public void ToggleMinusButton(bool Enable)
+    {
+        if (Enable)
+        {
+            minusButton.SetActive(true);
+        }
+        else
+        {
+            minusButton.SetActive(false);
+        }
     }
 }
