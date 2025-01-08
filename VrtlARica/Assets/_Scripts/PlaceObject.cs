@@ -147,7 +147,7 @@ public class PlaceObject : MonoBehaviour
 
     public void CreateBasket()
     {
-        instantiatedBasket = Instantiate(basketPrefab, new Vector3(GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.x + 0.5f,
+        instantiatedBasket = Instantiate(basketPrefab, new Vector3(GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.x - 0.3f,
         GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.y, GameManager.Instance.placeObject.GetTrenutnaTeglica().transform.position.z), Quaternion.identity);
     }
 
