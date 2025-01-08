@@ -35,7 +35,7 @@ public class SizeUpObject : MonoBehaviour
             else
             {
                 if (currentIndex == 0)
-                    placeObject.ReplaceModel(placeObject.GetObject(), models[currentIndex]);
+                    placeObject.ReplaceModel(placeObject.GetTrenutnaTeglica(), models[currentIndex]);
                 else
                     placeObject.ReplaceModel(models[currentIndex - 1], models[currentIndex]);
 

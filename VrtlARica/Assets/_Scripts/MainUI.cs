@@ -15,8 +15,8 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject StrelicaUdesnoVizualno;
     //dodano za rotaciju
     [SerializeField] private GameObject StreliceZaRotaciju;
-/*     [SerializeField] private GameObject StrelicaZaRotacijuDesno;
-    [SerializeField] private GameObject StrelicaZaRotacijuLijevo; */
+    /*     [SerializeField] private GameObject StrelicaZaRotacijuDesno;
+        [SerializeField] private GameObject StrelicaZaRotacijuLijevo; */
 
     [SerializeField] private GameObject StrelicaZaUvecanje;
     [SerializeField] private GameObject StrelicaZaSmanjenje;
@@ -24,6 +24,7 @@ public class MainUI : MonoBehaviour
     // [SerializeField] private GameObject StrelicaZaSmanjenje;
     [SerializeField] private GameObject[] Text;
     [SerializeField] private GameObject[] Tockice;
+    [SerializeField] private GameObject moveButtons;
 
     private int i;
     private bool canToggle;
@@ -242,6 +243,52 @@ public class MainUI : MonoBehaviour
         {
             StrelicaZaSmanjenje.SetActive(false);
             StrelicaZaUvecanje.SetActive(true);
+        }
+    }
+
+    public void ToggleMoveSeedButtons(bool Enable)
+    {
+        if (Enable)
+        {
+            moveButtons.SetActive(true);
+        }
+        else
+        {
+            moveButtons.SetActive(false);
+        }
+    }
+
+    public void MoveSeedLeft()
+    {
+
+    }
+
+    public void MoveSeedRight(GameObject objectToMove)
+    {
+        if (objectToMove != null)
+        {
+            objectToMove.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
+            Debug.Log(transform.position);
+        }
+    }
+
+    public void MoveSeedUp(GameObject objectToMove)
+    {
+        if (objectToMove != null)
+        {
+            objectToMove.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
+            Debug.Log(transform.position);
+        }
+    }
+
+    public void MoveSeedDown(GameObject objectToMove)
+    {
+        if (objectToMove != null)
+        {
+            objectToMove.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
+            Debug.Log(transform.position);
+            TransformPotAndDestroySeed();
+            GameManager.Instance.SkeniranMarker();
         }
     }
 }

@@ -5,6 +5,7 @@ enum Stanje
 {
     PostavljanjeZemlje,
     SkeniranjeMarkera,
+    PomicanjeSjemenke,
     ZalijevanjeBiljke,
     RastBiljke,
     BerbaPlodova
@@ -77,6 +78,10 @@ public class GameManager : SingletonPersistent<GameManager>
                 Debug.Log(Stanje.SkeniranjeMarkera);
                 imageTracker.enabled = true;
                 break;
+            case Stanje.PomicanjeSjemenke:
+                Debug.Log(Stanje.PomicanjeSjemenke);
+                mainUI.ToggleMoveSeedButtons(true);
+                break;
             case Stanje.ZalijevanjeBiljke:
                 Debug.Log(Stanje.ZalijevanjeBiljke);
                 ZalivenaBiljka();
@@ -93,9 +98,9 @@ public class GameManager : SingletonPersistent<GameManager>
 
                 rotateObject.enabled = true;
                 //zamijeni trenutni objekt s biljkom s plodovima
-                placeObject.ReplaceModel(placeObject.GetObject(), rotateObject.GetGrownPlantWithFruit());
+                placeObject.ReplaceModel(placeObject.GetTrenutnaTeglica(), rotateObject.GetGrownPlantWithFruit());
                 //dohvati objekt koji će se rotirati
-                GameObject rotationTarget = placeObject.GetObject();
+                GameObject rotationTarget = placeObject.GetTrenutnaTeglica();
                 //dohvati objekt kosare
                 GameObject basket = rotateObject.GetBasket();
                 //stvori kosaru pokraj biljke
@@ -111,11 +116,11 @@ public class GameManager : SingletonPersistent<GameManager>
 
     private void PronadiKomponente()
     {
+        mainUI = FindFirstObjectByType<MainUI>();
         placeObject = FindFirstObjectByType<PlaceObject>();
         imageTracker = FindFirstObjectByType<ImageTracker>();
         sizeUpObject = FindFirstObjectByType<SizeUpObject>();
         rotateObject = FindFirstObjectByType<RotateObject>();
-
     }
 
     public void ZemljaPostavljena()
@@ -126,13 +131,20 @@ public class GameManager : SingletonPersistent<GameManager>
         //priprema za sljedece stanje 
         stanje = Stanje.SkeniranjeMarkera;
         zadovoljeniUvjeti++;
-        mainUI = FindFirstObjectByType<MainUI>();
         mainUI.ToggleRightArrow(true);
     }
 
     public void SkeniranMarker()
     {
-        //trackedImageInfo.enabled = false;
+        imageTracker.enabled = false;
+
+        stanje = Stanje.PomicanjeSjemenke;
+        zadovoljeniUvjeti++;
+        mainUI.ToggleRightArrow(true);
+    }
+
+    public void SjemenkaPomaknuta()
+    {
         stanje = Stanje.ZalijevanjeBiljke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
@@ -140,11 +152,14 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void ZalivenaBiljka()
     {
+        mainUI.ToggleMoveSeedButtons(false);
+
         //treba nadopuniti
         stanje = Stanje.RastBiljke;
         zadovoljeniUvjeti++;
         mainUI.ToggleRightArrow(true);
     }
+
     public void BiljkaNarasla()
     {
         //treba nadopuniti

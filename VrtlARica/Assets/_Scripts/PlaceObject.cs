@@ -8,18 +8,14 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 [RequireComponent(typeof(ARRaycastManager), typeof(ARPlaneManager))]
 public class PlaceObject : MonoBehaviour
 {
-    [SerializeField] private GameObject Zemlja;
-
+    [SerializeField] private GameObject teglicaPrefab;
+    private GameObject trenutnaTeglica;
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
-    //dodano da se zapamti pozicija gdje je stavljen model
-    private Pose pose;
-
-    //dodano da se zapamti trenutni model
-    private GameObject obj;
-
+    //dodano da se zapamti pozicija gdje je stavljen prefab
+    private Pose poseTeglicaPrefab;
     private bool objectPlaced;
 
     private void Awake()
@@ -61,10 +57,9 @@ public class PlaceObject : MonoBehaviour
                 {
                     objectPlaced = true;
 
-                    //Pose pose = hit.pose;
-                    pose = hit.pose;
-                    //GameObject obj = Instantiate(Zemlja, pose.position, pose.rotation);
-                    obj = Instantiate(Zemlja, pose.position, pose.rotation);
+                    poseTeglicaPrefab = hit.pose;
+
+                    trenutnaTeglica = Instantiate(teglicaPrefab, poseTeglicaPrefab.position, poseTeglicaPrefab.rotation);
 
                     //iskljucivanje prepoznavanja ravnina i njihovih mesh-eva
                     aRPlaneManager.enabled = false;
@@ -82,16 +77,19 @@ public class PlaceObject : MonoBehaviour
     }
 
     //dodano za zamijenu trenutnog modela
-    public void ReplaceModel(GameObject toReplace, GameObject replaceWith){
-        if(toReplace != null)
+    public void ReplaceModel(GameObject toReplace, GameObject replaceWith)
+    {
+        if (toReplace != null)
         {
             Debug.Log("Uništenje " + toReplace);
             Destroy(toReplace);
 
-            obj = Instantiate(replaceWith, pose.position, pose.rotation);
+            trenutnaTeglica = Instantiate(replaceWith, poseTeglicaPrefab.position, poseTeglicaPrefab.rotation);
 
             Debug.Log("Stvoren novi objekt " + toReplace);
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("Objekt ne postoji");
         }
     }
@@ -112,9 +110,10 @@ public class PlaceObject : MonoBehaviour
 
     }
 
-    //getter za trenutni objekt
-    public GameObject GetObject(){
-        return obj;
+    //getter za trenutnu teglicu
+    public GameObject GetTrenutnaTeglica()
+    {
+        return trenutnaTeglica;
     }
 
 }

@@ -4,13 +4,13 @@ using UnityEngine.XR.ARFoundation;
 
 public class ImageTracker : MonoBehaviour
 {
-    [SerializeField] GameObject Sjemenka; 
+    [SerializeField] GameObject sjemenka;
     [SerializeField] GameObject transformedPotModel; //privremeneo dok pot collision ne radi
     [SerializeField] GameObject transformedPotModel2; //privremeno
     [SerializeField] GameObject waterCanModel; // privremeno dok collision ne radi
     private List<GameObject> ARObjects = new List<GameObject>();
     private ARTrackedImageManager aRTrackedImageManager;
-    private GameObject instantiatedSeed; 
+    private GameObject instantiatedSeed;
     private GameObject pot;
     private GameObject instantiatedWateringCan;
     private GameObject instantiatedTransformedPot;
@@ -44,77 +44,51 @@ public class ImageTracker : MonoBehaviour
             {
                 ListAllImages();
                 // var newPrefab = Instantiate(Sjemenka, trackedImage.transform);
-                var newPrefab = Instantiate(Sjemenka, new Vector3(pot.transform.position.x + 1f, pot.transform.position.y + 1f, pot.transform.position.z), Quaternion.identity);
-                instantiatedSeed = newPrefab;  
+                instantiatedSeed = Instantiate(sjemenka, new Vector3(pot.transform.position.x + 0.5f, pot.transform.position.y + 0.5f, pot.transform.position.z), Quaternion.identity);
+
                 Debug.Log("stvoren prefab");
-                Debug.Log("Prefab Position: " + newPrefab.transform.position);
-
-                MoveObject moveObjectScript = newPrefab.GetComponent<MoveObject>();
-                if (moveObjectScript == null)
-                {
-                    moveObjectScript = newPrefab.AddComponent<MoveObject>(); 
-                    Debug.Log("move object dodan");
-                }
-
-                moveObjectScript.SetMoveTarget(newPrefab); 
+                Debug.Log("Prefab Position: " + instantiatedSeed.transform.position);
 
                 GameManager.Instance.SkeniranMarker();
             }
         }
     }
-    public void MoveSeedLeft()
-    {
-        if (instantiatedSeed != null)
-        {
-            var moveObjectScript = instantiatedSeed.GetComponent<MoveObject>();
-            if (moveObjectScript != null)
-            {
-                moveObjectScript.MoveLeft();
 
-            }
+    public void MoveSeedLeft(GameObject objectToMove)
+    {
+        if (objectToMove != null)
+        {
+            objectToMove.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
+            Debug.Log(transform.position);
         }
     }
 
-    public void MoveSeedRight()
+    public void MoveSeedRight(GameObject objectToMove)
     {
-        if (instantiatedSeed != null)
+        if (objectToMove != null)
         {
-            var moveObjectScript = instantiatedSeed.GetComponent<MoveObject>();
-            if (moveObjectScript != null)
-            {
-                moveObjectScript.MoveRight();
-
-            }
+            objectToMove.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
+            Debug.Log(transform.position);
         }
     }
 
-    public void MoveSeedUp()
+    public void MoveSeedUp(GameObject objectToMove)
     {
-        Debug.Log("up");
-        if (instantiatedSeed != null)
+        if (objectToMove != null)
         {
-            var moveObjectScript = instantiatedSeed.GetComponent<MoveObject>();
-            if (moveObjectScript != null)
-            {
-                moveObjectScript.MoveUp();
-
-            }
+            objectToMove.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
+            Debug.Log(transform.position);
         }
     }
 
-    public void MoveSeedDown()
+    public void MoveSeedDown(GameObject objectToMove)
     {
-        Debug.Log("down");
-        if (instantiatedSeed != null)
+        if (objectToMove != null)
         {
-            var moveObjectScript = instantiatedSeed.GetComponent<MoveObject>();
-            if (moveObjectScript != null)
-            {
-                moveObjectScript.MoveDown();
-                Debug.Log("zovi destroy");
-                TransformPotAndDestroySeed();
-                GameManager.Instance.SjemenkaPomaknuta();
-            }
+            objectToMove.transform.position -= new Vector3(0.1f, 0, 0);  // Adjust as needed
+            Debug.Log(transform.position);
+            TransformPotAndDestroySeed();
+            GameManager.Instance.SkeniranMarker();
         }
     }
 
@@ -128,8 +102,10 @@ public class ImageTracker : MonoBehaviour
         }
     }
 
-    private void TransformPotAndDestroySeed() { 
-        if (pot != null && transformedPotModel != null) {
+    private void TransformPotAndDestroySeed()
+    {
+        if (pot != null && transformedPotModel != null)
+        {
             GameObject newTransformedPot = Instantiate(transformedPotModel, pot.transform.position, pot.transform.rotation);
             newTransformedPot.transform.localScale = pot.transform.localScale;
             GameObject newWaterCanModel = Instantiate(waterCanModel, pot.transform.position + new Vector3(0.0f, 1f, 0.0f), pot.transform.rotation);
@@ -146,66 +122,78 @@ public class ImageTracker : MonoBehaviour
             moveObjectScript.SetMoveTarget(newWaterCanModel);
 
 
-            GameManager.Instance.SetTransformedPot(newTransformedPot);
             Destroy(pot);
-            Debug.Log("Pot has been transformed."); 
-        } else { 
-            Debug.LogWarning("Pot or transformed pot model is not assigned."); 
-        } 
-        if (instantiatedSeed != null) { 
-            Destroy(instantiatedSeed); 
-            Debug.Log("Seed has been destroyed."); 
-        } else { 
-            Debug.LogWarning("Seed instance is not available."); 
-        } 
-    }
-    public void MoveWateringCanLeft() { 
-        if (instantiatedWateringCan != null) { 
-            var moveObjectScript = instantiatedWateringCan.GetComponent<MoveObject>();
-            if (moveObjectScript != null) { moveObjectScript.MoveLeft(); } 
-        } 
-    }
-    public void MoveWateringCanRight() { 
-        if (instantiatedWateringCan != null) { 
-            var moveObjectScript = instantiatedWateringCan.GetComponent<MoveObject>();
-            if (moveObjectScript != null) {
-                moveObjectScript.MoveRight(); 
-            } 
+            Debug.Log("Pot has been transformed.");
+        }
+        else
+        {
+            Debug.LogWarning("Pot or transformed pot model is not assigned.");
+        }
+        if (instantiatedSeed != null)
+        {
+            Destroy(instantiatedSeed);
+            Debug.Log("Seed has been destroyed.");
+        }
+        else
+        {
+            Debug.LogWarning("Seed instance is not available.");
         }
     }
-    public void MoveWateringCanUp() { 
-        if (instantiatedWateringCan != null) { 
-            var moveObjectScript = instantiatedWateringCan.GetComponent<MoveObject>(); 
-            if (moveObjectScript != null) { moveObjectScript.MoveUp(); }
-        } 
+    public void MoveWateringCanLeft()
+    {
+        if (instantiatedWateringCan != null)
+        {
+            var moveObjectScript = instantiatedWateringCan.GetComponent<MoveObject>();
+            if (moveObjectScript != null) { moveObjectScript.MoveLeft(); }
+        }
     }
-    public void MoveWateringCanDown() { 
-        if (instantiatedWateringCan != null) { 
-            var moveObjectScript = instantiatedWateringCan.GetComponent<MoveObject>(); 
-            if (moveObjectScript != null) { 
+    public void MoveWateringCanRight()
+    {
+        if (instantiatedWateringCan != null)
+        {
+            var moveObjectScript = instantiatedWateringCan.GetComponent<MoveObject>();
+            if (moveObjectScript != null)
+            {
+                moveObjectScript.MoveRight();
+            }
+        }
+    }
+    public void MoveWateringCanUp()
+    {
+        if (instantiatedWateringCan != null)
+        {
+            var moveObjectScript = instantiatedWateringCan.GetComponent<MoveObject>();
+            if (moveObjectScript != null) { moveObjectScript.MoveUp(); }
+        }
+    }
+    public void MoveWateringCanDown()
+    {
+        if (instantiatedWateringCan != null)
+        {
+            var moveObjectScript = instantiatedWateringCan.GetComponent<MoveObject>();
+            if (moveObjectScript != null)
+            {
                 moveObjectScript.MoveDown();
                 TransformPotAndDestroyWaterCan();
                 GameManager.Instance.SjemenkaPomaknuta();
-            } 
-        } 
+            }
+        }
     }
 
     private void TransformPotAndDestroyWaterCan()
     {
         if (instantiatedWateringCan != null && transformedPotModel2 != null)
         {
-            
+
             GameObject newTransformedPot2 = Instantiate(transformedPotModel2, instantiatedTransformedPot.transform.position, instantiatedTransformedPot.transform.rotation);
             newTransformedPot2.transform.localScale = instantiatedTransformedPot.transform.localScale;
 
-           
-            GameManager.Instance.SetTransformedPot(newTransformedPot2);
 
-           
+
             Destroy(instantiatedTransformedPot);
             Debug.Log("Pot has been upgraded to stage 2.");
 
-         
+
             Destroy(instantiatedWateringCan);
             Debug.Log("Watering can has been destroyed.");
         }
