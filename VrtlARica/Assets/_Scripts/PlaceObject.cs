@@ -110,18 +110,23 @@ public class PlaceObject : MonoBehaviour
 
     public void ReplaceCurrentPotWithNextPotInLine()
     {
+        currentPotIndex++;
+
         if (currentPotIndex == 5)
         {
             GameManager.Instance.BiljkaNarasla();
+            Destroy(trenutnaTeglica);
+            trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], trenutnaTeglica.transform.position, trenutnaTeglica.transform.rotation);
         }
         else if (currentPotIndex == 10)
         {
             GameManager.Instance.BiljkaPropala();
-            return;
         }
-        Destroy(trenutnaTeglica);
-        currentPotIndex++;
-        trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], trenutnaTeglica.transform.position, trenutnaTeglica.transform.rotation);
+        else
+        {
+            Destroy(trenutnaTeglica);
+            trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], trenutnaTeglica.transform.position, trenutnaTeglica.transform.rotation);
+        }
     }
 
     public void CreateBasket()
@@ -182,9 +187,16 @@ public class PlaceObject : MonoBehaviour
         currentObjectToMove.MoveDown();
     }
 
-    public IEnumerator SkipGrowInteraction(int count)
+    public IEnumerator SkipGrowInteraction()
     {
-        for (int i = 0; i < count; i++)
+        int targetIndex;
+
+        if (GameManager.Instance.stanje == Stanje.RastBiljke)
+            targetIndex = 6;
+        else
+            targetIndex = 10;
+
+        while (currentPotIndex < targetIndex)
         {
             yield return new WaitForSeconds(1);
             ReplaceCurrentPotWithNextPotInLine();

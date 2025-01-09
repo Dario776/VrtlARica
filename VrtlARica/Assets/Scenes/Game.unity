@@ -2053,6 +2053,7 @@ MonoBehaviour:
   currentObjectToMove: {fileID: 0}
   instantiatedSeed: {fileID: 0}
   instantiatedWateringCan: {fileID: 0}
+  instantiatedBasket: {fileID: 0}
   trenutnaTeglica: {fileID: 0}
 --- !u!114 &372881576
 MonoBehaviour:

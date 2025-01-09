@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum Stanje
+public enum Stanje
 {
     PostavljanjeZemlje,
     SkeniranjeMarkera,
@@ -16,7 +16,7 @@ enum Stanje
 public class GameManager : SingletonPersistent<GameManager>
 {
     private int zadovoljeniUvjeti;
-    private Stanje stanje;
+    public Stanje stanje;
     private MainUI mainUI;
     public PlaceObject placeObject;
     public RotateObject rotateObject;
@@ -213,7 +213,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case Stanje.RastBiljke:
                 mainUI.TogglePlusButton(false);
-                StartCoroutine(placeObject.SkipGrowInteraction(4));
+                StartCoroutine(placeObject.SkipGrowInteraction());
                 break;
             case Stanje.BerbaPlodova:
                 mainUI.ToggleRotationButtons(false);
@@ -222,7 +222,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case Stanje.PropadanjeBiljke:
                 mainUI.ToggleMinusButton(false);
-                StartCoroutine(placeObject.SkipGrowInteraction(5));
+                StartCoroutine(placeObject.SkipGrowInteraction());
                 break;
             default:
                 Debug.Log("Greska!");
