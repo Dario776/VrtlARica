@@ -16,6 +16,7 @@ enum State
 public class GameManager : SingletonPersistent<GameManager>
 {
     private int conditionsSatisfied;
+    private bool skipSkip;
     private State state;
     private MainUI mainUI;
     public PlaceObject placeObject { get; private set; }
@@ -42,6 +43,7 @@ public class GameManager : SingletonPersistent<GameManager>
         //2 uvodna teksta, 2 puta dajemo prolaz
         conditionsSatisfied = 2;
         state = State.PotPlace;
+        skipSkip = false;
         audioManager.Stop("mainmenumusic");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
@@ -72,6 +74,8 @@ public class GameManager : SingletonPersistent<GameManager>
 
     private void HandleCurrentState()
     {
+        StopAllCoroutines();
+        skipSkip = false;
         StartCoroutine(ShowSkipButton());
 
         switch (state)
@@ -116,6 +120,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void StartPotPlaced()
     {
+        skipSkip = true;
         mainUI.ToggleSkipButton(false);
 
         state = State.MarkerScan;
@@ -126,6 +131,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void MarkerScanned()
     {
+        skipSkip = true;
         mainUI.ToggleSkipButton(false);
         imageTracker.enabled = false;
 
@@ -137,6 +143,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void SeedMoved()
     {
+        skipSkip = true;
         mainUI.ToggleSkipButton(false);
         placeObject.CreateWateringCan();
         placeObject.ReplaceCurrentPotWithNextPotInLine();
@@ -149,6 +156,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void WateringCanMoved()
     {
+        skipSkip = true;
         mainUI.ToggleSkipButton(false);
         placeObject.ReplaceCurrentPotWithNextPotInLine();
         mainUI.ToggleMoveSeedButtons(false);
@@ -161,6 +169,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void PlantGrew()
     {
+        skipSkip = true;
         mainUI.ToggleSkipButton(false);
         mainUI.TogglePlusButton(false);
 
@@ -172,6 +181,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void FruitsHarvested()
     {
+        skipSkip = true;
         mainUI.ToggleSkipButton(false);
         mainUI.ToggleRotationButtons(false);
 
@@ -230,8 +240,12 @@ public class GameManager : SingletonPersistent<GameManager>
     private IEnumerator ShowSkipButton()
     {
         yield return new WaitForSeconds(5f);
-        audioManager.Play("skipshow");
-        mainUI.ToggleSkipButton(true);
+
+        if (!skipSkip)
+        {
+            mainUI.ToggleSkipButton(true);
+            audioManager.Play("skipshow");
+        }
     }
 
     private void FindComponents()
