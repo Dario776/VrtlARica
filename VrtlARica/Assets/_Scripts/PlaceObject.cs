@@ -112,7 +112,7 @@ public class PlaceObject : MonoBehaviour
     {
         currentPotIndex++;
 
-        if (currentPotIndex == 5)
+        if (currentPotIndex == 6)
         {
             GameManager.Instance.BiljkaNarasla();
             Destroy(trenutnaTeglica);
