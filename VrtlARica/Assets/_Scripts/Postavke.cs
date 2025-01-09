@@ -9,9 +9,11 @@ public class Postavke : MonoBehaviour
     private Image imageOpcijaFonta2;
 
     private PostavkeManager postavkeManager;
+    private AudioManager audioManager;
 
     private void Start()
     {
+        audioManager = AudioManager.Instance;
         postavkeManager = PostavkeManager.Instance;
         imageOpcijaFonta1 = OpcijaFonta1.GetComponent<Image>();
         imageOpcijaFonta2 = OpcijaFonta2.GetComponent<Image>();
@@ -38,18 +40,21 @@ public class Postavke : MonoBehaviour
     }
     public void ChangeFontSansButton()
     {
+        audioManager.Play("startbutton");
         postavkeManager.ChangeFontSans();
         imageOpcijaFonta1.color = Constants.CustomOrangeColor;
         imageOpcijaFonta2.color = Constants.WhiteColor;
     }
     public void ChangeFontDyslexicButton()
     {
+        audioManager.Play("startbutton");
         postavkeManager.ChangeFontDyslexic();
         imageOpcijaFonta1.color = Constants.WhiteColor;
         imageOpcijaFonta2.color = Constants.CustomOrangeColor;
     }
     public void CloseButton()
     {
+        audioManager.Play("startbutton");
         gameObject.SetActive(false);
     }
 }

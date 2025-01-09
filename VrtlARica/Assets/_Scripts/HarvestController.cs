@@ -13,6 +13,7 @@ public class HarvestController : MonoBehaviour
     private bool isFruitHarvested;
 
     private GameManager gameManager;
+    private AudioManager audioManager;
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class HarvestController : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
+        audioManager = AudioManager.Instance;
     }
 
     private void Update()
@@ -50,6 +52,7 @@ public class HarvestController : MonoBehaviour
 
     private void HandleAppleSelection(TapDetection tappedApple)
     {
+        audioManager.Play("tapdetect");
         //onemogucuje selektiranje vise jabuka odjednom
         if (selectedApple != null && selectedApple != tappedApple)
         {
@@ -69,6 +72,7 @@ public class HarvestController : MonoBehaviour
 
     private void HandleBasketSelection(TapDetection tappedBasket)
     {
+        audioManager.Play("tapdetect");
         //oznaci/odznaci kosaru
         tappedBasket.ToggleOutline();
 
@@ -136,6 +140,7 @@ public class HarvestController : MonoBehaviour
             for (int i = 0; i < 10; i++)
             {
                 yield return new WaitForSeconds(0.5f);
+                audioManager.Play("tapdetect");
                 gameManager.placeObject.instantiatedBasket.transform.GetChild(i).gameObject.SetActive(true);
                 gameManager.placeObject.currentPot.transform.GetChild(i).gameObject.SetActive(false);
             }

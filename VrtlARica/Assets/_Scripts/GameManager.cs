@@ -25,9 +25,16 @@ public class GameManager : SingletonPersistent<GameManager>
     private ImageTracker imageTracker;
     private Camera arCamera;
 
+    private AudioManager audioManager;
+
     public override void Awake()
     {
         base.Awake();
+    }
+
+    private void Start()
+    {
+        audioManager = AudioManager.Instance;
     }
 
     public void LoadGameScene()
@@ -35,6 +42,7 @@ public class GameManager : SingletonPersistent<GameManager>
         //2 uvodna teksta, 2 puta dajemo prolaz
         conditionsSatisfied = 2;
         state = State.PotPlace;
+        audioManager.Stop("mainmenumusic");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -113,6 +121,7 @@ public class GameManager : SingletonPersistent<GameManager>
         state = State.MarkerScan;
         conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
+        audioManager.Play("success");
     }
 
     public void MarkerScanned()
@@ -123,6 +132,7 @@ public class GameManager : SingletonPersistent<GameManager>
         state = State.SeedMove;
         conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
+        audioManager.Play("success");
     }
 
     public void SeedMoved()
@@ -134,6 +144,7 @@ public class GameManager : SingletonPersistent<GameManager>
         state = State.WateringCanMove;
         conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
+        audioManager.Play("success");
     }
 
     public void WateringCanMoved()
@@ -145,6 +156,7 @@ public class GameManager : SingletonPersistent<GameManager>
         state = State.PlantGrow;
         conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
+        audioManager.Play("success");
     }
 
     public void PlantGrew()
@@ -155,6 +167,7 @@ public class GameManager : SingletonPersistent<GameManager>
         state = State.FruitHarvest;
         conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
+        audioManager.Play("success");
     }
 
     public void FruitsHarvested()
@@ -165,6 +178,7 @@ public class GameManager : SingletonPersistent<GameManager>
         state = State.PlantDecay;
         conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
+        audioManager.Play("success");
     }
 
     public void PlantDecayed()
@@ -215,7 +229,8 @@ public class GameManager : SingletonPersistent<GameManager>
 
     private IEnumerator ShowSkipButton()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(5f);
+        audioManager.Play("skipshow");
         mainUI.ToggleSkipButton(true);
     }
 

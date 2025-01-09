@@ -42,6 +42,7 @@ public class Upute : MonoBehaviour
 
     private void ShowUpute(int trenutneUpute)
     {
+        AudioManager.Instance.Play("startbutton");
         if (trenutneUpute == 1)
         {
             Upute1.SetActive(true);

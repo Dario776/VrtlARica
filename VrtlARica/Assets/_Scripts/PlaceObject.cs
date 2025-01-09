@@ -24,6 +24,7 @@ public class PlaceObject : MonoBehaviour
     private int currentPotIndex;
     private bool isPotPlaced;
     private GameManager gameManager;
+    private AudioManager audioManager;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class PlaceObject : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
+        audioManager = AudioManager.Instance;
         aRPlaneManager = GetComponent<ARPlaneManager>();
         aRRaycastManager = GetComponent<ARRaycastManager>();
     }
@@ -107,6 +109,7 @@ public class PlaceObject : MonoBehaviour
     public void ReplaceCurrentPotWithNextPotInLine()
     {
         currentPotIndex++;
+        audioManager.Play("movebutton");
 
         if (currentPotIndex == 6)
         {

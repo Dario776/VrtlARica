@@ -6442,10 +6442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566b56f21d7c7ee46bd03d8dcf186219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stanje: 0
-  placeObject: {fileID: 0}
-  rotateObject: {fileID: 0}
-  imageTracker: {fileID: 0}
 --- !u!1 &1632297292
 GameObject:
   m_ObjectHideFlags: 0
@@ -7638,6 +7634,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f48347f9e76584c8c3ce38ba3544e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds:
+  - name: mainmenumusic
+    clip: {fileID: 8300000, guid: a6c6b801cd9ea154a899fc1fc7713583, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: endsuccess
+    clip: {fileID: 8300000, guid: d2e437ea035492c4da85ac63e513dedd, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: success
+    clip: {fileID: 8300000, guid: 79b265869357fc242b5f5a5d25468569, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: skipshow
+    clip: {fileID: 8300000, guid: 374ef9c667288a5428f7b27145430be6, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: startbutton
+    clip: {fileID: 8300000, guid: 71b033c71d0b89a4b8ac40daed305ef8, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: navigationbutton
+    clip: {fileID: 8300000, guid: 029ab82938776514db7bb64cd05c3a1b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: movebutton
+    clip: {fileID: 8300000, guid: 7493f42fb14b1914f9b992abd98e4d7c, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: rotatebutton
+    clip: {fileID: 8300000, guid: 86b3754f244950d459665dd344e9deaa, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: tapdetect
+    clip: {fileID: 8300000, guid: 6c7a57e4366f01f49bf78a27cffae05b, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &2039594523
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ public class MainUI : MonoBehaviour
     private bool canToggle;
     private int isLeftArrowPressed;
     private GameManager gameManager;
+    private AudioManager audioManager;
 
     private void Awake()
     {
@@ -32,33 +33,39 @@ public class MainUI : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
+        audioManager = AudioManager.Instance;
         //onemogucujemo lijevu strelicu na pocetku
         ToggleLeftArrow(false);
     }
 
     public void HomeButton()
     {
+        audioManager.Play("startbutton");
         exit.SetActive(true);
     }
 
     public void CancelExit()
     {
+        audioManager.Play("startbutton");
         exit.SetActive(false);
     }
 
     public void ConfirmExit()
     {
+        audioManager.Play("startbutton");
         gameManager.LoadStartScene();
     }
 
     public void SettingsButton()
     {
+        audioManager.Play("startbutton");
         settings.SetActive(true);
         dropdownMenu.SetActive(false);
     }
 
     public void HamburgerButton()
     {
+        audioManager.Play("startbutton");
         if (!dropdownMenu.gameObject.activeSelf)
             dropdownMenu.SetActive(true);
         else
@@ -67,6 +74,7 @@ public class MainUI : MonoBehaviour
 
     public void RightArrowButton()
     {
+        audioManager.Play("navigationbutton");
         //provjera jel smo vratili tekst ulijevo pa samo zelimo doci opet do zadnjeg desnog teksta bez uplitavanja GameManagera
         if (isLeftArrowPressed > 0)
         {
@@ -109,6 +117,7 @@ public class MainUI : MonoBehaviour
 
     public void LeftArrowButton()
     {
+        audioManager.Play("navigationbutton");
         //da nikad ne izade "out of bounds"
         if (i > 0)
         {
@@ -186,21 +195,25 @@ public class MainUI : MonoBehaviour
 
     public void MoveLeftButton()
     {
+        audioManager.Play("movebutton");
         gameManager.placeObject.MoveCurrentObjectLeft();
     }
 
     public void MoveRightButton()
     {
+        audioManager.Play("movebutton");
         gameManager.placeObject.MoveCurrentObjectRight();
     }
 
     public void MoveUpButton()
     {
+        audioManager.Play("movebutton");
         gameManager.placeObject.MoveCurrentObjectUp();
     }
 
     public void MoveDownButton()
     {
+        audioManager.Play("movebutton");
         gameManager.placeObject.MoveCurrentObjectDown();
     }
 
@@ -235,21 +248,25 @@ public class MainUI : MonoBehaviour
 
     public void RotateLeftButton()
     {
+        audioManager.Play("rotatebutton");
         gameManager.rotateObject.RotateLeft();
     }
 
     public void RotateRightButton()
     {
+        audioManager.Play("rotatebutton");
         gameManager.rotateObject.RotateRight();
     }
 
     public void ShowEndScreen()
     {
+        audioManager.Play("endsuccess");
         end.SetActive(true);
     }
 
     public void SkipInteraction()
     {
+        audioManager.Play("startbutton");
         gameManager.SkipInteraction();
     }
 
