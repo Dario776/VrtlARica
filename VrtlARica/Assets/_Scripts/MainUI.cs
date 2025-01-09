@@ -19,7 +19,6 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject[] gameText;
     [SerializeField] private GameObject[] dots;
     private int i;
-    private bool canToggle;
     private int isLeftArrowPressed;
     private GameManager gameManager;
     private AudioManager audioManager;
@@ -75,7 +74,7 @@ public class MainUI : MonoBehaviour
     public void RightArrowButton()
     {
         audioManager.Play("navigationbutton");
-        //provjera jel smo vratili tekst ulijevo pa samo zelimo doci opet do zadnjeg desnog teksta bez uplitavanja GameManagera
+
         if (isLeftArrowPressed > 0)
         {
             isLeftArrowPressed--;
@@ -91,14 +90,15 @@ public class MainUI : MonoBehaviour
             gameText[i].SetActive(true);
             dots[i].SetActive(false);
 
+            if (isLeftArrowPressed == 0 && gameManager.conditionsSatisfied == 0)
+            {
+                ToggleRightArrow(false);
+            }
+
             ToggleLeftArrow(true);
-
         }
-        //provjera jel mogu ic dalje s igrom i namjestavanje desne strelice na temelju provjere
-        else if (canToggle = gameManager.NextStep() && i < gameText.Length - 1)
+        else if (gameManager.conditionsSatisfied > 0 && i < gameText.Length - 1)
         {
-            ToggleRightArrow(canToggle);
-
             gameText[i].SetActive(false);
             dots[i].SetActive(true);
 
@@ -107,11 +107,15 @@ public class MainUI : MonoBehaviour
             gameText[i].SetActive(true);
             dots[i].SetActive(false);
 
+            gameManager.conditionsSatisfied--;
+
+            if (gameManager.conditionsSatisfied == 0)
+            {
+                gameManager.HandleCurrentState();
+                ToggleRightArrow(false);
+            }
+
             ToggleLeftArrow(true);
-        }
-        else
-        {
-            ToggleRightArrow(canToggle);
         }
     }
 

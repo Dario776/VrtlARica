@@ -15,7 +15,7 @@ enum State
 
 public class GameManager : SingletonPersistent<GameManager>
 {
-    private int conditionsSatisfied;
+    public int conditionsSatisfied;
     private bool skipSkip;
     private State state;
     private MainUI mainUI;
@@ -53,26 +53,7 @@ public class GameManager : SingletonPersistent<GameManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    //ako je igrac napravio zadano, zadovoljeniUvjeti ce biti pozitivni i ova funkcija ce vratiti prolaz (true)
-    public bool NextStep()
-    {
-        if (conditionsSatisfied > 0)
-        {
-            conditionsSatisfied--;
-            //kad smo dosli do kraja prolaza, obradujemo stanje
-            if (conditionsSatisfied == 0)
-            {
-                HandleCurrentState();
-            }
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private void HandleCurrentState()
+    public void HandleCurrentState()
     {
         StopAllCoroutines();
         skipSkip = false;
@@ -95,6 +76,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case State.WateringCanMove:
                 Debug.Log(State.WateringCanMove);
+                mainUI.ToggleMoveSeedButtons(true);
                 break;
             case State.PlantGrow:
                 Debug.Log(State.PlantGrow);
@@ -145,6 +127,7 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         skipSkip = true;
         mainUI.ToggleSkipButton(false);
+        mainUI.ToggleMoveSeedButtons(false);
         placeObject.CreateWateringCan();
         placeObject.ReplaceCurrentPotWithNextPotInLine();
 
