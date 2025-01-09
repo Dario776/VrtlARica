@@ -26,10 +26,9 @@ public class ImageTracker : MonoBehaviour
     {
         foreach (var trackedImage in eventArgs.added)
         {
-            if (trackedImage.referenceImage.name == "crvenaJabuka" || trackedImage.referenceImage.name == "zelenaJabuka")
+            if (trackedImage.referenceImage.name == Constants.redApple || trackedImage.referenceImage.name == Constants.greenApple)
             {
                 gameManager.placeObject.CreateSeed();
-                gameManager.SkeniranMarker();
             }
         }
     }

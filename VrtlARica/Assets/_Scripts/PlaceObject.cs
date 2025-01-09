@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
@@ -10,33 +9,31 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 [RequireComponent(typeof(ARRaycastManager), typeof(ARPlaneManager))]
 public class PlaceObject : MonoBehaviour
 {
-    [SerializeField] private GameObject[] teglicePrefab;
+    [SerializeField] private GameObject[] potPrefab;
     [SerializeField] private GameObject basketPrefab;
-
-    [SerializeField] public GameObject seedPrefab;
-    [SerializeField] public GameObject wateringCanPrefab;
-
-    public MoveObject currentObjectToMove;
-    public GameObject instantiatedSeed;
-    public GameObject instantiatedWateringCan;
-    public GameObject instantiatedBasket;
-    public GameObject trenutnaTeglica;
+    [SerializeField] private GameObject seedPrefab;
+    [SerializeField] private GameObject wateringCanPrefab;
+    public MoveObject currentObjectToMove { get; private set; }
+    public GameObject instantiatedSeed { get; private set; }
+    public GameObject instantiatedWateringCan { get; private set; }
+    public GameObject instantiatedBasket { get; private set; }
+    public GameObject currentPot { get; private set; }
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
-
-    //dodano da se zapamti pozicija gdje je stavljen prefab
-    private bool objectPlaced;
     private int currentPotIndex;
+    private bool isPotPlaced;
+    private GameManager gameManager;
 
     private void Awake()
     {
-        objectPlaced = false;
         currentPotIndex = 0;
+        isPotPlaced = false;
     }
 
     private void Start()
     {
+        gameManager = GameManager.Instance;
         aRPlaneManager = GetComponent<ARPlaneManager>();
         aRRaycastManager = GetComponent<ARRaycastManager>();
     }
@@ -62,87 +59,17 @@ public class PlaceObject : MonoBehaviour
 
         if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon))
         {
-            foreach (ARRaycastHit hit in hits)
-            {
-                // da nebi slucajno bilo dva objekta zemlje
-                if (!objectPlaced)
-                {
-                    objectPlaced = true;
-                    EnhancedTouch.Touch.onFingerDown -= FingerDown;
-
-                    trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], hit.pose.position, hit.pose.rotation);
-
-                    Debug.Log("stvoren prefab teglice");
-                    Debug.Log("Prefab Position: " + trenutnaTeglica.transform.position);
-
-                    //iskljucivanje prepoznavanja ravnina i njihovih mesh-eva
-                    aRPlaneManager.enabled = false;
-                    ARPlaneMeshVisualizer[] aRPlaneMeshVisualizers = FindObjectsByType<ARPlaneMeshVisualizer>(FindObjectsSortMode.None);
-                    foreach (ARPlaneMeshVisualizer aRPlaneMesh in aRPlaneMeshVisualizers)
-                    {
-                        aRPlaneMesh.enabled = false;
-                    }
-
-                    //javljanje GameManageru da smo gotovi
-                    GameManager.Instance.ZemljaPostavljena();
-                }
-            }
+            if (!isPotPlaced)
+                CreateStartPot(hits.First().pose);
         }
     }
 
-    //dodano za zamijenu trenutnog modela
-    public void ReplaceModel(GameObject toReplace, GameObject replaceWith)
+    public void CreateStartPot(Pose potPose)
     {
-        if (toReplace != null)
-        {
-            Debug.Log("Uništenje " + toReplace);
-            Destroy(toReplace);
+        isPotPlaced = true;
+        EnhancedTouch.Touch.onFingerDown -= FingerDown; // iskljucuje FingerDown funkciju
 
-            trenutnaTeglica = Instantiate(replaceWith, trenutnaTeglica.transform.position, trenutnaTeglica.transform.rotation);
-
-            Debug.Log("Stvoren novi objekt " + toReplace);
-        }
-        else
-        {
-            Debug.LogWarning("Objekt ne postoji");
-        }
-    }
-
-    public void ReplaceCurrentPotWithNextPotInLine()
-    {
-        currentPotIndex++;
-
-        if (currentPotIndex == 6)
-        {
-            GameManager.Instance.BiljkaNarasla();
-            Destroy(trenutnaTeglica);
-            trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], trenutnaTeglica.transform.position, trenutnaTeglica.transform.rotation);
-        }
-        else if (currentPotIndex == 10)
-        {
-            GameManager.Instance.BiljkaPropala();
-        }
-        else
-        {
-            Destroy(trenutnaTeglica);
-            trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], trenutnaTeglica.transform.position, trenutnaTeglica.transform.rotation);
-        }
-    }
-
-    public void CreateBasket()
-    {
-        instantiatedBasket = Instantiate(basketPrefab, new Vector3(trenutnaTeglica.transform.position.x - 0.3f,
-        trenutnaTeglica.transform.position.y, trenutnaTeglica.transform.position.z), Quaternion.identity);
-    }
-
-    public void CreateStartTeglica(Vector3 potPosition)
-    {
-        objectPlaced = true;
-
-        trenutnaTeglica = Instantiate(teglicePrefab[currentPotIndex], potPosition, Quaternion.identity);
-
-        Debug.Log("stvoren prefab teglice");
-        Debug.Log("Prefab Position: " + trenutnaTeglica.transform.position);
+        currentPot = Instantiate(potPrefab[currentPotIndex], potPose.position, potPose.rotation);
 
         //iskljucivanje prepoznavanja ravnina i njihovih mesh-eva
         aRPlaneManager.enabled = false;
@@ -151,20 +78,74 @@ public class PlaceObject : MonoBehaviour
         {
             aRPlaneMesh.enabled = false;
         }
-    }
 
-    public void CreateWateringCan()
-    {
-        instantiatedWateringCan = Instantiate(wateringCanPrefab, new Vector3(trenutnaTeglica.transform.position.x + 0.5f,
-        trenutnaTeglica.transform.position.y, trenutnaTeglica.transform.position.z), Quaternion.identity);
-        currentObjectToMove = instantiatedWateringCan.GetComponent<MoveObject>();
+        //javljanje GameManageru da smo gotovi
+        gameManager.StartPotPlaced();
     }
 
     public void CreateSeed()
     {
-        instantiatedSeed = Instantiate(seedPrefab, new Vector3(trenutnaTeglica.transform.position.x + 0.5f,
-        trenutnaTeglica.transform.position.y + 0.5f, trenutnaTeglica.transform.position.z), Quaternion.identity);
+        instantiatedSeed = Instantiate(seedPrefab, new Vector3(currentPot.transform.position.x + 0.5f,
+        currentPot.transform.position.y + 0.5f, currentPot.transform.position.z), Quaternion.identity);
         currentObjectToMove = instantiatedSeed.GetComponent<MoveObject>();
+        gameManager.MarkerScanned();
+    }
+
+    public void CreateWateringCan()
+    {
+        instantiatedWateringCan = Instantiate(wateringCanPrefab, new Vector3(currentPot.transform.position.x + 0.5f,
+        currentPot.transform.position.y, currentPot.transform.position.z), Quaternion.identity);
+        currentObjectToMove = instantiatedWateringCan.GetComponent<MoveObject>();
+    }
+
+    public void CreateBasket()
+    {
+        instantiatedBasket = Instantiate(basketPrefab, new Vector3(currentPot.transform.position.x - 0.3f,
+        currentPot.transform.position.y, currentPot.transform.position.z), Quaternion.identity);
+    }
+
+    public void ReplaceCurrentPotWithNextPotInLine()
+    {
+        currentPotIndex++;
+
+        if (currentPotIndex == 6)
+        {
+            Destroy(currentPot);
+            currentPot = Instantiate(potPrefab[currentPotIndex], currentPot.transform.position, currentPot.transform.rotation);
+            gameManager.PlantGrew();
+        }
+        else if (currentPotIndex == 11)
+        {
+            Destroy(currentPot);
+            currentPot = Instantiate(potPrefab[0], currentPot.transform.position, currentPot.transform.rotation);
+        }
+        else if (currentPotIndex == 12)
+        {
+            gameManager.PlantDecayed();
+        }
+        else
+        {
+            Destroy(currentPot);
+            currentPot = Instantiate(potPrefab[currentPotIndex], currentPot.transform.position, currentPot.transform.rotation);
+        }
+    }
+
+    public IEnumerator SkipGrowInteraction()
+    {
+        while (currentPotIndex < 6)
+        {
+            yield return new WaitForSeconds(1);
+            ReplaceCurrentPotWithNextPotInLine();
+        }
+    }
+
+    public IEnumerator SkipRotInteraction()
+    {
+        while (currentPotIndex < 12)
+        {
+            yield return new WaitForSeconds(1);
+            ReplaceCurrentPotWithNextPotInLine();
+        }
     }
 
     public void MoveCurrentObjectLeft()
@@ -185,21 +166,5 @@ public class PlaceObject : MonoBehaviour
     public void MoveCurrentObjectDown()
     {
         currentObjectToMove.MoveDown();
-    }
-
-    public IEnumerator SkipGrowInteraction()
-    {
-        int targetIndex;
-
-        if (GameManager.Instance.stanje == Stanje.RastBiljke)
-            targetIndex = 6;
-        else
-            targetIndex = 10;
-
-        while (currentPotIndex < targetIndex)
-        {
-            yield return new WaitForSeconds(1);
-            ReplaceCurrentPotWithNextPotInLine();
-        }
     }
 }

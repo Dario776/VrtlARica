@@ -3,64 +3,47 @@ using UnityEngine.UI;
 
 public class MainUI : MonoBehaviour
 {
-    [SerializeField] private GameObject Hint;
-    [SerializeField] private GameObject Postavke;
-    [SerializeField] private GameObject IzlazPopup;
-    [SerializeField] private GameObject DropdownMenu;
-    [SerializeField] private GameObject Zamrzni;
-    [SerializeField] private GameObject StrelicaUlijevoObjekt;
-    [SerializeField] private GameObject StrelicaUdesnoObjekt;
-    [SerializeField] private GameObject StrelicaUlijevoVizualno;
-    [SerializeField] private GameObject StrelicaUdesnoVizualno;
-    [SerializeField] private GameObject StreliceZaRotaciju;
+    [SerializeField] private GameObject settings;
+    [SerializeField] private GameObject exit;
+    [SerializeField] private GameObject dropdownMenu;
+    [SerializeField] private Button leftArrowButton;
+    [SerializeField] private Button rightArrowButton;
+    [SerializeField] private Image leftArrowImage;
+    [SerializeField] private Image rightArrowImage;
+    [SerializeField] private GameObject rotationButtons;
     [SerializeField] private GameObject moveButtons;
     [SerializeField] private GameObject plusButton;
     [SerializeField] private GameObject minusButton;
     [SerializeField] private GameObject skipButton;
-    [SerializeField] private GameObject endScreenPopup;
-    [SerializeField] private GameObject[] Text;
-    [SerializeField] private GameObject[] Tockice;
-
+    [SerializeField] private GameObject end;
+    [SerializeField] private GameObject[] gameText;
+    [SerializeField] private GameObject[] dots;
     private int i;
     private bool canToggle;
-    private int pritisnutaStrelicaUlijevo;
-    private Button strelicaUlijevoButton;
-    private Button strelicaUdesnoButton;
-    private Image strelicaUlijevoVizualnoImage;
-    private Image strelicaUdesnoVizualnoImage;
-    private MoveObject moveObject;
-
+    private int isLeftArrowPressed;
     private GameManager gameManager;
 
     private void Awake()
     {
         i = 0;
-        pritisnutaStrelicaUlijevo = 0;
+        isLeftArrowPressed = 0;
     }
 
     private void Start()
     {
         gameManager = GameManager.Instance;
-        strelicaUlijevoButton = StrelicaUlijevoObjekt.GetComponent<Button>();
-        strelicaUdesnoButton = StrelicaUdesnoObjekt.GetComponent<Button>();
-
-        strelicaUlijevoVizualnoImage = StrelicaUlijevoVizualno.GetComponent<Image>();
-        strelicaUdesnoVizualnoImage = StrelicaUdesnoVizualno.GetComponent<Image>();
-
-        moveObject = moveButtons.GetComponent<MoveObject>();
-
         //onemogucujemo lijevu strelicu na pocetku
         ToggleLeftArrow(false);
     }
 
     public void HomeButton()
     {
-        IzlazPopup.SetActive(true);
+        exit.SetActive(true);
     }
 
     public void CancelExit()
     {
-        IzlazPopup.SetActive(false);
+        exit.SetActive(false);
     }
 
     public void ConfirmExit()
@@ -68,78 +51,53 @@ public class MainUI : MonoBehaviour
         gameManager.LoadStartScene();
     }
 
-    public void HintButton()
+    public void SettingsButton()
     {
-        Debug.Log("Treba dodati Hint funkcionalost.");
-    }
-
-    public void PostavkeButton()
-    {
-        Postavke.SetActive(true);
-        DropdownMenu.SetActive(false);
+        settings.SetActive(true);
+        dropdownMenu.SetActive(false);
     }
 
     public void HamburgerButton()
     {
-        if (!DropdownMenu.gameObject.activeSelf)
-            DropdownMenu.SetActive(true);
+        if (!dropdownMenu.gameObject.activeSelf)
+            dropdownMenu.SetActive(true);
         else
-            DropdownMenu.SetActive(false);
+            dropdownMenu.SetActive(false);
     }
 
-
-    public void ZamrzniButton()
-    {
-        Debug.Log("Treba dodati Zamrzni funkcionalost.");
-
-        // NE RADI, TREBA POPRAVAK
-        // NE RADI, TREBA POPRAVAK
-
-        if (Time.timeScale > 0)
-        {
-            Zamrzni.GetComponent<Image>().color = Konstante.CustomBlueColor;
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Zamrzni.GetComponent<Image>().color = Konstante.WhiteColor;
-            Time.timeScale = 1;
-        }
-    }
-
-    public void StrelicaUdesnoButton()
+    public void RightArrowButton()
     {
         //provjera jel smo vratili tekst ulijevo pa samo zelimo doci opet do zadnjeg desnog teksta bez uplitavanja GameManagera
-        if (pritisnutaStrelicaUlijevo > 0)
+        if (isLeftArrowPressed > 0)
         {
-            pritisnutaStrelicaUlijevo--;
+            isLeftArrowPressed--;
 
             //iskljucujem trenutni text i tockicu (kod tockice ukljucujem bijeli krug unutar veceg smedeg)
-            Text[i].SetActive(false);
-            Tockice[i].SetActive(true);
+            gameText[i].SetActive(false);
+            dots[i].SetActive(true);
 
             //micem se dalje
             i++;
 
             //ukljucujem sljedeci text i tockicu
-            Text[i].SetActive(true);
-            Tockice[i].SetActive(false);
+            gameText[i].SetActive(true);
+            dots[i].SetActive(false);
 
             ToggleLeftArrow(true);
 
         }
         //provjera jel mogu ic dalje s igrom i namjestavanje desne strelice na temelju provjere
-        else if (canToggle = gameManager.NextStep() && i < Text.Length - 1)
+        else if (canToggle = gameManager.NextStep() && i < gameText.Length - 1)
         {
             ToggleRightArrow(canToggle);
 
-            Text[i].SetActive(false);
-            Tockice[i].SetActive(true);
+            gameText[i].SetActive(false);
+            dots[i].SetActive(true);
 
             i++;
 
-            Text[i].SetActive(true);
-            Tockice[i].SetActive(false);
+            gameText[i].SetActive(true);
+            dots[i].SetActive(false);
 
             ToggleLeftArrow(true);
         }
@@ -149,21 +107,21 @@ public class MainUI : MonoBehaviour
         }
     }
 
-    public void StrelicaUlijevoButton()
+    public void LeftArrowButton()
     {
         //da nikad ne izade "out of bounds"
         if (i > 0)
         {
-            pritisnutaStrelicaUlijevo++;
+            isLeftArrowPressed++;
 
-            Text[i].SetActive(false);
-            Tockice[i].SetActive(true);
+            gameText[i].SetActive(false);
+            dots[i].SetActive(true);
 
             //suprotan postupak od desne strelice
             i--;
 
-            Text[i].SetActive(true);
-            Tockice[i].SetActive(false);
+            gameText[i].SetActive(true);
+            dots[i].SetActive(false);
 
             if (i == 0)
             {
@@ -178,28 +136,27 @@ public class MainUI : MonoBehaviour
     {
         if (isEnabled)
         {
-            strelicaUlijevoButton.interactable = true;
-            strelicaUlijevoVizualnoImage.color = Konstante.CustomBrownColor;
+            leftArrowButton.interactable = true;
+            leftArrowImage.color = Constants.CustomBrownColor;
         }
         else
         {
-            strelicaUlijevoButton.interactable = false;
-            strelicaUlijevoVizualnoImage.color = Konstante.CustomDisabledBrownColor;
+            leftArrowButton.interactable = false;
+            leftArrowImage.color = Constants.CustomDisabledBrownColor;
         }
     }
 
-    //mora bit public da ju GameManager moze aktivirat
     public void ToggleRightArrow(bool isEnabled)
     {
         if (isEnabled)
         {
-            strelicaUdesnoButton.interactable = true;
-            strelicaUdesnoVizualnoImage.color = Konstante.CustomBrownColor;
+            rightArrowButton.interactable = true;
+            rightArrowImage.color = Constants.CustomBrownColor;
         }
         else
         {
-            strelicaUdesnoButton.interactable = false;
-            strelicaUdesnoVizualnoImage.color = Konstante.CustomDisabledBrownColor;
+            rightArrowButton.interactable = false;
+            rightArrowImage.color = Constants.CustomDisabledBrownColor;
         }
     }
 
@@ -207,11 +164,11 @@ public class MainUI : MonoBehaviour
     {
         if (Enable)
         {
-            StreliceZaRotaciju.SetActive(true);
+            rotationButtons.SetActive(true);
         }
         else
         {
-            StreliceZaRotaciju.SetActive(false);
+            rotationButtons.SetActive(false);
         }
     }
 
@@ -247,7 +204,7 @@ public class MainUI : MonoBehaviour
         gameManager.placeObject.MoveCurrentObjectDown();
     }
 
-    public void NextPotButton()
+    public void MinusAndPlusButton()
     {
         gameManager.placeObject.ReplaceCurrentPotWithNextPotInLine();
     }
@@ -288,12 +245,12 @@ public class MainUI : MonoBehaviour
 
     public void ShowEndScreen()
     {
-        endScreenPopup.SetActive(true);
+        end.SetActive(true);
     }
 
     public void SkipInteraction()
     {
-        GameManager.Instance.SkipInteraction();
+        gameManager.SkipInteraction();
     }
 
     public void ToggleSkipButton(bool Enable)

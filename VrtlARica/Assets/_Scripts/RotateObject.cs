@@ -28,7 +28,6 @@ public class RotateObject : MonoBehaviour
     public void SetRotationTarget(GameObject target)
     {
         targetObject = target;
-        Debug.Log("targetObject=" + targetObject);
         targetRotation = targetObject.transform.rotation;
     }
 

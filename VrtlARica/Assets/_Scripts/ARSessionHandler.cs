@@ -15,9 +15,8 @@ public class ARSessionHandler : MonoBehaviour
         }
     }
 
-    public void ClearTrackedImages()
+    private void ClearTrackedImages()
     {
-        Debug.Log("cistim images");
         if (trackedImageManager != null)
         {
             foreach (var trackedImage in trackedImageManager.trackables)

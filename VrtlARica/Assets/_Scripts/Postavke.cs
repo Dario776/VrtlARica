@@ -28,25 +28,25 @@ public class Postavke : MonoBehaviour
 
     public void ChangeFontSans()
     {
-        imageOpcijaFonta1.color = Konstante.CustomOrangeColor;
-        imageOpcijaFonta2.color = Konstante.WhiteColor;
+        imageOpcijaFonta1.color = Constants.CustomOrangeColor;
+        imageOpcijaFonta2.color = Constants.WhiteColor;
     }
     public void ChangeFontDyslexic()
     {
-        imageOpcijaFonta1.color = Konstante.WhiteColor;
-        imageOpcijaFonta2.color = Konstante.CustomOrangeColor;
+        imageOpcijaFonta1.color = Constants.WhiteColor;
+        imageOpcijaFonta2.color = Constants.CustomOrangeColor;
     }
     public void ChangeFontSansButton()
     {
         postavkeManager.ChangeFontSans();
-        imageOpcijaFonta1.color = Konstante.CustomOrangeColor;
-        imageOpcijaFonta2.color = Konstante.WhiteColor;
+        imageOpcijaFonta1.color = Constants.CustomOrangeColor;
+        imageOpcijaFonta2.color = Constants.WhiteColor;
     }
     public void ChangeFontDyslexicButton()
     {
         postavkeManager.ChangeFontDyslexic();
-        imageOpcijaFonta1.color = Konstante.WhiteColor;
-        imageOpcijaFonta2.color = Konstante.CustomOrangeColor;
+        imageOpcijaFonta1.color = Constants.WhiteColor;
+        imageOpcijaFonta2.color = Constants.CustomOrangeColor;
     }
     public void CloseButton()
     {

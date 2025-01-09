@@ -2,22 +2,51 @@ using UnityEngine;
 
 public class PotCollision : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider collision)
-    {
-        Debug.Log("OnTriggerEnter");
-        Debug.Log(collision.gameObject.name);
+    // stiti kod da se samo jednom izvede gameManager funkcija
+    private bool isSeedMoved;
+    private bool isWateringCanMoved;
+    private GameManager gameManager;
 
-        if (collision.gameObject.name == "seed(Clone)")
+    private void Awake()
+    {
+        isSeedMoved = false;
+        isWateringCanMoved = false;
+    }
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.name.Contains(Constants.seed))
         {
-            Debug.Log("seed ocitan");
-            Destroy(collision.gameObject);
-            GameManager.Instance.SjemenkaPomaknuta();
+            SeedMoved(collider.gameObject);
         }
-        else if (collision.gameObject.name == "wateringCan(Clone)")
+        else if (collider.gameObject.name.Contains(Constants.wateringCan))
         {
-            Debug.Log("wateringCan ocitan");
-            Destroy(collision.gameObject);
-            GameManager.Instance.ZalivenaBiljka();
+            WateringCanMoved(collider.gameObject);
+        }
+    }
+
+    public void SeedMoved(GameObject seed)
+    {
+        if (!isSeedMoved)
+        {
+            isSeedMoved = true;
+            Destroy(seed);
+            gameManager.SeedMoved();
+        }
+    }
+
+    public void WateringCanMoved(GameObject wateringCan)
+    {
+        if (!isWateringCanMoved)
+        {
+            isWateringCanMoved = true;
+            Destroy(wateringCan);
+            gameManager.WateringCanMoved();
         }
     }
 }

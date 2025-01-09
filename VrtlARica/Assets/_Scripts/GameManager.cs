@@ -1,28 +1,29 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum Stanje
+enum State
 {
-    PostavljanjeZemlje,
-    SkeniranjeMarkera,
-    PomicanjeSjemenke,
-    ZalijevanjeBiljke,
-    RastBiljke,
-    BerbaPlodova,
-    PropadanjeBiljke
+    PotPlace,
+    MarkerScan,
+    SeedMove,
+    WateringCanMove,
+    PlantGrow,
+    FruitHarvest,
+    PlantDecay
 }
+
 public class GameManager : SingletonPersistent<GameManager>
 {
-    private int zadovoljeniUvjeti;
-    public Stanje stanje;
+    private int conditionsSatisfied;
+    private State state;
     private MainUI mainUI;
-    public PlaceObject placeObject;
-    public RotateObject rotateObject;
+    public PlaceObject placeObject { get; private set; }
+    public RotateObject rotateObject { get; private set; }
     private HarvestController harvestController;
-    public ImageTracker imageTracker;
-    private Camera camera;
+    private PotCollision potCollision;
+    private ImageTracker imageTracker;
+    private Camera arCamera;
 
     public override void Awake()
     {
@@ -31,10 +32,10 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void LoadGameScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //2 uvodna teksta, 2 puta dajemo prolaz
-        zadovoljeniUvjeti = 2;
-        stanje = Stanje.PostavljanjeZemlje;
+        conditionsSatisfied = 2;
+        state = State.PotPlace;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void LoadStartScene()
@@ -42,22 +43,16 @@ public class GameManager : SingletonPersistent<GameManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    public void LoadEndScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
     //ako je igrac napravio zadano, zadovoljeniUvjeti ce biti pozitivni i ova funkcija ce vratiti prolaz (true)
     public bool NextStep()
     {
-        if (zadovoljeniUvjeti > 0)
+        if (conditionsSatisfied > 0)
         {
-            zadovoljeniUvjeti--;
-            Debug.Log("zadovoljeniUvjet= " + zadovoljeniUvjeti);
+            conditionsSatisfied--;
             //kad smo dosli do kraja prolaza, obradujemo stanje
-            if (zadovoljeniUvjeti == 0)
+            if (conditionsSatisfied == 0)
             {
-                ObradiStanje();
+                HandleCurrentState();
             }
             return true;
         }
@@ -67,42 +62,42 @@ public class GameManager : SingletonPersistent<GameManager>
         }
     }
 
-    private void ObradiStanje()
+    private void HandleCurrentState()
     {
         StartCoroutine(ShowSkipButton());
 
-        switch (stanje)
+        switch (state)
         {
-            case Stanje.PostavljanjeZemlje:
-                Debug.Log(Stanje.PostavljanjeZemlje);
-                PronadiKomponente();
+            case State.PotPlace:
+                Debug.Log(State.PotPlace);
+                FindComponents();
                 placeObject.enabled = true;
                 break;
-            case Stanje.SkeniranjeMarkera:
-                Debug.Log(Stanje.SkeniranjeMarkera);
+            case State.MarkerScan:
+                Debug.Log(State.MarkerScan);
                 imageTracker.enabled = true;
                 break;
-            case Stanje.PomicanjeSjemenke:
-                Debug.Log(Stanje.PomicanjeSjemenke);
+            case State.SeedMove:
+                Debug.Log(State.SeedMove);
                 mainUI.ToggleMoveSeedButtons(true);
                 break;
-            case Stanje.ZalijevanjeBiljke:
-                Debug.Log(Stanje.ZalijevanjeBiljke);
+            case State.WateringCanMove:
+                Debug.Log(State.WateringCanMove);
                 break;
-            case Stanje.RastBiljke:
-                Debug.Log(Stanje.RastBiljke);
+            case State.PlantGrow:
+                Debug.Log(State.PlantGrow);
                 mainUI.TogglePlusButton(true);
                 break;
-            case Stanje.BerbaPlodova:
-                Debug.Log(Stanje.BerbaPlodova);
+            case State.FruitHarvest:
+                Debug.Log(State.FruitHarvest);
                 mainUI.ToggleRotationButtons(true);
                 placeObject.CreateBasket();
                 rotateObject.enabled = true;
                 harvestController.enabled = true;
-                rotateObject.SetRotationTarget(placeObject.trenutnaTeglica);
+                rotateObject.SetRotationTarget(placeObject.currentPot);
                 break;
-            case Stanje.PropadanjeBiljke:
-                Debug.Log(Stanje.PropadanjeBiljke);
+            case State.PlantDecay:
+                Debug.Log(State.PlantDecay);
                 mainUI.ToggleMinusButton(true);
                 break;
             default:
@@ -111,81 +106,69 @@ public class GameManager : SingletonPersistent<GameManager>
         }
     }
 
-    private void PronadiKomponente()
-    {
-        mainUI = FindFirstObjectByType<MainUI>();
-        placeObject = FindFirstObjectByType<PlaceObject>();
-        imageTracker = FindFirstObjectByType<ImageTracker>();
-        rotateObject = FindFirstObjectByType<RotateObject>();
-        harvestController = FindFirstObjectByType<HarvestController>();
-        camera = FindFirstObjectByType<Camera>();
-    }
-
-    public void ZemljaPostavljena()
+    public void StartPotPlaced()
     {
         mainUI.ToggleSkipButton(false);
 
-        stanje = Stanje.SkeniranjeMarkera;
-        zadovoljeniUvjeti++;
+        state = State.MarkerScan;
+        conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
     }
 
-    public void SkeniranMarker()
+    public void MarkerScanned()
     {
         mainUI.ToggleSkipButton(false);
         imageTracker.enabled = false;
 
-        stanje = Stanje.PomicanjeSjemenke;
-        zadovoljeniUvjeti++;
+        state = State.SeedMove;
+        conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
     }
 
-    public void SjemenkaPomaknuta()
+    public void SeedMoved()
     {
         mainUI.ToggleSkipButton(false);
         placeObject.CreateWateringCan();
         placeObject.ReplaceCurrentPotWithNextPotInLine();
 
-        stanje = Stanje.ZalijevanjeBiljke;
-        zadovoljeniUvjeti++;
+        state = State.WateringCanMove;
+        conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
     }
 
-    public void ZalivenaBiljka()
+    public void WateringCanMoved()
     {
         mainUI.ToggleSkipButton(false);
         placeObject.ReplaceCurrentPotWithNextPotInLine();
-
         mainUI.ToggleMoveSeedButtons(false);
 
-        stanje = Stanje.RastBiljke;
-        zadovoljeniUvjeti++;
+        state = State.PlantGrow;
+        conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
     }
 
-    public void BiljkaNarasla()
+    public void PlantGrew()
     {
         mainUI.ToggleSkipButton(false);
         mainUI.TogglePlusButton(false);
 
-        stanje = Stanje.BerbaPlodova;
-        zadovoljeniUvjeti++;
+        state = State.FruitHarvest;
+        conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
     }
 
-    public void UbraniPlodovi()
+    public void FruitsHarvested()
     {
         mainUI.ToggleSkipButton(false);
         mainUI.ToggleRotationButtons(false);
 
-        stanje = Stanje.PropadanjeBiljke;
-        zadovoljeniUvjeti++;
+        state = State.PlantDecay;
+        conditionsSatisfied++;
         mainUI.ToggleRightArrow(true);
     }
 
-    public void BiljkaPropala()
+    public void PlantDecayed()
     {
-        Debug.Log("GOTOVO!!!!!");
         mainUI.ShowEndScreen();
     }
 
@@ -193,36 +176,36 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         mainUI.ToggleSkipButton(false);
 
-        switch (stanje)
+        switch (state)
         {
-            case Stanje.PostavljanjeZemlje:
-                placeObject.CreateStartTeglica(camera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 3, 2f)));
-                ZemljaPostavljena();
+            case State.PotPlace:
+                Vector3 position = arCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 3, 2f));
+                Quaternion rotation = Quaternion.identity;
+                Pose pose = new Pose(position, rotation);
+                placeObject.CreateStartPot(pose);
                 break;
-            case Stanje.SkeniranjeMarkera:
+            case State.MarkerScan:
                 placeObject.CreateSeed();
-                SkeniranMarker();
                 break;
-            case Stanje.PomicanjeSjemenke:
-                Destroy(placeObject.instantiatedSeed);
-                SjemenkaPomaknuta();
+            case State.SeedMove:
+                potCollision = placeObject.currentPot.GetComponent<PotCollision>();
+                potCollision.SeedMoved(placeObject.instantiatedSeed);
                 break;
-            case Stanje.ZalijevanjeBiljke:
-                Destroy(placeObject.instantiatedWateringCan);
-                ZalivenaBiljka();
+            case State.WateringCanMove:
+                potCollision = placeObject.currentPot.GetComponent<PotCollision>();
+                potCollision.WateringCanMoved(placeObject.instantiatedWateringCan);
                 break;
-            case Stanje.RastBiljke:
+            case State.PlantGrow:
                 mainUI.TogglePlusButton(false);
                 StartCoroutine(placeObject.SkipGrowInteraction());
                 break;
-            case Stanje.BerbaPlodova:
+            case State.FruitHarvest:
                 mainUI.ToggleRotationButtons(false);
                 StartCoroutine(harvestController.SkipHarvestInteraction());
-                UbraniPlodovi();
                 break;
-            case Stanje.PropadanjeBiljke:
+            case State.PlantDecay:
                 mainUI.ToggleMinusButton(false);
-                StartCoroutine(placeObject.SkipGrowInteraction());
+                StartCoroutine(placeObject.SkipRotInteraction());
                 break;
             default:
                 Debug.Log("Greska!");
@@ -234,5 +217,15 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         yield return new WaitForSeconds(0.5f);
         mainUI.ToggleSkipButton(true);
+    }
+
+    private void FindComponents()
+    {
+        mainUI = FindFirstObjectByType<MainUI>();
+        placeObject = FindFirstObjectByType<PlaceObject>();
+        imageTracker = FindFirstObjectByType<ImageTracker>();
+        rotateObject = FindFirstObjectByType<RotateObject>();
+        harvestController = FindFirstObjectByType<HarvestController>();
+        arCamera = FindFirstObjectByType<Camera>();
     }
 }

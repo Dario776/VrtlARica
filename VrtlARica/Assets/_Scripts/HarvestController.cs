@@ -10,6 +10,19 @@ public class HarvestController : MonoBehaviour
     private TapDetection selectedBasket;
     //brojac koliko je jabuka ubrano s biljke i stavljeno u kosaru
     private int appleCounter = 0;
+    private bool isFruitHarvested;
+
+    private GameManager gameManager;
+
+    private void Awake()
+    {
+        isFruitHarvested = false;
+    }
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
 
     private void Update()
     {
@@ -18,12 +31,12 @@ public class HarvestController : MonoBehaviour
 
         if (currentlyTapped != null)
         {
-            if (currentlyTapped.name.Contains("red_apple"))
+            if (currentlyTapped.name.Contains(Constants.redApple))
             {
                 HandleAppleSelection(currentlyTapped);
             }
 
-            if (currentlyTapped.name.Contains("basket"))
+            if (currentlyTapped.name.Contains(Constants.basket))
             {
                 HandleBasketSelection(currentlyTapped);
             }
@@ -73,62 +86,60 @@ public class HarvestController : MonoBehaviour
     {
         //bitno da se vidi outline jabuke i kosare
         yield return new WaitForSeconds(delay);
+
         //ukloni jabuku koja je selektirana
-        DisableVisibility(selectedApple.gameObject);
+        selectedApple.gameObject.SetActive(false);
 
         //odznaci kosaru
         selectedBasket.ToggleOutline();
 
         //dohvati jabuku koja je u hijerarhiji djete kosare i inicijalno je nevidljiva
-        Transform appleChild = selectedBasket.transform.GetChild(appleCounter);
         //postavi vidljivost jabuke
-        appleChild.gameObject.SetActive(true);
+        selectedBasket.transform.GetChild(appleCounter).gameObject.SetActive(true);
+
         //counter omogucava dohvat odredenog djeteta
         ++appleCounter;
-
-
         selectedBasket = null;
-
-        //ukloni jabuku s biljke u hijerarhiji
-        selectedApple.transform.SetParent(null);
         selectedApple = null;
 
-        if (appleCounter == 10)
-            GameManager.Instance.UbraniPlodovi();
+        if (appleCounter == 10 && !isFruitHarvested)
+        {
+            isFruitHarvested = true;
+            gameManager.FruitsHarvested();
+        }
     }
 
-    private void DisableVisibility(GameObject obj)
-    {
-        if (obj == null)
-            return;
+    // private void DisableVisibility(GameObject obj)
+    // {
+    //     if (obj == null)
+    //         return;
 
-        Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
-        foreach (Renderer renderer in renderers)
-        {
-            renderer.enabled = false;
-        }
+    //     Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
+    //     foreach (Renderer renderer in renderers)
+    //     {
+    //         renderer.enabled = false;
+    //     }
 
-        Collider[] colliders = obj.GetComponentsInChildren<Collider>();
-        foreach (Collider collider in colliders)
-        {
-            collider.enabled = false;
-        }
+    //     Collider[] colliders = obj.GetComponentsInChildren<Collider>();
+    //     foreach (Collider collider in colliders)
+    //     {
+    //         collider.enabled = false;
+    //     }
 
-        Debug.Log("Disabled visibility for object: " + obj.name);
-    }
+    //     Debug.Log("Disabled visibility for object: " + obj.name);
+    // }
 
     public IEnumerator SkipHarvestInteraction()
     {
-        for (int i = 0; i < 10; i++)
+        if (!isFruitHarvested)
         {
-            yield return new WaitForSeconds(0.5f);
-            Debug.Log(GameManager.Instance.placeObject.trenutnaTeglica);
-            Debug.Log(GameManager.Instance.placeObject.instantiatedBasket.transform.GetChild(i).gameObject);
-            Debug.Log(GameManager.Instance.placeObject.trenutnaTeglica.transform.GetChild(i).gameObject);
-            Debug.Log(GameManager.Instance.placeObject.instantiatedBasket.transform.GetChild(i).gameObject.name);
-            Debug.Log(GameManager.Instance.placeObject.trenutnaTeglica.transform.GetChild(i).gameObject.name);
-            GameManager.Instance.placeObject.instantiatedBasket.transform.GetChild(i).gameObject.SetActive(true);
-            GameManager.Instance.placeObject.trenutnaTeglica.transform.GetChild(i).gameObject.SetActive(false);
+            for (int i = 0; i < 10; i++)
+            {
+                yield return new WaitForSeconds(0.5f);
+                gameManager.placeObject.instantiatedBasket.transform.GetChild(i).gameObject.SetActive(true);
+                gameManager.placeObject.currentPot.transform.GetChild(i).gameObject.SetActive(false);
+            }
+            gameManager.FruitsHarvested();
         }
     }
 }

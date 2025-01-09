@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,8 +17,8 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
         base.Awake();
         currentFont = "Sans";
         currentFontSize = 0;
-        sans = Resources.Load<TMP_FontAsset>(Konstante.OpenSansRegularPath);
-        dyslexic = Resources.Load<TMP_FontAsset>(Konstante.OpenDyslexicRegularPath);
+        sans = Resources.Load<TMP_FontAsset>(Constants.OpenSansRegularPath);
+        dyslexic = Resources.Load<TMP_FontAsset>(Constants.OpenDyslexicRegularPath);
     }
 
     private void Start()
