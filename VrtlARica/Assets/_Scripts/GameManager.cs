@@ -193,6 +193,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void PlantDecayed()
     {
+        skipSkip = true;
         mainUI.ShowEndScreen();
     }
 
