@@ -6,6 +6,8 @@ public class Naslovnica : MonoBehaviour
     [SerializeField] private GameObject Info;
     [SerializeField] private GameObject Postavke;
     [SerializeField] private GameObject IzlazPopup;
+    [SerializeField] private GameObject sunFrame;
+    [SerializeField] private float sunRotationSpeed = 10f;
 
     private GameManager gameManager;
     private AudioManager audioManager;
@@ -16,6 +18,11 @@ public class Naslovnica : MonoBehaviour
         audioManager = AudioManager.Instance;
         audioManager.Stop("endsuccess");
         audioManager.Play("mainmenumusic");
+    }
+
+    private void Update()
+    {
+        sunFrame.transform.Rotate(Vector3.forward, sunRotationSpeed * Time.deltaTime);
     }
 
     public void ZapocniButton()
