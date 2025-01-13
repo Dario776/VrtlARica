@@ -12,12 +12,19 @@ public class HarvestController : MonoBehaviour
     private int appleCounter = 0;
     private bool isFruitHarvested;
 
+    private bool isHarvesting;
+    private bool isProcessingAppleTap;
+    private bool isProcessingBasketTap; 
+
     private GameManager gameManager;
     private AudioManager audioManager;
 
     private void Awake()
     {
         isFruitHarvested = false;
+        isHarvesting = false;
+        isProcessingAppleTap = false;
+        isProcessingBasketTap = false;
     }
 
     private void Start()
@@ -43,51 +50,71 @@ public class HarvestController : MonoBehaviour
                 HandleBasketSelection(currentlyTapped);
             }
             //ako je selektirana kosara i jabuka
-            if (selectedApple != null && selectedBasket != null)
+            if (selectedApple != null && selectedBasket != null && !isHarvesting)
             {   //potreban delay kako bi outline kosare i jabuke bio vidljiv
                 StartCoroutine(Harvest(0.5f));
             }
         }
     }
 
-    private void HandleAppleSelection(TapDetection tappedApple)
+private void HandleAppleSelection(TapDetection tappedApple)
+{
+    if (isHarvesting || isProcessingAppleTap) return; // Ignore if harvesting or waiting for delay
+
+    StartCoroutine(HandleAppleSelectionWithDelay(tappedApple));
+}
+
+private IEnumerator HandleAppleSelectionWithDelay(TapDetection tappedApple)
+{
+    isProcessingAppleTap = true; // Lock further taps
+    audioManager.Play("tapdetect");
+
+    if (selectedApple != null && selectedApple != tappedApple)
     {
-        audioManager.Play("tapdetect");
-        //onemogucuje selektiranje vise jabuka odjednom
-        if (selectedApple != null && selectedApple != tappedApple)
-        {
-            //odznaci selektiranu jabuku
-            selectedApple.ToggleOutline();
-            selectedApple = null;
-        }
-
-        //oznaci/odznaci jabuku
-        tappedApple.ToggleOutline();
-
-        if (tappedApple.isOutlined)
-        {
-            selectedApple = tappedApple;
-        }
+        selectedApple.ToggleOutline();
+        selectedApple = null;
     }
 
-    private void HandleBasketSelection(TapDetection tappedBasket)
-    {
-        audioManager.Play("tapdetect");
-        //oznaci/odznaci kosaru
-        tappedBasket.ToggleOutline();
+    tappedApple.ToggleOutline();
 
-        if (tappedBasket.isOutlined)
-        {
-            selectedBasket = tappedBasket;
-        }
-        else
-        {
-            selectedBasket = null;
-        }
+    if (tappedApple.isOutlined)
+    {
+        selectedApple = tappedApple;
     }
 
+    yield return new WaitForSeconds(0.2f); // Add a 200ms delay
+    isProcessingAppleTap = false; // Unlock taps
+}
+
+private void HandleBasketSelection(TapDetection tappedBasket)
+{
+    if (isHarvesting || isProcessingBasketTap) return; // Ignore if harvesting or waiting for delay
+
+    StartCoroutine(HandleBasketSelectionWithDelay(tappedBasket));
+}
+
+private IEnumerator HandleBasketSelectionWithDelay(TapDetection tappedBasket)
+{
+    isProcessingBasketTap = true; // Lock further taps
+    audioManager.Play("tapdetect");
+
+    tappedBasket.ToggleOutline();
+
+    if (tappedBasket.isOutlined)
+    {
+        selectedBasket = tappedBasket;
+    }
+    else
+    {
+        selectedBasket = null;
+    }
+
+    yield return new WaitForSeconds(0.2f); // Add a 200ms delay
+    isProcessingBasketTap = false; // Unlock taps
+}
     private IEnumerator Harvest(float delay)
     {
+        isHarvesting = true;
         //bitno da se vidi outline jabuke i kosare
         yield return new WaitForSeconds(delay);
 
@@ -111,6 +138,8 @@ public class HarvestController : MonoBehaviour
             isFruitHarvested = true;
             gameManager.FruitsHarvested();
         }
+
+        isHarvesting = false;
     }
 
     // private void DisableVisibility(GameObject obj)
@@ -139,7 +168,7 @@ public class HarvestController : MonoBehaviour
         {
             for (int i = 0; i < 10; i++)
             {
-                yield return new WaitForSeconds(0.5f);
+                yield return null;
                 audioManager.Play("tapdetect");
                 gameManager.placeObject.instantiatedBasket.transform.GetChild(i).gameObject.SetActive(true);
                 gameManager.placeObject.currentPot.transform.GetChild(i).gameObject.SetActive(false);

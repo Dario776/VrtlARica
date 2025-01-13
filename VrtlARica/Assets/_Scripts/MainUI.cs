@@ -16,12 +16,14 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject minusButton;
     [SerializeField] private GameObject skipButton;
     [SerializeField] private GameObject end;
-    [SerializeField] private GameObject[] gameText;
+    [SerializeField] private GameObject[] gameTextButtons;
+    [SerializeField] private GameObject[] gameTextGestures;
     [SerializeField] private GameObject[] dots;
     private int i;
     private int isLeftArrowPressed;
     private GameManager gameManager;
     private AudioManager audioManager;
+    private PostavkeManager postavkeManager;
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class MainUI : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         audioManager = AudioManager.Instance;
+        postavkeManager = PostavkeManager.Instance;
         //onemogucujemo lijevu strelicu na pocetku
         ToggleLeftArrow(false);
     }
@@ -80,36 +83,58 @@ public class MainUI : MonoBehaviour
             isLeftArrowPressed--;
 
             //iskljucujem trenutni text i tockicu (kod tockice ukljucujem bijeli krug unutar veceg smedeg)
-            gameText[i].SetActive(false);
+            gameTextButtons[i].SetActive(false);
+            gameTextGestures[i].SetActive(false);
+        
+
             dots[i].SetActive(true);
 
             //micem se dalje
             i++;
 
             //ukljucujem sljedeci text i tockicu
-            gameText[i].SetActive(true);
+            if (!postavkeManager.usingGestures)
+            {
+                gameTextButtons[i].SetActive(true);
+            }
+            else
+            {
+                gameTextGestures[i].SetActive(true);
+            }
             dots[i].SetActive(false);
 
-            if (isLeftArrowPressed == 0 && gameManager.conditionsSatisfied == 0)
+            if (isLeftArrowPressed == 0 && gameManager.conditions == 0)
             {
                 ToggleRightArrow(false);
             }
 
             ToggleLeftArrow(true);
         }
-        else if (gameManager.conditionsSatisfied > 0 && i < gameText.Length - 1)
+        else if (gameManager.conditions > 0 && i < gameTextButtons.Length - 1)
         {
-            gameText[i].SetActive(false);
+
+            gameTextButtons[i].SetActive(false);
+            gameTextGestures[i].SetActive(false);
+
+
             dots[i].SetActive(true);
 
             i++;
 
-            gameText[i].SetActive(true);
+            if (!postavkeManager.usingGestures)
+            {
+                gameTextButtons[i].SetActive(true);
+            }
+            else
+            {
+                gameTextGestures[i].SetActive(true);
+            }
+
             dots[i].SetActive(false);
 
-            gameManager.conditionsSatisfied--;
+            gameManager.conditions--;
 
-            if (gameManager.conditionsSatisfied == 0)
+            if (gameManager.conditions == 0)
             {
                 gameManager.HandleCurrentState();
                 ToggleRightArrow(false);
@@ -127,13 +152,23 @@ public class MainUI : MonoBehaviour
         {
             isLeftArrowPressed++;
 
-            gameText[i].SetActive(false);
+            gameTextButtons[i].SetActive(false);
+            gameTextGestures[i].SetActive(false);
+
             dots[i].SetActive(true);
 
             //suprotan postupak od desne strelice
             i--;
 
-            gameText[i].SetActive(true);
+            if (!postavkeManager.usingGestures)
+            {
+                gameTextButtons[i].SetActive(true);
+            }
+            else
+            {
+                gameTextGestures[i].SetActive(true);
+            }
+            
             dots[i].SetActive(false);
 
             if (i == 0)

@@ -582,7 +582,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ce425fac6ff21ab47a04185ce5ee79b1,
         type: 3}
       propertyPath: m_Name
-      value: teglica6
+      value: pot6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ce425fac6ff21ab47a04185ce5ee79b1,
         type: 3}
@@ -632,7 +632,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3260777158708231266}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ce425fac6ff21ab47a04185ce5ee79b1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1607070422656109554}
   m_SourcePrefab: {fileID: 100100000, guid: ce425fac6ff21ab47a04185ce5ee79b1, type: 3}
 --- !u!4 &1621279418664107044 stripped
 Transform:
@@ -640,6 +644,61 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1294020147796597711}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2104343922964719262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ce425fac6ff21ab47a04185ce5ee79b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1294020147796597711}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1607070422656109554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104343922964719262}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd79b8aba7d51bb41b5f7386dafb4d99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressAction:
+    m_Name: Press
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 6fff45a5-eb83-4593-9196-48885d1e96cb
+    m_Processors: 
+    m_Interactions: Press
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: fe6b5f15-6827-4029-8b85-14f58cb3a2a5
+      m_Path: <Touchscreen>/Press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Press
+      m_Flags: 0
+    m_Flags: 0
+  positionAction:
+    m_Name: Position
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: 35ea08c9-d07d-4dba-adfb-8118c6ad8ed3
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 163ec9ff-b2b6-4036-bc97-9a9679977ac2
+      m_Path: <Touchscreen>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Position
+      m_Flags: 0
+    m_Flags: 0
+  swipeThreshold: 100
+  rotationDegree: 15
+  rotationSpeed: 5
 --- !u!1001 &3083315316898372489
 PrefabInstance:
   m_ObjectHideFlags: 0

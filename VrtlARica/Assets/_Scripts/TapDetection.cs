@@ -14,6 +14,9 @@ public class TapDetection : MonoBehaviour
         EnhancedTouch.TouchSimulation.Enable();
         EnhancedTouch.EnhancedTouchSupport.Enable();
         EnhancedTouch.Touch.onFingerDown += TapAction;
+/*         EnhancedTouch.Touch.onFingerMove += DragAction;
+        EnhancedTouch.Touch.onFingerUp += EndDragAction; */
+        
     }
 
     private void OnDisable()
@@ -21,6 +24,8 @@ public class TapDetection : MonoBehaviour
         EnhancedTouch.TouchSimulation.Disable();
         EnhancedTouch.EnhancedTouchSupport.Disable();
         EnhancedTouch.Touch.onFingerDown -= TapAction;
+/*         EnhancedTouch.Touch.onFingerMove -= DragAction;
+        EnhancedTouch.Touch.onFingerUp -= EndDragAction; */
     }
 
     private void TapAction(EnhancedTouch.Finger finger)
@@ -41,6 +46,26 @@ public class TapDetection : MonoBehaviour
         }
 
     }
+
+/*     private void DragAction(EnhancedTouch.Finger finger){
+        Debug.Log("Drag action");
+        if (currentlyTappedOn != this || finger.index != 0) { return; }
+
+        Vector3 tapPosition = finger.currentTouch.screenPosition;
+        tapPosition.z = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(tapPosition);
+
+        transform.position = worldPosition;
+    }
+
+    private void EndDragAction(EnhancedTouch.Finger finger)
+    {
+        if (currentlyTappedOn == this && finger.index == 0)
+        {
+            Debug.Log("Released drag on object: " + gameObject.name);
+            currentlyTappedOn = null;
+        }
+    } */
 
     public void ToggleOutline()
     {

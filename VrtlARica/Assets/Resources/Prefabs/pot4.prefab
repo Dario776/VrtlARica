@@ -61,10 +61,84 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d097b16600bb87c48b16751ab693a8cc,
         type: 3}
       propertyPath: m_Name
-      value: teglica4
+      value: pot4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d097b16600bb87c48b16751ab693a8cc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8094115285301612337}
   m_SourcePrefab: {fileID: 100100000, guid: d097b16600bb87c48b16751ab693a8cc, type: 3}
+--- !u!1 &1675787903810802156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d097b16600bb87c48b16751ab693a8cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1981849821782682813}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8094115285301612337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675787903810802156}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40da5bd13ce84544789eff65f0529da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstFingerPosition:
+    m_Name: First Finger Position
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: d9ef0e5f-b5be-49ea-81c3-b483c0869a40
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 028a5afc-f572-4d59-a3ec-e46b00d3fb1f
+      m_Path: <Touchscreen>/touch0/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: First Finger Position
+      m_Flags: 0
+    m_Flags: 0
+  secondFingerPosition:
+    m_Name: Second Finger Position
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: 1648ac0f-39d7-4e31-9528-d965fd0eaf2d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: bac93c95-9009-4fdc-b960-ba344ae0cb6a
+      m_Path: <Touchscreen>/touch1/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Second Finger Position
+      m_Flags: 0
+    m_Flags: 0
+  secondFingerContact:
+    m_Name: Second Finger Contact
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 1adcdff5-af15-4070-88d6-7b82e2db587a
+    m_Processors: 
+    m_Interactions: Press
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a4cbb057-88b0-404e-876c-82476559e482
+      m_Path: <Touchscreen>/touch1/press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Second Finger Contact
+      m_Flags: 0
+    m_Flags: 0
+  pinchThreshold: 50

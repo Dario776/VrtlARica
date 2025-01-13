@@ -15,7 +15,7 @@ enum State
 
 public class GameManager : SingletonPersistent<GameManager>
 {
-    public int conditionsSatisfied;
+    public int conditions;
     private bool skipSkip;
     private State state;
     private MainUI mainUI;
@@ -27,6 +27,7 @@ public class GameManager : SingletonPersistent<GameManager>
     private Camera arCamera;
 
     private AudioManager audioManager;
+    private PostavkeManager postavkeManager;
 
     public override void Awake()
     {
@@ -36,12 +37,13 @@ public class GameManager : SingletonPersistent<GameManager>
     private void Start()
     {
         audioManager = AudioManager.Instance;
+        postavkeManager = PostavkeManager.Instance;
     }
 
     public void LoadGameScene()
     {
         //2 uvodna teksta, 2 puta dajemo prolaz
-        conditionsSatisfied = 2;
+        conditions = 2;
         state = State.PotPlace;
         skipSkip = false;
         audioManager.Stop("mainmenumusic");
@@ -72,27 +74,44 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case State.SeedMove:
                 Debug.Log(State.SeedMove);
-                mainUI.ToggleMoveSeedButtons(true);
+                if(!postavkeManager.usingGestures)
+                    mainUI.ToggleMoveSeedButtons(true);
+                else
+                    placeObject.instantiatedSeed.GetComponent<DragAndDrop>().enabled = true;
                 break;
             case State.WateringCanMove:
                 Debug.Log(State.WateringCanMove);
-                mainUI.ToggleMoveSeedButtons(true);
+                placeObject.CreateWateringCan();
+                if(!postavkeManager.usingGestures)
+                    mainUI.ToggleMoveSeedButtons(true);
+                else
+                    placeObject.instantiatedWateringCan.GetComponent<DragAndDrop>().enabled = true;
                 break;
             case State.PlantGrow:
                 Debug.Log(State.PlantGrow);
-                mainUI.TogglePlusButton(true);
+                if(!postavkeManager.usingGestures)
+                    mainUI.TogglePlusButton(true);
+                //geste omogucene u placeObjectu jer ima vise objekata u interakciji
                 break;
             case State.FruitHarvest:
                 Debug.Log(State.FruitHarvest);
-                mainUI.ToggleRotationButtons(true);
+                if(!postavkeManager.usingGestures){
+                    mainUI.ToggleRotationButtons(true);
+                    rotateObject.enabled = true;
+                    rotateObject.SetRotationTarget(placeObject.currentPot);
+                }
+                else{
+                    placeObject.currentPot.GetComponent<RotationGesture>().enabled = true;
+                }
                 placeObject.CreateBasket();
-                rotateObject.enabled = true;
                 harvestController.enabled = true;
-                rotateObject.SetRotationTarget(placeObject.currentPot);
                 break;
             case State.PlantDecay:
                 Debug.Log(State.PlantDecay);
-                mainUI.ToggleMinusButton(true);
+                placeObject.ReplaceCurrentPotWithNextPotInLine();
+                if(!postavkeManager.usingGestures)
+                    mainUI.ToggleMinusButton(true);
+                //geste omogucene u placeObjectu jer ima vise objekata u interakciji
                 break;
             default:
                 Debug.Log("Greska!");
@@ -106,7 +125,7 @@ public class GameManager : SingletonPersistent<GameManager>
         mainUI.ToggleSkipButton(false);
 
         state = State.MarkerScan;
-        conditionsSatisfied++;
+        conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
     }
@@ -118,7 +137,7 @@ public class GameManager : SingletonPersistent<GameManager>
         imageTracker.enabled = false;
 
         state = State.SeedMove;
-        conditionsSatisfied++;
+        conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
     }
@@ -127,12 +146,12 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         skipSkip = true;
         mainUI.ToggleSkipButton(false);
+        //onemoguci geste
         mainUI.ToggleMoveSeedButtons(false);
-        placeObject.CreateWateringCan();
         placeObject.ReplaceCurrentPotWithNextPotInLine();
 
         state = State.WateringCanMove;
-        conditionsSatisfied++;
+        conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
     }
@@ -142,10 +161,11 @@ public class GameManager : SingletonPersistent<GameManager>
         skipSkip = true;
         mainUI.ToggleSkipButton(false);
         placeObject.ReplaceCurrentPotWithNextPotInLine();
+        //onemoguci geste
         mainUI.ToggleMoveSeedButtons(false);
 
         state = State.PlantGrow;
-        conditionsSatisfied++;
+        conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
     }
@@ -154,10 +174,11 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         skipSkip = true;
         mainUI.ToggleSkipButton(false);
+        //onemoguci geste
         mainUI.TogglePlusButton(false);
 
         state = State.FruitHarvest;
-        conditionsSatisfied++;
+        conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
     }
@@ -167,9 +188,12 @@ public class GameManager : SingletonPersistent<GameManager>
         skipSkip = true;
         mainUI.ToggleSkipButton(false);
         mainUI.ToggleRotationButtons(false);
+        //onemoguci gestu
+        placeObject.currentPot.GetComponent<RotationGesture>().enabled = false;
+        placeObject.currentPot.GetComponent<RotationGesture>().DisableInputActions();
 
         state = State.PlantDecay;
-        conditionsSatisfied++;
+        conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
     }

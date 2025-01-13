@@ -21,10 +21,11 @@ public class PlaceObject : MonoBehaviour
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
-    private int currentPotIndex;
+    public int currentPotIndex;
     private bool isPotPlaced;
     private GameManager gameManager;
     private AudioManager audioManager;
+    private PostavkeManager postavkeManager;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class PlaceObject : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         audioManager = AudioManager.Instance;
+        postavkeManager = PostavkeManager.Instance;
         aRPlaneManager = GetComponent<ARPlaneManager>();
         aRRaycastManager = GetComponent<ARRaycastManager>();
     }
@@ -121,6 +123,8 @@ public class PlaceObject : MonoBehaviour
         {
             Destroy(currentPot);
             currentPot = Instantiate(potPrefab[0], currentPot.transform.position, currentPot.transform.rotation);
+            if(postavkeManager.usingGestures)
+                gameManager.PlantDecayed();
         }
         else if (currentPotIndex == 12)
         {
@@ -130,6 +134,12 @@ public class PlaceObject : MonoBehaviour
         {
             Destroy(currentPot);
             currentPot = Instantiate(potPrefab[currentPotIndex], currentPot.transform.position, currentPot.transform.rotation);
+
+            PinchDetection pinchDetection = currentPot.GetComponent<PinchDetection>();
+            if (postavkeManager.usingGestures && pinchDetection != null)
+            {
+                pinchDetection.enabled = true;
+            }
         }
     }
 

@@ -1,0 +1,225 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PinchDetectionInput
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 40da5bd13ce84544789eff65f0529da7,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_Name
+    value: First Finger Position
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_ExpectedControlType
+    value: Vector2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_Id
+    value: d9ef0e5f-b5be-49ea-81c3-b483c0869a40
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_SingletonActionBindings.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_SingletonActionBindings.Array.data[0].m_Name
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_SingletonActionBindings.Array.data[0].m_Id
+    value: 028a5afc-f572-4d59-a3ec-e46b00d3fb1f
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_SingletonActionBindings.Array.data[0].m_Path
+    value: <Touchscreen>/touch0/position
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_SingletonActionBindings.Array.data[0].m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_SingletonActionBindings.Array.data[0].m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_SingletonActionBindings.Array.data[0].m_Groups
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_SingletonActionBindings.Array.data[0].m_Action
+    value: First Finger Position
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_SingletonActionBindings.Array.data[0].m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: firstFingerPosition.m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_Name
+    value: Second Finger Position
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_ExpectedControlType
+    value: Vector2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_Id
+    value: 1648ac0f-39d7-4e31-9528-d965fd0eaf2d
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_SingletonActionBindings.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_SingletonActionBindings.Array.data[0].m_Name
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_SingletonActionBindings.Array.data[0].m_Id
+    value: bac93c95-9009-4fdc-b960-ba344ae0cb6a
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_SingletonActionBindings.Array.data[0].m_Path
+    value: <Touchscreen>/touch1/position
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_SingletonActionBindings.Array.data[0].m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_SingletonActionBindings.Array.data[0].m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_SingletonActionBindings.Array.data[0].m_Groups
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_SingletonActionBindings.Array.data[0].m_Action
+    value: Second Finger Position
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_SingletonActionBindings.Array.data[0].m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerPosition.m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_Name
+    value: Second Finger Contact
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_Type
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_ExpectedControlType
+    value: Button
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_Id
+    value: 1adcdff5-af15-4070-88d6-7b82e2db587a
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_Interactions
+    value: Press
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_SingletonActionBindings.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_SingletonActionBindings.Array.data[0].m_Name
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_SingletonActionBindings.Array.data[0].m_Id
+    value: a4cbb057-88b0-404e-876c-82476559e482
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_SingletonActionBindings.Array.data[0].m_Path
+    value: <Touchscreen>/touch1/press
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_SingletonActionBindings.Array.data[0].m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_SingletonActionBindings.Array.data[0].m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_SingletonActionBindings.Array.data[0].m_Groups
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_SingletonActionBindings.Array.data[0].m_Action
+    value: Second Finger Contact
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_SingletonActionBindings.Array.data[0].m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: secondFingerContact.m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
+  m_CoupledType:
+    m_NativeTypeID: 0
+    m_ManagedTypePPtr: {fileID: 0}
+    m_ManagedTypeFallback: 
+  m_CoupledProperties: []
