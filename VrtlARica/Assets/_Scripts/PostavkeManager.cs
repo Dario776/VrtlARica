@@ -101,5 +101,4 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
             text.font = dyslexic;
         }
     }
-
 }

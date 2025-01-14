@@ -89,8 +89,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case State.PlantGrow:
                 Debug.Log(State.PlantGrow);
-                if(!postavkeManager.usingGestures)
-                    mainUI.TogglePlusButton(true);
+                mainUI.TogglePlusButton(!postavkeManager.usingGestures);
                 //geste omogucene u placeObjectu jer ima vise objekata u interakciji
                 break;
             case State.FruitHarvest:
@@ -109,8 +108,7 @@ public class GameManager : SingletonPersistent<GameManager>
             case State.PlantDecay:
                 Debug.Log(State.PlantDecay);
                 placeObject.ReplaceCurrentPotWithNextPotInLine();
-                if(!postavkeManager.usingGestures)
-                    mainUI.ToggleMinusButton(true);
+                mainUI.ToggleMinusButton(!postavkeManager.usingGestures);
                 //geste omogucene u placeObjectu jer ima vise objekata u interakciji
                 break;
             default:
@@ -150,7 +148,7 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         skipSkip = true;
         mainUI.ToggleSkipButton(false);
-        //onemoguci geste
+
         mainUI.ToggleMoveSeedButtons(false);
         placeObject.ReplaceCurrentPotWithNextPotInLine();
 

@@ -124,7 +124,7 @@ public class PlaceObject : MonoBehaviour
             Destroy(currentPot);
             currentPot = Instantiate(potPrefab[0], currentPot.transform.position, currentPot.transform.rotation);
 
-            if(postavkeManager.usingGestures)
+            //if(postavkeManager.usingGestures)
                 gameManager.PlantDecayed();
         }
         else if (currentPotIndex == 12)
