@@ -128,6 +128,8 @@ public class GameManager : SingletonPersistent<GameManager>
         conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
+
+        mainUI.RightArrowButton();   
     }
 
     public void MarkerScanned()
@@ -140,6 +142,8 @@ public class GameManager : SingletonPersistent<GameManager>
         conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
+
+        mainUI.RightArrowButton();
     }
 
     public void SeedMoved()
@@ -154,6 +158,8 @@ public class GameManager : SingletonPersistent<GameManager>
         conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
+
+        mainUI.RightArrowButton();
     }
 
     public void WateringCanMoved()
@@ -168,6 +174,8 @@ public class GameManager : SingletonPersistent<GameManager>
         conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
+    
+        mainUI.RightArrowButton();
     }
 
     public void PlantGrew()
@@ -181,6 +189,8 @@ public class GameManager : SingletonPersistent<GameManager>
         conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
+
+        mainUI.RightArrowButton();
     }
 
     public void FruitsHarvested()
@@ -196,6 +206,8 @@ public class GameManager : SingletonPersistent<GameManager>
         conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
+
+        mainUI.RightArrowButton();
     }
 
     public void PlantDecayed()
