@@ -19,7 +19,7 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
         base.Awake();
         currentFont = PlayerPrefs.GetString("CurrentFont", "Sans");
         currentFontSize = PlayerPrefs.GetInt("CurrentFontSize", 0);
-        usingGestures= PlayerPrefs.GetInt("UsingGestures", 0) == 1;
+        usingGestures = PlayerPrefs.GetInt("UsingGestures", 0) == 1;
         sans = Resources.Load<TMP_FontAsset>(Constants.OpenSansRegularPath);
         dyslexic = Resources.Load<TMP_FontAsset>(Constants.OpenDyslexicRegularPath);
     }
@@ -27,8 +27,10 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
     public void SaveSettings()
     {
         PlayerPrefs.SetString("CurrentFont", currentFont);
+        PlayerPrefs.SetInt("CurrentFontSize", currentFontSize);
+        PlayerPrefs.SetInt("IsNaslovnicaMuted", AudioManager.Instance.IsNaslovnicaMuted ? 1 : 0);
         PlayerPrefs.SetInt("IsMuted", AudioManager.Instance.IsMuted ? 1 : 0);
-        PlayerPrefs.SetInt("IsGestureMode", usingGestures ? 1 : 0);
+        PlayerPrefs.SetInt("UsingGestures", usingGestures ? 1 : 0);
         PlayerPrefs.Save();
 
         Debug.Log("Settings saved!");
@@ -37,7 +39,6 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
     private void Start()
     {
         Refresh();
-        RefreshSound();
     }
 
     private void OnEnable()
@@ -53,7 +54,15 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
     private void SceneChanged(Scene scene, LoadSceneMode mode)
     {
         Refresh();
-        RefreshSound();
+
+        if (scene.name == "Start" && !AudioManager.Instance.IsNaslovnicaMuted)
+        {
+            AudioManager.Instance.Play("mainmenumusic");
+        }
+        else if (scene.name != "Start")
+        {
+            AudioManager.Instance.Stop("mainmenumusic");
+        }
     }
 
     private void Refresh()
@@ -68,11 +77,9 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
         {
             ChangeFontDyslexic();
         }
-    }
 
-    private void RefreshSound()
-    {
-        AudioManager.Instance.SetMute(AudioManager.Instance.IsMuted);
+        AudioManager.Instance.SetNaslovnicaMute(PlayerPrefs.GetInt("IsNaslovnicaMuted", 0) == 1);
+        AudioManager.Instance.SetMute(PlayerPrefs.GetInt("IsMuted", 0) == 1);
     }
 
     public void ChangeFontSans()

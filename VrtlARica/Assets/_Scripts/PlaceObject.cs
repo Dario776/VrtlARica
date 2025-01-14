@@ -123,6 +123,7 @@ public class PlaceObject : MonoBehaviour
         {
             Destroy(currentPot);
             currentPot = Instantiate(potPrefab[0], currentPot.transform.position, currentPot.transform.rotation);
+
             if(postavkeManager.usingGestures)
                 gameManager.PlantDecayed();
         }
@@ -147,7 +148,7 @@ public class PlaceObject : MonoBehaviour
     {
         while (currentPotIndex < 6)
         {
-            yield return new WaitForSeconds(1);
+            yield return null;
             ReplaceCurrentPotWithNextPotInLine();
         }
     }
@@ -156,7 +157,7 @@ public class PlaceObject : MonoBehaviour
     {
         while (currentPotIndex < 12)
         {
-            yield return new WaitForSeconds(1);
+            yield return null;
             ReplaceCurrentPotWithNextPotInLine();
         }
     }

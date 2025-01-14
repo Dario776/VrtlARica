@@ -4,11 +4,17 @@ using UnityEngine;
 public class AudioManager : SingletonPersistent<AudioManager>
 {
     [SerializeField] private Sound[] sounds;
-    private bool isMuted = false;
+    private bool isNaslovnicaMuted;
+    private bool isMuted;
 
     public override void Awake()
     {
         base.Awake();
+        InitializeSounds();
+        LoadMuteStates();
+    }
+    private void InitializeSounds()
+    {
         foreach (Sound sound in sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
@@ -19,10 +25,15 @@ public class AudioManager : SingletonPersistent<AudioManager>
         }
     }
 
+    private void LoadMuteStates()
+    {
+        isNaslovnicaMuted = PlayerPrefs.GetInt("IsNaslovnicaMuted", 0) == 1;
+        isMuted = PlayerPrefs.GetInt("IsMuted", 0) == 1;
+        ApplyMuteStates();
+    }   
+
     public void Play(string name)
     {
-        if (isMuted) return;
-        
         Sound sound = Array.Find(sounds, (s) => s.name == name);
         if (sound != null)
             sound.Play();
@@ -39,15 +50,34 @@ public class AudioManager : SingletonPersistent<AudioManager>
             Debug.LogWarning("Sound not found in AudioManager: " + name);
     }
 
+    public void SetNaslovnicaMute(bool mute)
+    {
+        isNaslovnicaMuted = mute;
+        ApplyMuteState("mainmenumusic", mute);
+    }
+
     public void SetMute(bool mute)
     {
         isMuted = mute;
-
         foreach (Sound sound in sounds)
         {
-            sound.source.mute = mute;
+            if (sound.name != "mainmenumusic"){
+                sound.source.mute = mute;
+            }      
         }
     }
 
+    private void ApplyMuteStates()
+    {
+        SetNaslovnicaMute(isNaslovnicaMuted);
+        SetMute(isMuted);
+    }
+
+    private void ApplyMuteState(string soundName, bool mute)
+    {
+        Sound sound = Array.Find(sounds, s => s.name == soundName);
+        if (sound != null && sound.source != null) sound.source.mute = mute;
+    }
+    public bool IsNaslovnicaMuted => isNaslovnicaMuted;
     public bool IsMuted => isMuted;
 }
