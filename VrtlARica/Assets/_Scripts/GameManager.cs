@@ -74,7 +74,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case State.SeedMove:
                 Debug.Log(State.SeedMove);
-                if(!postavkeManager.usingGestures)
+                if (!postavkeManager.usingGestures)
                     mainUI.ToggleMoveSeedButtons(true);
                 else
                     placeObject.instantiatedSeed.GetComponent<DragAndDrop>().enabled = true;
@@ -82,7 +82,7 @@ public class GameManager : SingletonPersistent<GameManager>
             case State.WateringCanMove:
                 Debug.Log(State.WateringCanMove);
                 placeObject.CreateWateringCan();
-                if(!postavkeManager.usingGestures)
+                if (!postavkeManager.usingGestures)
                     mainUI.ToggleMoveSeedButtons(true);
                 else
                     placeObject.instantiatedWateringCan.GetComponent<DragAndDrop>().enabled = true;
@@ -94,12 +94,14 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case State.FruitHarvest:
                 Debug.Log(State.FruitHarvest);
-                if(!postavkeManager.usingGestures){
+                if (!postavkeManager.usingGestures)
+                {
                     mainUI.ToggleRotationButtons(true);
                     rotateObject.enabled = true;
                     rotateObject.SetRotationTarget(placeObject.currentPot);
                 }
-                else{
+                else
+                {
                     placeObject.currentPot.GetComponent<RotationGesture>().enabled = true;
                 }
                 placeObject.CreateBasket();
@@ -127,7 +129,7 @@ public class GameManager : SingletonPersistent<GameManager>
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
 
-        mainUI.RightArrowButton();   
+        mainUI.RightArrowButton();
     }
 
     public void MarkerScanned()
@@ -172,7 +174,7 @@ public class GameManager : SingletonPersistent<GameManager>
         conditions++;
         mainUI.ToggleRightArrow(true);
         audioManager.Play("success");
-    
+
         mainUI.RightArrowButton();
     }
 
@@ -197,8 +199,8 @@ public class GameManager : SingletonPersistent<GameManager>
         mainUI.ToggleSkipButton(false);
         mainUI.ToggleRotationButtons(false);
         //onemoguci gestu
-        placeObject.currentPot.GetComponent<RotationGesture>().enabled = false;
         placeObject.currentPot.GetComponent<RotationGesture>().DisableInputActions();
+        placeObject.currentPot.GetComponent<RotationGesture>().enabled = false;
 
         state = State.PlantDecay;
         conditions++;

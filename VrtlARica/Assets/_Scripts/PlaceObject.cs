@@ -113,6 +113,12 @@ public class PlaceObject : MonoBehaviour
         currentPotIndex++;
         audioManager.Play("movebutton");
 
+        PinchDetection pinchDetectionDisable = currentPot.GetComponent<PinchDetection>();
+        if (postavkeManager.usingGestures && pinchDetectionDisable != null)
+        {
+            pinchDetectionDisable.enabled = false;
+        }
+
         if (currentPotIndex == 6)
         {
             Destroy(currentPot);
@@ -123,12 +129,6 @@ public class PlaceObject : MonoBehaviour
         {
             Destroy(currentPot);
             currentPot = Instantiate(potPrefab[0], currentPot.transform.position, currentPot.transform.rotation);
-
-            //if(postavkeManager.usingGestures)
-                gameManager.PlantDecayed();
-        }
-        else if (currentPotIndex == 12)
-        {
             gameManager.PlantDecayed();
         }
         else
@@ -148,16 +148,16 @@ public class PlaceObject : MonoBehaviour
     {
         while (currentPotIndex < 6)
         {
-            yield return null;
+            yield return new WaitForSeconds(0.25f);
             ReplaceCurrentPotWithNextPotInLine();
         }
     }
 
     public IEnumerator SkipRotInteraction()
     {
-        while (currentPotIndex < 12)
+        while (currentPotIndex < 11)
         {
-            yield return null;
+            yield return new WaitForSeconds(0.25f);
             ReplaceCurrentPotWithNextPotInLine();
         }
     }

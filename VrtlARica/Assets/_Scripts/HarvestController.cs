@@ -14,7 +14,7 @@ public class HarvestController : MonoBehaviour
 
     private bool isHarvesting;
     private bool isProcessingAppleTap;
-    private bool isProcessingBasketTap; 
+    private bool isProcessingBasketTap;
 
     private GameManager gameManager;
     private AudioManager audioManager;
@@ -57,61 +57,61 @@ public class HarvestController : MonoBehaviour
         }
     }
 
-private void HandleAppleSelection(TapDetection tappedApple)
-{
-    if (isHarvesting || isProcessingAppleTap) return; // Ignore if harvesting or waiting for delay
-
-    StartCoroutine(HandleAppleSelectionWithDelay(tappedApple));
-}
-
-private IEnumerator HandleAppleSelectionWithDelay(TapDetection tappedApple)
-{
-    isProcessingAppleTap = true; // Lock further taps
-    audioManager.Play("tapdetect");
-
-    if (selectedApple != null && selectedApple != tappedApple)
+    private void HandleAppleSelection(TapDetection tappedApple)
     {
-        selectedApple.ToggleOutline();
-        selectedApple = null;
+        if (isHarvesting || isProcessingAppleTap) return; // Ignore if harvesting or waiting for delay
+
+        StartCoroutine(HandleAppleSelectionWithDelay(tappedApple));
     }
 
-    tappedApple.ToggleOutline();
-
-    if (tappedApple.isOutlined)
+    private IEnumerator HandleAppleSelectionWithDelay(TapDetection tappedApple)
     {
-        selectedApple = tappedApple;
+        isProcessingAppleTap = true; // Lock further taps
+        audioManager.Play("tapdetect");
+
+        if (selectedApple != null && selectedApple != tappedApple)
+        {
+            selectedApple.ToggleOutline();
+            selectedApple = null;
+        }
+
+        tappedApple.ToggleOutline();
+
+        if (tappedApple.isOutlined)
+        {
+            selectedApple = tappedApple;
+        }
+
+        yield return new WaitForSeconds(0.2f); // Add a 200ms delay
+        isProcessingAppleTap = false; // Unlock taps
     }
 
-    yield return new WaitForSeconds(0.2f); // Add a 200ms delay
-    isProcessingAppleTap = false; // Unlock taps
-}
-
-private void HandleBasketSelection(TapDetection tappedBasket)
-{
-    if (isHarvesting || isProcessingBasketTap) return; // Ignore if harvesting or waiting for delay
-
-    StartCoroutine(HandleBasketSelectionWithDelay(tappedBasket));
-}
-
-private IEnumerator HandleBasketSelectionWithDelay(TapDetection tappedBasket)
-{
-    isProcessingBasketTap = true; // Lock further taps
-    audioManager.Play("tapdetect");
-
-    tappedBasket.ToggleOutline();
-
-    if (tappedBasket.isOutlined)
+    private void HandleBasketSelection(TapDetection tappedBasket)
     {
-        selectedBasket = tappedBasket;
-    }
-    else
-    {
-        selectedBasket = null;
+        if (isHarvesting || isProcessingBasketTap) return; // Ignore if harvesting or waiting for delay
+
+        StartCoroutine(HandleBasketSelectionWithDelay(tappedBasket));
     }
 
-    yield return new WaitForSeconds(0.2f); // Add a 200ms delay
-    isProcessingBasketTap = false; // Unlock taps
-}
+    private IEnumerator HandleBasketSelectionWithDelay(TapDetection tappedBasket)
+    {
+        isProcessingBasketTap = true; // Lock further taps
+        audioManager.Play("tapdetect");
+
+        tappedBasket.ToggleOutline();
+
+        if (tappedBasket.isOutlined)
+        {
+            selectedBasket = tappedBasket;
+        }
+        else
+        {
+            selectedBasket = null;
+        }
+
+        yield return new WaitForSeconds(0.2f); // Add a 200ms delay
+        isProcessingBasketTap = false; // Unlock taps
+    }
     private IEnumerator Harvest(float delay)
     {
         isHarvesting = true;
@@ -168,7 +168,7 @@ private IEnumerator HandleBasketSelectionWithDelay(TapDetection tappedBasket)
         {
             for (int i = 0; i < 10; i++)
             {
-                yield return null;
+                yield return new WaitForSeconds(0.25f);
                 audioManager.Play("tapdetect");
                 gameManager.placeObject.instantiatedBasket.transform.GetChild(i).gameObject.SetActive(true);
                 gameManager.placeObject.currentPot.transform.GetChild(i).gameObject.SetActive(false);
