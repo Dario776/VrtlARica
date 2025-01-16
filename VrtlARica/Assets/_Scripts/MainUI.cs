@@ -16,6 +16,8 @@ public class MainUI : MonoBehaviour
     [SerializeField] private GameObject minusButton;
     [SerializeField] private GameObject skipButton;
     [SerializeField] private GameObject end;
+    [SerializeField] private GameObject endButtons;
+    [SerializeField] private GameObject endGestures;
     [SerializeField] private GameObject[] gameTextButtons;
     [SerializeField] private GameObject[] gameTextGestures;
     [SerializeField] private GameObject[] dots;
@@ -85,7 +87,7 @@ public class MainUI : MonoBehaviour
             //iskljucujem trenutni text i tockicu (kod tockice ukljucujem bijeli krug unutar veceg smedeg)
             gameTextButtons[i].SetActive(false);
             gameTextGestures[i].SetActive(false);
-        
+
 
             dots[i].SetActive(true);
 
@@ -168,7 +170,7 @@ public class MainUI : MonoBehaviour
             {
                 gameTextGestures[i].SetActive(true);
             }
-            
+
             dots[i].SetActive(false);
 
             if (i == 0)
@@ -301,6 +303,17 @@ public class MainUI : MonoBehaviour
     {
         audioManager.Play("endsuccess");
         end.SetActive(true);
+        if (!postavkeManager.usingGestures)
+        {
+            endButtons.SetActive(true);
+            endGestures.SetActive(false);
+        }
+        else
+        {
+            endButtons.SetActive(false);
+            endGestures.SetActive(true);
+        }
+
     }
 
     public void SkipInteraction()
