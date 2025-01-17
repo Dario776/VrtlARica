@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PinchDetection : MonoBehaviour
+public class PinchGesture : MonoBehaviour
 {
     [SerializeField] InputAction firstFingerPosition, secondFingerPosition, secondFingerContact;
     [SerializeField] private float pinchThreshold = 50f;
@@ -28,7 +28,6 @@ public class PinchDetection : MonoBehaviour
         if (pinchCoroutine == null)
         {
             pinchCoroutine = StartCoroutine(PinchDetect());
-            Debug.Log("Pinch coroutine started");
         }
     }
 
@@ -38,13 +37,11 @@ public class PinchDetection : MonoBehaviour
         {
             StopCoroutine(pinchCoroutine);
             pinchCoroutine = null;
-            Debug.Log("Pinch coroutine stopped");
         }
     }
 
     private IEnumerator PinchDetect()
     {
-        Debug.Log("PinchDetect coroutine started");
         float previousDistance = Vector2.Distance(
             firstFingerPosition.ReadValue<Vector2>(),
             secondFingerPosition.ReadValue<Vector2>());
@@ -57,14 +54,17 @@ public class PinchDetection : MonoBehaviour
 
             if (Mathf.Abs(currentDistance - previousDistance) > pinchThreshold)
             {
-                if(gameManager.placeObject.currentPotIndex <= 6){
+                if (gameManager.placeObject.currentPotIndex <= 6)
+                {
                     if (currentDistance > previousDistance)
                     {
                         Debug.Log("Pinched out");
                         gameManager.placeObject.ReplaceCurrentPotWithNextPotInLine();
                         DisableInputActions();
                     }
-                } else {
+                }
+                else
+                {
                     if (currentDistance < previousDistance)
                     {
                         Debug.Log("Pinched in");

@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Naslovnica : MonoBehaviour
+public class HomePage : MonoBehaviour
 {
-    [SerializeField] private GameObject Upute;
+    [SerializeField] private GameObject Instructions;
     [SerializeField] private GameObject Info;
-    [SerializeField] private GameObject Postavke;
-    [SerializeField] private GameObject IzlazPopup;
+    [SerializeField] private GameObject Settings;
+    [SerializeField] private GameObject ExitPopup;
     [SerializeField] private GameObject sunFrame;
     [SerializeField] private float sunRotationSpeed = 10f;
 
@@ -25,22 +25,22 @@ public class Naslovnica : MonoBehaviour
         sunFrame.transform.Rotate(Vector3.forward, sunRotationSpeed * Time.deltaTime);
     }
 
-    public void ZapocniButton()
+    public void StartButton()
     {
         audioManager.Play("startbutton");
         gameManager.LoadGameScene();
     }
 
-    public void IzlazButton()
+    public void ExitButton()
     {
         audioManager.Play("startbutton");
-        IzlazPopup.SetActive(true);
+        ExitPopup.SetActive(true);
     }
 
     public void CancelExit()
     {
         audioManager.Play("startbutton");
-        IzlazPopup.SetActive(false);
+        ExitPopup.SetActive(false);
     }
 
     public void ConfirmExit()
@@ -49,16 +49,16 @@ public class Naslovnica : MonoBehaviour
         Application.Quit();
     }
 
-    public void UputeButton()
+    public void InstructionsButton()
     {
         audioManager.Play("startbutton");
-        if (Upute.activeSelf == false)
+        if (Instructions.activeSelf == false)
         {
-            Upute.SetActive(true);
+            Instructions.SetActive(true);
         }
         else
         {
-            Upute.SetActive(false);
+            Instructions.SetActive(false);
         }
     }
 
@@ -75,16 +75,16 @@ public class Naslovnica : MonoBehaviour
         }
     }
 
-    public void PostavkeButton()
+    public void SettingsButton()
     {
         audioManager.Play("startbutton");
-        if (Postavke.activeSelf == false)
+        if (Settings.activeSelf == false)
         {
-            Postavke.SetActive(true);
+            Settings.SetActive(true);
         }
         else
         {
-            Postavke.SetActive(false);
+            Settings.SetActive(false);
         }
     }
 }

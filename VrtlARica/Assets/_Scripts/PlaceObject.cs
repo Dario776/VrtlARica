@@ -25,7 +25,7 @@ public class PlaceObject : MonoBehaviour
     private bool isPotPlaced;
     private GameManager gameManager;
     private AudioManager audioManager;
-    private PostavkeManager postavkeManager;
+    private SettingsManager settingsManager;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class PlaceObject : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         audioManager = AudioManager.Instance;
-        postavkeManager = PostavkeManager.Instance;
+        settingsManager = SettingsManager.Instance;
         aRPlaneManager = GetComponent<ARPlaneManager>();
         aRRaycastManager = GetComponent<ARRaycastManager>();
     }
@@ -113,8 +113,8 @@ public class PlaceObject : MonoBehaviour
         currentPotIndex++;
         audioManager.Play("movebutton");
 
-        PinchDetection pinchDetectionDisable = currentPot.GetComponent<PinchDetection>();
-        if (postavkeManager.usingGestures && pinchDetectionDisable != null)
+        PinchGesture pinchDetectionDisable = currentPot.GetComponent<PinchGesture>();
+        if (settingsManager.usingGestures && pinchDetectionDisable != null)
         {
             pinchDetectionDisable.enabled = false;
         }
@@ -136,8 +136,8 @@ public class PlaceObject : MonoBehaviour
             Destroy(currentPot);
             currentPot = Instantiate(potPrefab[currentPotIndex], currentPot.transform.position, currentPot.transform.rotation);
 
-            PinchDetection pinchDetection = currentPot.GetComponent<PinchDetection>();
-            if (postavkeManager.usingGestures && pinchDetection != null)
+            PinchGesture pinchDetection = currentPot.GetComponent<PinchGesture>();
+            if (settingsManager.usingGestures && pinchDetection != null)
             {
                 pinchDetection.enabled = true;
             }

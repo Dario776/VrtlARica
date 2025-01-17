@@ -485,12 +485,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1921778731}
+  m_Father: {fileID: 1754717721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -346, y: -126}
-  m_SizeDelta: {x: 376.09998, y: -930}
+  m_AnchorMin: {x: -0.2, y: 0.15}
+  m_AnchorMax: {x: 0.65, y: 0.15}
+  m_AnchoredPosition: {x: 4, y: -76.19529}
+  m_SizeDelta: {x: 316, y: 817}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &65400539
 MonoBehaviour:
@@ -1090,6 +1090,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122891398}
   m_CullTransparentMesh: 1
+--- !u!1 &127945204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 127945205}
+  m_Layer: 0
+  m_Name: NaslovnicaContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &127945205
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127945204}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 790534292}
+  m_Father: {fileID: 1349440607}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.7}
+  m_AnchorMax: {x: 1, y: 0.87}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &193315524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,12 +1672,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1673907395}
-  m_Father: {fileID: 1349440607}
+  m_Father: {fileID: 2006404537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 0, y: -200}
+  m_AnchorMin: {x: 0, y: 0.45}
+  m_AnchorMax: {x: 1, y: 0.8}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &425408563
 GameObject:
@@ -2817,7 +2853,7 @@ GameObject:
   - component: {fileID: 672777672}
   - component: {fileID: 672777673}
   m_Layer: 0
-  m_Name: 'PostavkeManager '
+  m_Name: 'SettingsManager '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2976,14 +3012,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21626a91324b9f841ab70604ef791faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpcijaFonta1: {fileID: 1704092567}
-  OpcijaFonta2: {fileID: 1741455686}
-  OpcijaZvukUkljucenN: {fileID: 837067909}
-  OpcijaZvukIskljucenN: {fileID: 1766514298}
-  OpcijaZvukUkljucen: {fileID: 2100388584}
-  OpcijaZvukIskljucen: {fileID: 1561435026}
-  OpcijaGumbi: {fileID: 561910796}
-  OpcijaGeste: {fileID: 773569570}
+  FontOption1: {fileID: 1704092567}
+  FontOption2: {fileID: 1741455686}
+  HomePageSoundOn: {fileID: 837067909}
+  HomePageSoundOff: {fileID: 1766514298}
+  SoundOn: {fileID: 2100388584}
+  SoundOff: {fileID: 1561435026}
+  ButtonOption: {fileID: 561910796}
+  GestureOption: {fileID: 773569570}
 --- !u!1 &681529687
 GameObject:
   m_ObjectHideFlags: 0
@@ -3333,6 +3369,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740494771}
   m_CullTransparentMesh: 1
+--- !u!1 &741038348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 741038349}
+  m_Layer: 0
+  m_Name: IzlazPostvakeContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &741038349
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741038348}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1983149237}
+  - {fileID: 1693694880}
+  m_Father: {fileID: 1349440607}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.87}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -12.5}
+  m_SizeDelta: {x: -50, y: -25}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &741194711
 GameObject:
   m_ObjectHideFlags: 0
@@ -3830,14 +3903,14 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1349440607}
+  m_Father: {fileID: 127945205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -425}
-  m_SizeDelta: {x: 100, y: 1860}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 1200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &790534293
 MonoBehaviour:
@@ -4247,11 +4320,11 @@ RectTransform:
   m_GameObject: {fileID: 882215152}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.4999999, y: 1.4999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 928531584}
-  m_Father: {fileID: 1349440607}
+  m_Father: {fileID: 2006404537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4654,8 +4727,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1162343358}
-        m_TargetAssemblyTypeName: Upute, Assembly-CSharp
-        m_MethodName: ShowLastUpute
+        m_TargetAssemblyTypeName: Instructions, Assembly-CSharp
+        m_MethodName: ShowLastInstruction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4939,8 +5012,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1162343358}
-        m_TargetAssemblyTypeName: Upute, Assembly-CSharp
-        m_MethodName: ShowNextUpute
+        m_TargetAssemblyTypeName: Instructions, Assembly-CSharp
+        m_MethodName: ShowNextInstruction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5168,12 +5241,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1921778731}
+  m_Father: {fileID: 1754717721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 595, y: 152.00006}
-  m_SizeDelta: {x: -113, y: -946.6}
+  m_AnchorMin: {x: 0.6, y: 0.7}
+  m_AnchorMax: {x: 0.6, y: 0.7}
+  m_AnchoredPosition: {x: 500, y: -15.8880005}
+  m_SizeDelta: {x: 1210, y: 817.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1105471472
 MonoBehaviour:
@@ -5397,12 +5470,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f05ce410ac34844ae36b64cc12e3df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Upute1: {fileID: 2133776880}
-  Upute2: {fileID: 95489911}
-  Upute3: {fileID: 2084794630}
-  Tockica1: {fileID: 122891398}
-  Tockica2: {fileID: 1471467552}
-  Tockica3: {fileID: 1469444930}
+  Instructions1: {fileID: 2133776880}
+  Instructions2: {fileID: 95489911}
+  Instructions3: {fileID: 2084794630}
+  Dot1: {fileID: 122891398}
+  Dot2: {fileID: 1471467552}
+  Dot3: {fileID: 1469444930}
 --- !u!1 &1170457987
 GameObject:
   m_ObjectHideFlags: 0
@@ -5438,7 +5511,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 25.001818, y: 25.003168}
+  m_AnchoredPosition: {x: 25, y: 25}
   m_SizeDelta: {x: -50, y: -225}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1170457989
@@ -5700,8 +5773,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1349440608}
-        m_TargetAssemblyTypeName: Naslovnica, Assembly-CSharp
-        m_MethodName: PostavkeButton
+        m_TargetAssemblyTypeName: HomePage, Assembly-CSharp
+        m_MethodName: SettingsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6296,19 +6369,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295186358}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1458091940}
   - {fileID: 1938134794}
-  m_Father: {fileID: 1921778731}
+  m_Father: {fileID: 1754717721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -210, y: 108}
-  m_SizeDelta: {x: -492.40002, y: -1042}
+  m_AnchorMin: {x: 0.25, y: 0.5}
+  m_AnchorMax: {x: 0.25, y: 0.5}
+  m_AnchoredPosition: {x: 50, y: -20}
+  m_SizeDelta: {x: 700, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1304203505
 GameObject:
@@ -6394,8 +6467,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1349440608}
-        m_TargetAssemblyTypeName: Naslovnica, Assembly-CSharp
-        m_MethodName: UputeButton
+        m_TargetAssemblyTypeName: HomePage, Assembly-CSharp
+        m_MethodName: InstructionsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6510,14 +6583,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 781795914}
-  - {fileID: 1921778731}
   - {fileID: 1359916125}
-  - {fileID: 790534292}
-  - {fileID: 358684789}
-  - {fileID: 1983149237}
-  - {fileID: 882215153}
-  - {fileID: 1483120438}
-  - {fileID: 1693694880}
+  - {fileID: 1754717721}
+  - {fileID: 127945205}
+  - {fileID: 741038349}
+  - {fileID: 2006404537}
   - {fileID: 1607993105}
   m_Father: {fileID: 1200568759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6538,10 +6608,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f577b8dc92eabc4a8166e4b092c5580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Upute: {fileID: 1162343356}
+  Instructions: {fileID: 1162343356}
   Info: {fileID: 1801920431}
-  Postavke: {fileID: 676501364}
-  IzlazPopup: {fileID: 1607993104}
+  Settings: {fileID: 676501364}
+  ExitPopup: {fileID: 1607993104}
   sunFrame: {fileID: 1458091939}
   sunRotationSpeed: 7
 --- !u!1 &1355604993
@@ -6714,9 +6784,9 @@ RectTransform:
   m_Father: {fileID: 1349440607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 2190}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1359916126
 MonoBehaviour:
@@ -7173,7 +7243,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 830, y: 722}
+  m_SizeDelta: {x: 700, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1458091941
 MonoBehaviour:
@@ -7467,11 +7537,11 @@ RectTransform:
   m_GameObject: {fileID: 1483120437}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.4999999, y: 1.4999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 986481762}
-  m_Father: {fileID: 1349440607}
+  m_Father: {fileID: 2006404537}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -7523,8 +7593,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1349440608}
-        m_TargetAssemblyTypeName: Naslovnica, Assembly-CSharp
-        m_MethodName: UputeButton
+        m_TargetAssemblyTypeName: HomePage, Assembly-CSharp
+        m_MethodName: InstructionsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7777,7 +7847,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -50, y: -50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1542096854
 MonoBehaviour:
@@ -8341,10 +8411,10 @@ RectTransform:
   - {fileID: 574414966}
   m_Father: {fileID: 358684789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 325}
-  m_SizeDelta: {x: -200, y: 300}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -144}
+  m_SizeDelta: {x: 852, y: 288}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1673907396
 MonoBehaviour:
@@ -8391,8 +8461,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1349440608}
-        m_TargetAssemblyTypeName: Naslovnica, Assembly-CSharp
-        m_MethodName: ZapocniButton
+        m_TargetAssemblyTypeName: HomePage, Assembly-CSharp
+        m_MethodName: StartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8468,15 +8538,15 @@ RectTransform:
   m_GameObject: {fileID: 1693694879}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.4999999, y: 1.4999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1791022028}
-  m_Father: {fileID: 1349440607}
+  m_Father: {fileID: 741038349}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25, y: -25}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1693694881
@@ -8524,8 +8594,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1349440608}
-        m_TargetAssemblyTypeName: Naslovnica, Assembly-CSharp
-        m_MethodName: PostavkeButton
+        m_TargetAssemblyTypeName: HomePage, Assembly-CSharp
+        m_MethodName: SettingsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8991,6 +9061,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743686335}
   m_CullTransparentMesh: 1
+--- !u!1 &1754717720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1754717721}
+  m_Layer: 0
+  m_Name: SunceOblaciContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1754717721
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754717720}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1295186359}
+  - {fileID: 65400538}
+  - {fileID: 1105471471}
+  m_Father: {fileID: 1349440607}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.45}
+  m_AnchorMax: {x: 1, y: 0.7}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1755454475
 GameObject:
   m_ObjectHideFlags: 0
@@ -9813,44 +9921,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908406576}
   m_CullTransparentMesh: 1
---- !u!1 &1921778730
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1921778731}
-  m_Layer: 5
-  m_Name: Container
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1921778731
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1921778730}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1295186359}
-  - {fileID: 65400538}
-  - {fileID: 1105471471}
-  m_Father: {fileID: 1349440607}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 1322, y: 1764}
-  m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1938134793
 GameObject:
   m_ObjectHideFlags: 0
@@ -9886,7 +9956,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 29, y: 0}
-  m_SizeDelta: {x: 830, y: 722}
+  m_SizeDelta: {x: 700, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1938134795
 MonoBehaviour:
@@ -10170,15 +10240,15 @@ RectTransform:
   m_GameObject: {fileID: 1983149236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.4999999, y: 1.4999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 671421018}
-  m_Father: {fileID: 1349440607}
+  m_Father: {fileID: 741038349}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 25, y: -25}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1983149238
@@ -10226,8 +10296,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1349440608}
-        m_TargetAssemblyTypeName: Naslovnica, Assembly-CSharp
-        m_MethodName: IzlazButton
+        m_TargetAssemblyTypeName: HomePage, Assembly-CSharp
+        m_MethodName: ExitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10275,6 +10345,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983149236}
   m_CullTransparentMesh: 1
+--- !u!1 &2006404536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2006404537}
+  m_Layer: 0
+  m_Name: ZapocniInfoUpute
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2006404537
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006404536}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 358684789}
+  - {fileID: 882215153}
+  - {fileID: 1483120438}
+  m_Father: {fileID: 1349440607}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0.45}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2021434849
 GameObject:
   m_ObjectHideFlags: 0

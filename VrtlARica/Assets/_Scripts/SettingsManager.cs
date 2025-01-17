@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PostavkeManager : SingletonPersistent<PostavkeManager>
+public class SettingsManager : SingletonPersistent<SettingsManager>
 {
     public string currentFont { get; set; }
     public int currentFontSize { get; set; }
@@ -28,7 +28,7 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
     {
         PlayerPrefs.SetString("CurrentFont", currentFont);
         PlayerPrefs.SetInt("CurrentFontSize", currentFontSize);
-        PlayerPrefs.SetInt("IsNaslovnicaMuted", AudioManager.Instance.IsNaslovnicaMuted ? 1 : 0);
+        PlayerPrefs.SetInt("IsHomePageMuted", AudioManager.Instance.IsHomePageMuted ? 1 : 0);
         PlayerPrefs.SetInt("IsMuted", AudioManager.Instance.IsMuted ? 1 : 0);
         PlayerPrefs.SetInt("UsingGestures", usingGestures ? 1 : 0);
         PlayerPrefs.Save();
@@ -55,7 +55,7 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
     {
         Refresh();
 
-        if (scene.name == "Start" && !AudioManager.Instance.IsNaslovnicaMuted)
+        if (scene.name == "Start" && !AudioManager.Instance.IsHomePageMuted)
         {
             AudioManager.Instance.Play("mainmenumusic");
         }
@@ -78,7 +78,7 @@ public class PostavkeManager : SingletonPersistent<PostavkeManager>
             ChangeFontDyslexic();
         }
 
-        AudioManager.Instance.SetNaslovnicaMute(PlayerPrefs.GetInt("IsNaslovnicaMuted", 0) == 1);
+        AudioManager.Instance.SetHomePageMute(PlayerPrefs.GetInt("IsNaslovnicaMuted", 0) == 1);
         AudioManager.Instance.SetMute(PlayerPrefs.GetInt("IsMuted", 0) == 1);
     }
 

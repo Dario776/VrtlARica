@@ -2,13 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class DragAndDrop : MonoBehaviour
+public class DragAndDropGesture : MonoBehaviour
 {
     [SerializeField]
     private InputAction press, screenPosition;
 
     private Vector3 currentScreenPosition;
-    private bool dragged;
+    private bool isDragging;
 
     // ravnina paralelna kameri (na temelju pozicije trenutnog objekta)
     private float objectZPosition;
@@ -30,7 +30,7 @@ public class DragAndDrop : MonoBehaviour
         // Provjeri je li prst pritisnut na zaslon i je li pritisnut na objektu
         if (press.ReadValue<float>() > 0f)
         {
-            if (TappedOn && !dragged)
+            if (TappedOn && !isDragging)
             {
                 StartCoroutine(Drag());
             }
@@ -38,7 +38,7 @@ public class DragAndDrop : MonoBehaviour
         else
         {
             // zaustavi pomicanje kad prst nije pritisnut
-            dragged = false;
+            isDragging = false;
         }
 
         // azuriraj poziciju zaslona
@@ -82,11 +82,11 @@ public class DragAndDrop : MonoBehaviour
 
     private IEnumerator Drag()
     {
-        dragged = true;
+        isDragging = true;
 
         Vector3 offset = transform.position - WorldPosition;
 
-        while (dragged)
+        while (isDragging)
         {
             // azuriraj poziciju
             transform.position = WorldPosition + offset;

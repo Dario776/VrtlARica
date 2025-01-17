@@ -5432,14 +5432,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21626a91324b9f841ab70604ef791faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpcijaFonta1: {fileID: 1141763852}
-  OpcijaFonta2: {fileID: 1768272116}
-  OpcijaZvukUkljucenN: {fileID: 1886027714}
-  OpcijaZvukIskljucenN: {fileID: 1588601697}
-  OpcijaZvukUkljucen: {fileID: 408825452}
-  OpcijaZvukIskljucen: {fileID: 1451279131}
-  OpcijaGumbi: {fileID: 1425842062}
-  OpcijaGeste: {fileID: 1400982666}
+  FontOption1: {fileID: 1141763852}
+  FontOption2: {fileID: 1768272116}
+  HomePageSoundOn: {fileID: 1886027714}
+  HomePageSoundOff: {fileID: 1588601697}
+  SoundOn: {fileID: 408825452}
+  SoundOff: {fileID: 1451279131}
+  ButtonOption: {fileID: 1425842062}
+  GestureOption: {fileID: 1400982666}
 --- !u!1 &784136636
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class HarvestController : MonoBehaviour
 {
-    private TapDetection currentlyTapped;
+    private OutlineOnTap currentlyTapped;
     //prati koja je jabuka selektirana
-    private TapDetection selectedApple;
+    private OutlineOnTap selectedApple;
     //prati selektiranu kosaru
-    private TapDetection selectedBasket;
+    private OutlineOnTap selectedBasket;
     //brojac koliko je jabuka ubrano s biljke i stavljeno u kosaru
     private int appleCounter = 0;
     private bool isFruitHarvested;
@@ -36,7 +36,7 @@ public class HarvestController : MonoBehaviour
     private void Update()
     {
         //dohvati objekt na koji je trenutno korisnik kliknuo
-        currentlyTapped = TapDetection.GetCurrentlyTappedObject();
+        currentlyTapped = OutlineOnTap.GetCurrentlyTappedObject();
 
         if (currentlyTapped != null)
         {
@@ -57,16 +57,16 @@ public class HarvestController : MonoBehaviour
         }
     }
 
-    private void HandleAppleSelection(TapDetection tappedApple)
+    private void HandleAppleSelection(OutlineOnTap tappedApple)
     {
-        if (isHarvesting || isProcessingAppleTap) return; // Ignore if harvesting or waiting for delay
+        if (isHarvesting || isProcessingAppleTap) return;
 
         StartCoroutine(HandleAppleSelectionWithDelay(tappedApple));
     }
 
-    private IEnumerator HandleAppleSelectionWithDelay(TapDetection tappedApple)
+    private IEnumerator HandleAppleSelectionWithDelay(OutlineOnTap tappedApple)
     {
-        isProcessingAppleTap = true; // Lock further taps
+        isProcessingAppleTap = true;
         audioManager.Play("tapdetect");
 
         if (selectedApple != null && selectedApple != tappedApple)
@@ -82,20 +82,20 @@ public class HarvestController : MonoBehaviour
             selectedApple = tappedApple;
         }
 
-        yield return new WaitForSeconds(0.2f); // Add a 200ms delay
-        isProcessingAppleTap = false; // Unlock taps
+        yield return new WaitForSeconds(0.2f);
+        isProcessingAppleTap = false;
     }
 
-    private void HandleBasketSelection(TapDetection tappedBasket)
+    private void HandleBasketSelection(OutlineOnTap tappedBasket)
     {
-        if (isHarvesting || isProcessingBasketTap) return; // Ignore if harvesting or waiting for delay
+        if (isHarvesting || isProcessingBasketTap) return;
 
         StartCoroutine(HandleBasketSelectionWithDelay(tappedBasket));
     }
 
-    private IEnumerator HandleBasketSelectionWithDelay(TapDetection tappedBasket)
+    private IEnumerator HandleBasketSelectionWithDelay(OutlineOnTap tappedBasket)
     {
-        isProcessingBasketTap = true; // Lock further taps
+        isProcessingBasketTap = true;
         audioManager.Play("tapdetect");
 
         tappedBasket.ToggleOutline();
@@ -109,8 +109,8 @@ public class HarvestController : MonoBehaviour
             selectedBasket = null;
         }
 
-        yield return new WaitForSeconds(0.2f); // Add a 200ms delay
-        isProcessingBasketTap = false; // Unlock taps
+        yield return new WaitForSeconds(0.2f);
+        isProcessingBasketTap = false;
     }
     private IEnumerator Harvest(float delay)
     {
@@ -120,6 +120,7 @@ public class HarvestController : MonoBehaviour
 
         //ukloni jabuku koja je selektirana
         selectedApple.gameObject.SetActive(false);
+        selectedApple.gameObject.GetComponent<OutlineOnTap>().enabled = false;
 
         //odznaci kosaru
         selectedBasket.ToggleOutline();
@@ -141,26 +142,6 @@ public class HarvestController : MonoBehaviour
 
         isHarvesting = false;
     }
-
-    // private void DisableVisibility(GameObject obj)
-    // {
-    //     if (obj == null)
-    //         return;
-
-    //     Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
-    //     foreach (Renderer renderer in renderers)
-    //     {
-    //         renderer.enabled = false;
-    //     }
-
-    //     Collider[] colliders = obj.GetComponentsInChildren<Collider>();
-    //     foreach (Collider collider in colliders)
-    //     {
-    //         collider.enabled = false;
-    //     }
-
-    //     Debug.Log("Disabled visibility for object: " + obj.name);
-    // }
 
     public IEnumerator SkipHarvestInteraction()
     {

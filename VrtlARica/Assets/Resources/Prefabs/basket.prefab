@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.5529412, g: 0.882353, b: 0.97647065, a: 1}
+  outlineColor: {r: 0, g: 1, b: 0.9019608, a: 1}
   outlineWidth: 4
   precomputeOutline: 0
   bakeKeys: []

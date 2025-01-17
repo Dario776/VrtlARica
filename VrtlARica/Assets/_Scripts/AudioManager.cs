@@ -4,7 +4,7 @@ using UnityEngine;
 public class AudioManager : SingletonPersistent<AudioManager>
 {
     [SerializeField] private Sound[] sounds;
-    private bool isNaslovnicaMuted;
+    private bool isHomePageMuted;
     private bool isMuted;
 
     public override void Awake()
@@ -27,10 +27,10 @@ public class AudioManager : SingletonPersistent<AudioManager>
 
     private void LoadMuteStates()
     {
-        isNaslovnicaMuted = PlayerPrefs.GetInt("IsNaslovnicaMuted", 0) == 1;
+        isHomePageMuted = PlayerPrefs.GetInt("IsStartPageMuted", 0) == 1;
         isMuted = PlayerPrefs.GetInt("IsMuted", 0) == 1;
         ApplyMuteStates();
-    }   
+    }
 
     public void Play(string name)
     {
@@ -50,9 +50,9 @@ public class AudioManager : SingletonPersistent<AudioManager>
             Debug.LogWarning("Sound not found in AudioManager: " + name);
     }
 
-    public void SetNaslovnicaMute(bool mute)
+    public void SetHomePageMute(bool mute)
     {
-        isNaslovnicaMuted = mute;
+        isHomePageMuted = mute;
         ApplyMuteState("mainmenumusic", mute);
     }
 
@@ -61,15 +61,16 @@ public class AudioManager : SingletonPersistent<AudioManager>
         isMuted = mute;
         foreach (Sound sound in sounds)
         {
-            if (sound.name != "mainmenumusic"){
+            if (sound.name != "mainmenumusic")
+            {
                 sound.source.mute = mute;
-            }      
+            }
         }
     }
 
     private void ApplyMuteStates()
     {
-        SetNaslovnicaMute(isNaslovnicaMuted);
+        SetHomePageMute(isHomePageMuted);
         SetMute(isMuted);
     }
 
@@ -78,6 +79,6 @@ public class AudioManager : SingletonPersistent<AudioManager>
         Sound sound = Array.Find(sounds, s => s.name == soundName);
         if (sound != null && sound.source != null) sound.source.mute = mute;
     }
-    public bool IsNaslovnicaMuted => isNaslovnicaMuted;
+    public bool IsHomePageMuted => isHomePageMuted;
     public bool IsMuted => isMuted;
 }

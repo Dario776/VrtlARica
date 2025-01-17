@@ -25,7 +25,7 @@ public class MainUI : MonoBehaviour
     private int isLeftArrowPressed;
     private GameManager gameManager;
     private AudioManager audioManager;
-    private PostavkeManager postavkeManager;
+    private SettingsManager settingsManager;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class MainUI : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         audioManager = AudioManager.Instance;
-        postavkeManager = PostavkeManager.Instance;
+        settingsManager = SettingsManager.Instance;
         //onemogucujemo lijevu strelicu na pocetku
         ToggleLeftArrow(false);
     }
@@ -95,7 +95,7 @@ public class MainUI : MonoBehaviour
             i++;
 
             //ukljucujem sljedeci text i tockicu
-            if (!postavkeManager.usingGestures)
+            if (!settingsManager.usingGestures)
             {
                 gameTextButtons[i].SetActive(true);
             }
@@ -123,7 +123,7 @@ public class MainUI : MonoBehaviour
 
             i++;
 
-            if (!postavkeManager.usingGestures)
+            if (!settingsManager.usingGestures)
             {
                 gameTextButtons[i].SetActive(true);
             }
@@ -162,7 +162,7 @@ public class MainUI : MonoBehaviour
             //suprotan postupak od desne strelice
             i--;
 
-            if (!postavkeManager.usingGestures)
+            if (!settingsManager.usingGestures)
             {
                 gameTextButtons[i].SetActive(true);
             }
@@ -303,7 +303,7 @@ public class MainUI : MonoBehaviour
     {
         audioManager.Play("endsuccess");
         end.SetActive(true);
-        if (!postavkeManager.usingGestures)
+        if (!settingsManager.usingGestures)
         {
             endButtons.SetActive(true);
             endGestures.SetActive(false);

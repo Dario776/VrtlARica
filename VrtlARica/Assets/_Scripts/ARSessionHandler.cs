@@ -10,8 +10,8 @@ public class ARSessionHandler : MonoBehaviour
         ARSession arSession = GetComponent<ARSession>();
         if (arSession != null)
         {
-            arSession.Reset(); // Reset session on start
-            arSession.enabled = true; // Re-enable the AR session
+            arSession.Reset(); 
+            arSession.enabled = true; 
         }
     }
 

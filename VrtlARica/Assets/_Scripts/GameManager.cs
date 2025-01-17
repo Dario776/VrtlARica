@@ -27,7 +27,7 @@ public class GameManager : SingletonPersistent<GameManager>
     private Camera arCamera;
 
     private AudioManager audioManager;
-    private PostavkeManager postavkeManager;
+    private SettingsManager settingsManager;
 
     public override void Awake()
     {
@@ -37,7 +37,7 @@ public class GameManager : SingletonPersistent<GameManager>
     private void Start()
     {
         audioManager = AudioManager.Instance;
-        postavkeManager = PostavkeManager.Instance;
+        settingsManager = SettingsManager.Instance;
     }
 
     public void LoadGameScene()
@@ -74,27 +74,27 @@ public class GameManager : SingletonPersistent<GameManager>
                 break;
             case State.SeedMove:
                 Debug.Log(State.SeedMove);
-                if (!postavkeManager.usingGestures)
+                if (!settingsManager.usingGestures)
                     mainUI.ToggleMoveSeedButtons(true);
                 else
-                    placeObject.instantiatedSeed.GetComponent<DragAndDrop>().enabled = true;
+                    placeObject.instantiatedSeed.GetComponent<DragAndDropGesture>().enabled = true;
                 break;
             case State.WateringCanMove:
                 Debug.Log(State.WateringCanMove);
                 placeObject.CreateWateringCan();
-                if (!postavkeManager.usingGestures)
+                if (!settingsManager.usingGestures)
                     mainUI.ToggleMoveSeedButtons(true);
                 else
-                    placeObject.instantiatedWateringCan.GetComponent<DragAndDrop>().enabled = true;
+                    placeObject.instantiatedWateringCan.GetComponent<DragAndDropGesture>().enabled = true;
                 break;
             case State.PlantGrow:
                 Debug.Log(State.PlantGrow);
-                mainUI.TogglePlusButton(!postavkeManager.usingGestures);
+                mainUI.TogglePlusButton(!settingsManager.usingGestures);
                 //geste omogucene u placeObjectu jer ima vise objekata u interakciji
                 break;
             case State.FruitHarvest:
                 Debug.Log(State.FruitHarvest);
-                if (!postavkeManager.usingGestures)
+                if (!settingsManager.usingGestures)
                 {
                     mainUI.ToggleRotationButtons(true);
                     rotateObject.enabled = true;
@@ -110,7 +110,7 @@ public class GameManager : SingletonPersistent<GameManager>
             case State.PlantDecay:
                 Debug.Log(State.PlantDecay);
                 placeObject.ReplaceCurrentPotWithNextPotInLine();
-                mainUI.ToggleMinusButton(!postavkeManager.usingGestures);
+                mainUI.ToggleMinusButton(!settingsManager.usingGestures);
                 //geste omogucene u placeObjectu jer ima vise objekata u interakciji
                 break;
             default:
@@ -201,6 +201,7 @@ public class GameManager : SingletonPersistent<GameManager>
         //onemoguci gestu
         placeObject.currentPot.GetComponent<RotationGesture>().DisableInputActions();
         placeObject.currentPot.GetComponent<RotationGesture>().enabled = false;
+        placeObject.instantiatedBasket.GetComponent<OutlineOnTap>().enabled = false;
 
         state = State.PlantDecay;
         conditions++;
