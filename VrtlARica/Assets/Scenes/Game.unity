@@ -1084,7 +1084,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Koristi gumbe kako bi pomaknuo sjemenku i doveo je do teglice.
+  m_text: Koristi gumbe kako bi pomaknuo sjemenku i prenio je do teglice.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -1408,7 +1408,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u017Delimo zaliti sadnicu da naraste! Pritisni na kanticu vode i povuci
-    ju do teglice."
+    je do teglice."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -1835,8 +1835,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Klikni na jabuku, a zatim na ko\u0161aru kako bi ju ubrao. Rotiraj biljku
-    pomo\u0107u gumbi za rotaciju."
+  m_text: "Rotiraj biljku pomo\u0107u gumba za rotaciju. Klikni na jabuku, a zatim
+    na ko\u0161aru kako bi je ubrao."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -4981,7 +4981,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Svi plodovi su ubrani! Ukloni uvenulu biljku iz zemlje koriste\u0107i
-    gumb za smanjenje.\r\n"
+    gumb za smanjenje biljke."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -6658,8 +6658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Potaknimo sadnicu da naraste tako da ju pove\u0107amo! Klikni na gumb
-    za pove\u0107anje.\r\n"
+  m_text: "Potakni sadnicu da naraste! Klikni na gumb za pove\u0107anje biljke."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -7178,7 +7177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u017Delimo zaliti sadnicu da naraste! Dovedi kanticu vode do zemlje pomo\u0107u
+  m_text: "\u017Delimo zaliti sadnicu da naraste! Donesi kanticu vode do zemlje pomo\u0107u
     gumbi."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
@@ -8585,7 +8584,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 96
+  m_fontSize: 90.6
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9199,7 +9198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skeniraj AR marker kako bi se stvorila sjemenka pored biljke.
+  m_text: Skeniraj AR marker kako bi se stvorila sjemenka pored teglice.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -10272,8 +10271,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Usmjeri kameru prema ravnoj povr\u0161ini. Kada primjeti\u0161 to\u010Dkce
-    klikni na njih kako bi stvorio teglicu."
+  m_text: "Usmjeri kameru prema ravnoj povr\u0161ini. Klikni na nju kada se ozna\u010Di
+    kako bi stvorio teglicu za sadnju."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -10410,8 +10409,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Bravo! Upoznao si interakcije pro\u0161irene stvarnosti koriste\u0107i
-    gumbe! "
+  m_text: "\u010Cestitam! Uspje\u0161no si pro\u0161ao sve interakcije pomo\u0107u
+    gumba u pro\u0161irenoj stvarnosti!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -11396,8 +11395,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Bravo! Upoznao si interakcije pro\u0161irene stvarnosti koriste\u0107i
-    geste! "
+  m_text: "\u010Cestitam! Uspje\u0161no si pro\u0161ao sve interakcije gestama u
+    pro\u0161irenoj stvarnosti!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -12006,8 +12005,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Klikni na jabuku, a zatim na ko\u0161aru kako bi ju ubrao. Rotiraj biljku
-    prijelazom prsta po ekranu . "
+  m_text: "Rotiraj biljku prijelazom prsta po ekranu. Klikni na jabuku, a zatim na
+    ko\u0161aru kako bi je ubrao."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -15013,7 +15012,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pritisni i povuci sjemenku kako bi ju pomaknuo do teglice.
+  m_text: Pritisni na sjemenku kako bi je pomaknuo i povuci je do teglice.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,

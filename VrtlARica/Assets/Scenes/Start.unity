@@ -857,10 +857,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Zami\u0161ljeno je da kao igra\u010D preuzmete ulogu vrtlara u virtualnom
-    vrtu. Kroz va\u0161 ure\u0111aj (mobilni telefon ili tablet) skenirate marker,
-    \u0161to na zaslonu otkriva virtualno mjesto za sadnju biljke. Nakon toga kre\u0107u
-    zadaci u kojima se interakcije izvode prema uputi, tipkama ili gestama."
+  m_text: "Igra simulira osnovne korake u procesu uzgoja biljke: od sadnje, preko
+    njege, do berbe plodova. Zami\u0161ljeno je da kao igra\u010D preuzmete ulogu
+    vrtlara u virtualnom vrtu. Na va\u0161em nosivom ure\u0111aju (pametnom telefonu
+    ili tabletu) skenirate marker, nakon \u010Dega se na zaslonu prikazuje virtualno
+    mjesto za sadnju biljke i kre\u0107u zadaci u kojima se izvode interakcije."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -10690,10 +10691,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nakon uspje\u0161no izvr\u0161enog zadatka, reproducirat \u0107e se prigodni
-    zvuk koji potvr\u0111uje uspje\u0161no izvr\u0161enje zadane aktivnosti. U slu\u010Daju
-    da su potrebne detaljnije upute za obavljanje zadatka, dostupna je i tipka \u201C?\u201D.
-    Ako ne mo\u017Eete rije\u0161iti zadatak, mogu\u0107e ga je presko\u010Diti."
+  m_text: "Zadaci se izvr\u0161avaju prema uputama, tipkama ili gestama. Nakon uspje\u0161no
+    izvr\u0161enog zadatka, reproducirat \u0107e se prigodni zvuk koji potvr\u0111uje
+    uspje\u0161no izvr\u0161enje zadane aktivnosti.  U slu\u010Daju da ne mo\u017Eete
+    rije\u0161iti zadatak, mogu\u0107e ga je presko\u010Diti."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
@@ -10906,12 +10907,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ova AR (Augmented Reality) ozbiljna igra omogu\u0107uje vam da kroz pro\u0161irenu
-    stvarnost uzgajate biljke i brinete o njima, razvijaju\u0107i pritom svoje vrtlarske
-    vje\u0161tine u virtualnom okru\u017Eenju. Cilj igre je simulirati osnovne korake
-    u procesu uzgoja biljke: od sadnje, preko njege, do berbe plodova. Kroz jednostavne
-    interakcije, igra vas vodi kroz cijeli \u017Eivotni ciklus biljke i nagra\u0111uje
-    vas za pravilnu brigu i uspje\u0161nu berbu."
+  m_text: "Ovo je igra zasnovana na pro\u0161irenoj stvarnosti (Augmented Reality,
+    AR) \u010Diji je cilj upoznati korisnike s mogu\u0107nostima pro\u0161irene stvarnosti.
+    Igra vam omogu\u0107uje da u pro\u0161irenoj stvarnosti uzgajate biljke i brinete
+    o njima, razvijaju\u0107i pritom i svoje vrtlarske vje\u0161tine u virtualnom
+    okru\u017Eenju."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
   m_sharedMaterial: {fileID: -1279818604568656946, guid: a64a17577cc74bb458195679268f54e0,
