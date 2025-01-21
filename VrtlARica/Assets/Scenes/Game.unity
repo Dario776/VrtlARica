@@ -7964,7 +7964,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Vra\u0107anjem na po\u010Detak se gubi sav napredak. \u017Deli\u0161 li
+  m_text: "Vra\u0107anjem na po\u010Detak gubi se sav napredak. \u017Deli\u0161 li
     nastaviti?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a64a17577cc74bb458195679268f54e0, type: 2}
@@ -8584,7 +8584,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90.6
+  m_fontSize: 96
   m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 1
