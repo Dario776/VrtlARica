@@ -92,6 +92,7 @@ public class Settings : MonoBehaviour
         audioManager.Play("startbutton");
         imageHomePageSoundOn.color = Constants.CustomOrangeColor;
         imageHomePageSoundOff.color = Constants.WhiteColor;
+        Refresh();
 
     }
 
@@ -102,6 +103,7 @@ public class Settings : MonoBehaviour
         settingsManager.SaveSettings();
         imageHomePageSoundOn.color = Constants.WhiteColor;
         imageHomePageSoundOff.color = Constants.CustomOrangeColor;
+        Refresh();
     }
 
     public void ChangeSoundOnButton()
@@ -111,6 +113,7 @@ public class Settings : MonoBehaviour
         settingsManager.SaveSettings();
         imageSoundOn.color = Constants.CustomOrangeColor;
         imageSoundOff.color = Constants.WhiteColor;
+        Refresh();
 
     }
 
@@ -121,6 +124,7 @@ public class Settings : MonoBehaviour
         settingsManager.SaveSettings();
         imageSoundOn.color = Constants.WhiteColor;
         imageSoundOff.color = Constants.CustomOrangeColor;
+        Refresh();
     }
 
     public void ChangeGumbiButton()

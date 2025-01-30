@@ -18,6 +18,7 @@ public class HomePage : MonoBehaviour
         audioManager = AudioManager.Instance;
         audioManager.Stop("endsuccess");
         audioManager.Play("mainmenumusic");
+  
     }
 
     private void Update()

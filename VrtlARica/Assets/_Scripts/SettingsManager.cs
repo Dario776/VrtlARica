@@ -34,6 +34,7 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
         PlayerPrefs.Save();
 
         Debug.Log("Settings saved!");
+        Refresh();
     }
 
     private void Start()
