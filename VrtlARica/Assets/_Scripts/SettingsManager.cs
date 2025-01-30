@@ -78,7 +78,7 @@ public class SettingsManager : SingletonPersistent<SettingsManager>
             ChangeFontDyslexic();
         }
 
-        AudioManager.Instance.SetHomePageMute(PlayerPrefs.GetInt("IsNaslovnicaMuted", 0) == 1);
+        AudioManager.Instance.SetHomePageMute(PlayerPrefs.GetInt("IsHomePageMuted", 0) == 1);
         AudioManager.Instance.SetMute(PlayerPrefs.GetInt("IsMuted", 0) == 1);
     }
 

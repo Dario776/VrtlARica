@@ -27,7 +27,7 @@ public class AudioManager : SingletonPersistent<AudioManager>
 
     private void LoadMuteStates()
     {
-        isHomePageMuted = PlayerPrefs.GetInt("IsStartPageMuted", 0) == 1;
+        isHomePageMuted = PlayerPrefs.GetInt("IsHomePageMuted", 0) == 1;
         isMuted = PlayerPrefs.GetInt("IsMuted", 0) == 1;
         ApplyMuteStates();
     }
